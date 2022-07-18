@@ -1,4 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
+import axios from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Footer from '../components/HomePage/Footer'
@@ -21,6 +22,15 @@ const Home: NextPage = () => {
       <Footer />
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const posts = await axios.get("/api/posts");
+  return {
+      props: {
+          posts
+      }
+  }
 }
 
 export default Home
