@@ -10,6 +10,7 @@ import { Post } from '../components/types'
 
 const Home = ({posts} : {posts : Post[]}) => {
   const {user} = useUser();
+  
   return (
     <>
       <Head>
@@ -29,10 +30,12 @@ const Home = ({posts} : {posts : Post[]}) => {
 }
 
 export async function getServerSideProps() {
-  const posts = await axios.get("/api/posts");
+  const { data } = await axios.get("http://localhost:3000/api/posts");
+  const posts = data.data
+  console.log({ posts });
   return {
       props: {
-          posts
+          posts: posts
       }
   }
 }
