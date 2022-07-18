@@ -5,8 +5,10 @@ import Head from 'next/head'
 import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
 import NewPostForm from '../components/HomePage/NewPostForm'
+import PostsDisplay from '../components/HomePage/PostsDisplay'
+import { Post } from '../components/types'
 
-const Home: NextPage = () => {
+const Home = ({posts} : {posts : Post[]}) => {
   const {user} = useUser();
   return (
     <>
@@ -18,6 +20,8 @@ const Home: NextPage = () => {
       </Head>
       <NavBar />
       {user ? <NewPostForm /> : null}
+      <PostsDisplay
+      posts={posts} />
 
       <Footer />
     </>
