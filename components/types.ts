@@ -1,11 +1,11 @@
-type AuthorID = string;
+type UserID = string;
 
 export interface Post {
     id: string
     content: string
-    author: AuthorID
+    author: UserID
     date: string,
-    likedBy: AuthorID[]
+    likedBy: UserID[]
 }
 
 export interface User {
@@ -13,6 +13,6 @@ export interface User {
     name: string,
     username: string,
     created_at: string,
-    pciture: string,
+    picture: string,
     posts: Post[]
 }

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/dbConnect";
 import Post from "../../../model/Post";
+import User from "../../../model/User";
 
 const handler = async (req : NextApiRequest, res : NextApiResponse) => {
     const {method} = req;
@@ -19,8 +20,10 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
             }
         case 'POST':
             try {
+                const { content, author : authorID } = req.body
+                const author = await User.findById(authorID)
                 const newPost = new Post({
-                    ...req.body,
+                    content, author,
                     date: new Date(),
                     likes: []
                 })
