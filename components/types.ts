@@ -3,8 +3,7 @@ type AuthorID = string;
 export interface Post {
     id: string
     content: string
-    authorID: AuthorID
-    authorName: string,
+    author: AuthorID
     date: string,
     likedBy: AuthorID[]
 }

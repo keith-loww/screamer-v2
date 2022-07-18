@@ -17,6 +17,16 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
             } catch (error) {
                 return res.status(400).json({ success: false })
             }
+        case 'POST':
+            try {
+                const newPost = new Post({
+                    ...req.body,
+                    date: new Date(),
+                    likes: []
+                })
+            } catch (error) {
+                return res.status(400).json({ success: false })
+            }
         default:
             return res.status(400).json({ success: false })
     }
