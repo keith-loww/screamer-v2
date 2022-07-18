@@ -11,6 +11,7 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
         case 'GET' :
             try {
                 const posts = await Post.find({})
+                console.log(posts);
                 return res.status(200).json({
                     success: true,
                     data: posts
@@ -22,8 +23,10 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
             try {
                 const { content, author : authorID } = req.body
                 const author = await User.findById(authorID)
+                console.log(author);
                 const newPost = new Post({
-                    content, author,
+                    content,
+                    author: author,
                     date: new Date(),
                     likes: []
                 })
@@ -33,7 +36,7 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
                     data: added
                 })
             } catch (error) {
-                return res.status(400).json({ success: false })
+                return res.status(400).json({ success: false, error })
             }
         default:
             return res.status(400).json({ success: false })
