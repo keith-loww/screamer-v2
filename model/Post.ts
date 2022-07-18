@@ -10,6 +10,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    date: {
+        type: Date,
+        required: true
+    },
     likedBy: [
         {
             type: String
