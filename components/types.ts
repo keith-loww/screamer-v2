@@ -5,5 +5,6 @@ export interface Post {
     content: string
     authorID: AuthorID
     authorName: string,
+    date: string,
     likedBy: AuthorID[]
 }
