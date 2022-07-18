@@ -18,7 +18,7 @@ export default function PostItem({ post } : {post: Post}): JSX.Element {
     return (
         <div className='card card-bordered shadow-md hover:shadow-lg'>
             <div className='card-body'>
-                <div>
+                <div className='text-xl'>
                     {post.content.toUpperCase()}
                 </div>
                 <div>
