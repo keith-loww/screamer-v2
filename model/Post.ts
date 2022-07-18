@@ -7,8 +7,8 @@ const postSchema = new mongoose.Schema({
         maxLength: 280
     },
     author: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     date: {
         type: Date,
@@ -16,7 +16,8 @@ const postSchema = new mongoose.Schema({
     },
     likedBy: [
         {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }
     ]
 })
