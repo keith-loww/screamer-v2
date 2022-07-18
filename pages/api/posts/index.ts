@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/dbConnect";
-import Post from "../../../model/Post";
-import User from "../../../model/User";
+import Post from "../../../model/post";
+import User from "../../../model/user";
 
 const handler = async (req : NextApiRequest, res : NextApiResponse) => {
     const {method} = req;

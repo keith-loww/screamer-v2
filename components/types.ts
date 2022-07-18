@@ -1,11 +1,11 @@
 type UserID = string;
 
 export interface Post {
-    id: string
-    content: string
-    author: UserID
+    id: string,
+    content: string,
+    author: User,
     date: string,
-    likedBy: UserID[]
+    likedBy: UserID[],
 }
 
 export interface User {

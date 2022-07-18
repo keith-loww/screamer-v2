@@ -1,20 +1,21 @@
-import { User } from 'auth0';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Post } from '../../types';
+import { Post, User } from '../../types';
 
-export default function PostItem({ post } : {post: Post}): JSX.Element {
-    const [author, setAuthor] = useState<User | null>(null);
-    
+export default function PostItem({ post } : {post: Post}): JSX.Element | null {
+    const [authorUser, setAuthorUser] = useState<User | null>(null)
+
+    const fetchAuthor = async () => {
+        const { data } = await axios.get(`/api/users/${post.author}`)
+        setAuthorUser(data.data);
+    }
+
     useEffect(() => {
-        const options = {
-            method: 'GET',
-            url: 'http://localhost:3000/api/v2/users/USER_ID',
-            headers: {authorization: 'Bearer YOUR_MGMT_API_ACCESS_TOKEN'}
-        }
-        // const authorObj = await axios.get(`/api/v2/users`)
+        fetchAuthor()
     }, [])
-    
+
+    if (!authorUser) return null
+
     return (
         <div className='card card-bordered shadow-md hover:shadow-lg'>
             <div className='card-body'>
@@ -22,7 +23,7 @@ export default function PostItem({ post } : {post: Post}): JSX.Element {
                     {post.content.toUpperCase()}
                 </div>
                 <div>
-                    BY: {post.author}
+                    BY: {authorUser.name.toUpperCase()}
                     
                 </div>
                 <div> ON {(new Date(post.date)).toLocaleDateString()}</div>

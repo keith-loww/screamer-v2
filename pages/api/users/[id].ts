@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import User from "../../../model/User";
+import User from "../../../model/user";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const {method} = req;
