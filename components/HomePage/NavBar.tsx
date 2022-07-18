@@ -11,7 +11,7 @@ export default function NavBar() : JSX.Element {
             <div className='navbar-start'>
                 <Link href="/">
                 <a className="btn btn-ghost text-xl space-x-2">
-                    <IoMegaphoneSharp />
+                    <IoMegaphoneSharp className='hover:animate-ping' />
                     <span>SCREAMER V2</span>
                 </a>
                 </Link>
