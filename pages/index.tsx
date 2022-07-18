@@ -1,8 +1,11 @@
+import { useUser } from '@auth0/nextjs-auth0'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import NavBar from '../components/HomePage/NavBar'
+import NewPostForm from '../components/HomePage/NewPostForm'
 
 const Home: NextPage = () => {
+  const {user} = useUser();
   return (
     <>
       <Head>
@@ -12,6 +15,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
+      {user ? <NewPostForm /> : null}
     </>
   )
 }
