@@ -1,6 +1,7 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
 import NewPostForm from '../components/HomePage/NewPostForm'
 
@@ -16,6 +17,8 @@ const Home: NextPage = () => {
       </Head>
       <NavBar />
       {user ? <NewPostForm /> : null}
+
+      <Footer />
     </>
   )
 }
