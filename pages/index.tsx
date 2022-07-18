@@ -32,7 +32,6 @@ const Home = ({posts} : {posts : Post[]}) => {
 export async function getServerSideProps() {
   const { data } = await axios.get("http://localhost:3000/api/posts");
   const posts = data.data
-  console.log({ posts });
   return {
       props: {
           posts: posts
