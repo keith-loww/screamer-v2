@@ -1,6 +1,5 @@
-import { useUser } from '@auth0/nextjs-auth0'
+import { getSession, useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import axios from 'axios'
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
@@ -29,16 +28,12 @@ const Home = ({posts} : {posts : Post[]}) => {
   )
 }
 
+
 export async function getServerSideProps() {
   const { data : postData  } = await axios.get("http://localhost:3000/api/posts");
-  const { data: userData } = await axios.get(`http://localhost:3000/api/user`);
   const posts = postData.data
-  const user = userData.data
   return {
-      props: {
-          posts,
-          user
-      }
+    props: {posts}
   }
 }
 
