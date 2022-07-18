@@ -24,6 +24,11 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
                     date: new Date(),
                     likes: []
                 })
+                const added = await newPost.save()
+                res.status(200).json({
+                    success: true,
+                    data: added
+                })
             } catch (error) {
                 return res.status(400).json({ success: false })
             }

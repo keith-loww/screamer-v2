@@ -1,17 +1,26 @@
 import { useUser } from '@auth0/nextjs-auth0'
+import axios from 'axios';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 
+type FormData = {
+    content: string;
+}
+
 export default function NewPostForm(): JSX.Element | null {
     const {user, isLoading} = useUser();
-    const { register, reset, handleSubmit } = useForm();
+    const { register, reset, handleSubmit } = useForm<FormData>();
 
     if (!user || isLoading) return null
-    
-    const submitHandler = () => {
-        console.log("submitted lmao");
-    }
 
+    const submitHandler = async ({content} : FormData) => {
+        const obj = {
+            content,
+            author: user.sub
+        }
+        await axios.post("/api/posts", obj)
+        reset();
+    }
 
     return (
         <div className='card'>
@@ -23,7 +32,7 @@ export default function NewPostForm(): JSX.Element | null {
                 className="flex flex-col space-y-2">
                     <textarea {...register("content")}
                     placeholder="SCREAM HERE..."
-                    className="input input-bordered w-96 h-32" />
+                    className="input input-bordered w-96 h-32 uppercase" />
                     <button className='btn w-32'>SUBMIT</button>
                 </form>
             </div>
