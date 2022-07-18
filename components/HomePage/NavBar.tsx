@@ -1,8 +1,11 @@
+import { useUser } from '@auth0/nextjs-auth0';
 import Link from 'next/link'
 import React from 'react'
 import { IoMegaphoneSharp } from 'react-icons/io5'
 
-export default function NavBar() {
+export default function NavBar() : JSX.Element {
+    const {user} = useUser();
+
     return (
         <div className='navbar shadow-md' >
             <div className='navbar-start'>
@@ -14,10 +17,26 @@ export default function NavBar() {
                 </Link>
             </div>
             <div className="navbar-end">
-                <Link href="/login">
-                    <a className="btn">LOGIN</a>
-                </Link>
+                {user ? 
+                <LogoutBtn />
+                : <LoginBtn />}
             </div>
         </div>
-    )   
+    )
+}
+
+function LoginBtn() : JSX.Element {
+    return (
+        <Link href="/api/auth/login">
+            <a className="btn">LOGIN</a>
+        </Link>
+    )
+}
+
+function LogoutBtn() : JSX.Element {
+    return (
+        <Link href="/api/auth/logout">
+            <a className="btn">LOGOUT</a>
+        </Link>
+    )
 }
