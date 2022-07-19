@@ -90,7 +90,6 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-    console.log(params);
     if (!params || !params.id) throw new Error("ID not given")
     const { data } = await axios.get(`http://localhost:3000/api/posts/${params.id}`)
     

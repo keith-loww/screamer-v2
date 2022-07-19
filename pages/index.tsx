@@ -9,6 +9,7 @@ import { Post } from '../components/types'
 
 const Home = ({posts} : {posts : Post[]}) => {
   const {user} = useUser();
+  console.log(user);
   
   return (
     <>

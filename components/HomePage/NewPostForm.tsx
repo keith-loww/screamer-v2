@@ -1,5 +1,6 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 
@@ -8,6 +9,7 @@ type FormData = {
 }
 
 export default function NewPostForm(): JSX.Element | null {
+    const router = useRouter()
     const {user, isLoading} = useUser();
     const { register, reset, handleSubmit } = useForm<FormData>();
 
@@ -21,13 +23,14 @@ export default function NewPostForm(): JSX.Element | null {
         }
         await axios.post("/api/posts", obj)
         reset();
+        router.replace(router.asPath)
     }
 
     return (
         <div className='card w-3/5'>
             <div className='card-body'>
                 <h1 className='text-2xl font-semibold mb-2'>
-                    HEY, {user.name?.toUpperCase()}
+                    HEY, {user.nickname?.toUpperCase()}
                 </h1>
                 <form onSubmit={handleSubmit(submitHandler)}
                 className="flex flex-col space-y-2">

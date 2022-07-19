@@ -18,14 +18,12 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "PUT":
             try {
-                const updated = await Post.findByIdAndUpdate(id, req.body)
-                console.log({updated}); 
+                const updated = await Post.findByIdAndUpdate(id, req.body) 
                 return res.status(200).json({
                     success: true,
                     data: updated
                 })
             } catch (error) {
-                console.log(error.message)
                 return res.status(400).json({ success: false })
             }
         default:
