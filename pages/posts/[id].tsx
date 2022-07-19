@@ -20,6 +20,11 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
             router.push("/api/auth/login")
         } else {
             const alreadyLiked = post.likedBy.includes(user.sub)
+            if (alreadyLiked) {
+                await removeLike()
+            } else {
+                await addLike()
+            }
         }
         
     }
@@ -29,6 +34,15 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
             ...post,
             likedBy: post.likedBy.concat(user.sub)
         }
+        await axios.put(`/api/posts/${post.id}`, updatedPostObj)
+    }
+
+    const removeLike = async () => {
+        const updatedPostObj: Post = {
+            ...post,
+            likedBy: post.likedBy.filter(id => id !== user.sub)
+        }
+        await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
 
     return (
