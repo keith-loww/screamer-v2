@@ -16,7 +16,7 @@ export default function NewPostForm(): JSX.Element | null {
     const submitHandler = async ({content} : FormData) => {
         if (!content) return
         const obj = {
-            content,
+            content : content.toUpperCase(),
             author: user.sub
         }
         await axios.post("/api/posts", obj)
