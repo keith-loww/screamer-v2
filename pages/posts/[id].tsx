@@ -15,13 +15,20 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
     const { user, isLoading } = useUser();
     const {id} = router.query
 
-    const likeHandler = () => {
+    const likeHandler = async () => {
         if (!user) {
             router.push("/api/auth/login")
         } else {
             const alreadyLiked = post.likedBy.includes(user.sub)
         }
         
+    }
+
+    const addLike = async () => {
+        const updatedPostObj: Post = {
+            ...post,
+            likedBy: post.likedBy.concat(user.sub)
+        }
     }
 
     return (
