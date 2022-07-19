@@ -3,15 +3,27 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { createContext } from 'react'
 import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
 import { Post, User } from '../../components/types'
-import { BiLike } from "react-icons/bi"
+import LikeDisplay from '../../components/PostsPage/LikeDisplay';
+import { useUser } from '@auth0/nextjs-auth0';
 
 export default function PostPage({post, author} : {post: Post, author : User}): JSX.Element {
     const router = useRouter()
+    const { user, isLoading } = useUser();
     const {id} = router.query
+
+    const likeHandler = () => {
+        if (!user) {
+            router.push("/api/auth/login")
+        } else {
+            const alreadyLiked = post.likedBy.includes(user.sub)
+        }
+        
+    }
+
     return (
         <>
             <Head>
@@ -44,12 +56,8 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                         <div className='text-2xl'>
                             {post.content}
                         </div>
-                        <div className='flex flex-row space-x-2 items-center'>
-                            <button className='btn btn-ghost btn-square rounded-full'>
-                                <BiLike />
-                            </button>
-                            <span className='text-lg'>{post.likedBy.length}</span>
-                        </div>
+                        <LikeDisplay
+                        post={post} />
                     </div>
                 </div>
             </div>

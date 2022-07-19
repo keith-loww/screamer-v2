@@ -19,7 +19,7 @@ const Home = ({posts} : {posts : Post[]}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      {user ? <NewPostForm /> : null}
+      <div className='p-2 flex flex-col items-center'>{user ? <NewPostForm /> : null}</div>
       <PostsDisplay
       posts={posts} />
 

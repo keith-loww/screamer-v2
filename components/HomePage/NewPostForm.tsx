@@ -24,7 +24,7 @@ export default function NewPostForm(): JSX.Element | null {
     }
 
     return (
-        <div className='card'>
+        <div className='card w-3/5'>
             <div className='card-body'>
                 <h1 className='text-2xl font-semibold mb-2'>
                     HEY, {user.name?.toUpperCase()}
