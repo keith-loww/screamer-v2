@@ -6,7 +6,6 @@ import { Post, User } from '../../types';
 
 export default function PostItem({ post } : {post: Post}): JSX.Element | null {
     const [authorUser, setAuthorUser] = useState<User | null>(null)
-    console.log({post});
     
     const fetchAuthor = async () => {
         const { data } = await axios.get(`/api/users/${post.author}`)
@@ -22,7 +21,7 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
     return (
         <Link
         href={`/posts/${post.id}`} >
-            <div className='card card-bordered shadow-md hover:shadow-lg'>
+            <a className='card card-bordered shadow-md hover:shadow-lg'>
                 <div className='card-body'>
                     <div className="flex flex-row space-x-2">                
                         <div className="avatar">
@@ -49,7 +48,7 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </Link>
     )
 }
