@@ -19,7 +19,6 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
             }
         case 'POST':
             try {
-                console.log(req.body)
                 const {
                     username,
                     name,

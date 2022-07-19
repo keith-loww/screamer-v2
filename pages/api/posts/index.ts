@@ -11,7 +11,6 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
         case 'GET' :
             try {
                 const posts = await Post.find({})
-                console.log(posts);
                 return res.status(200).json({
                     success: true,
                     data: posts
@@ -23,7 +22,6 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
             try {
                 const { content, author : authorID } = req.body
                 const author = await User.findById(authorID)
-                console.log(author);
                 const newPost = new Post({
                     content,
                     author: author,

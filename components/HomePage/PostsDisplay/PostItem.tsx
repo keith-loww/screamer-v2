@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { Post, User } from '../../types';
 
@@ -9,7 +10,6 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
     
     const fetchAuthor = async () => {
         const { data } = await axios.get(`/api/users/${post.author}`)
-        console.log(data)
         setAuthorUser(data.data);
     }
 
@@ -17,38 +17,39 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
         fetchAuthor()
     }, [])
 
-    if (!authorUser) return null
+    if (!post || !authorUser) return null
 
     return (
-        <div className='card card-bordered shadow-md hover:shadow-lg'>
-            <div className='card-body'>
-                <div className="flex flex-row space-x-2">                
-                    <div className="avatar">
-                        <div className="h-14 rounded-full">
-                            <Image 
-                            src={authorUser.picture}
-                            alt="Cannot Fetch Image"
-                            className='rounded-full'
-                            layout='fill' />
-                        </div>
-                    </div>
-                    <div>
-                        <div className='flex space-x-2 items-end'>
-                            <span className='text-xl'>
-                                {authorUser.name.toUpperCase()}
-                            </span>
-                            <span className='text-secondary'>
-                                {(new Date(post.date)).toLocaleDateString()}
-                            </span>
+        <Link
+        href={`/posts/${post.id}`} >
+            <div className='card card-bordered shadow-md hover:shadow-lg'>
+                <div className='card-body'>
+                    <div className="flex flex-row space-x-2">                
+                        <div className="avatar">
+                            <div className="h-14 rounded-full">
+                                <Image 
+                                src={authorUser.picture}
+                                alt="Cannot Fetch Image"
+                                className='rounded-full'
+                                layout='fill' />
+                            </div>
                         </div>
                         <div>
-                            {post.content.toUpperCase()}
+                            <div className='flex space-x-2 items-end'>
+                                <span className='text-xl font-semibold'>
+                                    {authorUser.name.toUpperCase()}
+                                </span>
+                                <span className='text-secondary'>
+                                    {(new Date(post.date)).toLocaleDateString()}
+                                </span>
+                            </div>
+                            <div className='text-sm'>
+                                {post.content.toUpperCase()}
+                            </div>
                         </div>
-                        
-                        
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
