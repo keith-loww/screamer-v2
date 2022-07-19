@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { createContext } from 'react'
+import React from 'react'
 import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
 import { Post, User } from '../../components/types'

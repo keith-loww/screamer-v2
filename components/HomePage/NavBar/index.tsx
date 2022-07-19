@@ -2,6 +2,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import Link from 'next/link'
 import React from 'react'
 import { IoMegaphoneSharp } from 'react-icons/io5'
+import ProfileDropDown from './ProfileDropdown';
 
 export default function NavBar() : JSX.Element {
     const {user} = useUser();
@@ -18,7 +19,7 @@ export default function NavBar() : JSX.Element {
             </div>
             <div className="navbar-end">
                 {user ? 
-                <LogoutBtn />
+                <ProfileDropDown />
                 : <LoginBtn />}
             </div>
         </div>
