@@ -4,14 +4,16 @@ import { Post } from '../types'
 
 interface PropTypes {
     post: Post,
-    likeHandler?: () => void
+    likeHandler: () => void
 }
 
 export default function LikeDisplay({post, likeHandler} : PropTypes): JSX.Element {
 
     return (
         <div className='flex flex-row space-x-2 items-center'>
-            <button className='btn btn-ghost btn-square rounded-full'>
+            <button
+            onClick={likeHandler}
+            className='btn btn-ghost btn-square rounded-full'>
                 <BiLike />
             </button>
             <span className='text-lg'>{post.likedBy.length}</span>

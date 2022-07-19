@@ -23,8 +23,9 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
             if (alreadyLiked) {
                 await removeLike()
             } else {
-                await addLike()
+                await addLike() 
             }
+            router.replace(router.asPath)
         }
         
     }
@@ -78,7 +79,8 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                             {post.content}
                         </div>
                         <LikeDisplay
-                        post={post} />
+                        post={post}
+                        likeHandler={likeHandler} />
                     </div>
                 </div>
             </div>
