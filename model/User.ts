@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    username: {
+    nickname: {
         type: String
     },
     created_at: {

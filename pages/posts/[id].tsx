@@ -50,7 +50,7 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
         <>
             <Head>
                 <html data-theme="business"></html>
-                <title>{author.name}'s Post </title>
+                <title>{author.nickname}'s Post </title>
             </Head>
             <NavBar />
             <div className=' flex justify-center align-middle'>
@@ -68,7 +68,7 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                             </div>
                             <div className='flex flex-col space-y-2'>
                                 <span className='text-xl font-semibold'>
-                                    {author.name}
+                                    {author.nickname.toUpperCase()}
                                 </span>
                                 <span className='text-secondary'>
                                     {(new Date(post.date)).toLocaleString()}

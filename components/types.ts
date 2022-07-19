@@ -11,7 +11,7 @@ export interface Post {
 export interface User {
     id: string,
     name: string,
-    username: string,
+    nickname: string,
     created_at: string,
     picture: string,
     posts: Post[]
