@@ -5,10 +5,9 @@ import React from 'react'
 import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
 
-export default function DeletedPage() : NextPage {
+const DeletedPage : NextPage  = () => {
     return (<>
         <Head>
-            <html data-theme="business"></html>
             <title>POST DELETED</title>
         </Head>
         <NavBar />
@@ -22,3 +21,5 @@ export default function DeletedPage() : NextPage {
         <Footer />
     </>)
 }
+
+export default DeletedPage
