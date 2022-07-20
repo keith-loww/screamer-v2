@@ -1,12 +1,24 @@
 import React from 'react'
+import { Comment } from '../../types';
 
+interface PropTypes {
+    comments: Comment[]
+}
 
-export const CommentDisplay = () => {
+const CommentDisplay = ({comments }: PropTypes) => {
     return (
         <div>
-        <h1>CommentDisplay</h1>
+            {comments.map((comment, index) => {
+                return (
+                    <div key={index}>
+                        <h3>{comment.author.id}</h3>
+                        <p>{comment.content}</p>
+                    </div>
+                )
+            }
+            )}
         </div>
-    );
+    )
 }
 
 export default CommentDisplay;
