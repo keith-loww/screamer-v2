@@ -1,10 +1,12 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import { useState } from 'react'
 import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
 import NewPostForm from '../components/HomePage/NewPostForm'
 import PostsDisplay from '../components/HomePage/PostsDisplay'
+import Notification from '../components/Notification'
 import { Post } from '../components/types'
 import dbConnect from '../lib/dbConnect'
 import { getPostsWithAuthor } from './api/posts'
@@ -15,6 +17,8 @@ interface PropTypes {
 
 const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
   const {user} = useUser();
+  const [notifContent, setNotifContent] = useState<string>("")
+  const [notifType, setNotifType] = useState<string>("default")
   
   return (
     <>
@@ -24,7 +28,16 @@ const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <div className='p-2 flex flex-col items-center'>{user ? <NewPostForm /> : null}</div>
+      <Notification
+      content={notifContent}
+      type={notifType} />
+      <div className='p-2 flex flex-col items-center'>
+        {user
+          ? <NewPostForm
+              setNotifContent={setNotifContent}
+              setNotifType={setNotifType} />
+          : null}
+      </div>
       <PostsDisplay
       posts={posts} />
       <Footer />

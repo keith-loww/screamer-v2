@@ -9,7 +9,12 @@ type FormData = {
     content: string;
 }
 
-export default function NewPostForm(): JSX.Element | null {
+interface PropTypes {
+    setNotifContent: (content: string) => void;
+    setNotifType: (content: string) => void;
+}
+
+export default function NewPostForm({setNotifContent, setNotifType} : PropTypes): JSX.Element | null {
     const router = useRouter()
     const {user, isLoading} = useUser();
     const { register, reset, handleSubmit } = useForm<FormData>();
