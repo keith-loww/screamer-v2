@@ -1,10 +1,11 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
 
-export default function DeletedPage() {
+export default function DeletedPage() : NextPage {
     return (<>
         <Head>
             <html data-theme="business"></html>
