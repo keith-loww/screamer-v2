@@ -35,9 +35,11 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
                         </div>
                         <div>
                             <div className='flex space-x-2 items-center'>
-                                <span className='text-lg font-semibold'>
-                                    {authorUser.nickname.toUpperCase()}
-                                </span>
+                                <Link
+                                href={`/users/${post.author}`}
+                                className='text-lg font-semibold'>
+                                    <a className='underline'>{authorUser.nickname.toUpperCase()}</a>
+                                </Link>
                                 <span className='text-secondary'>
                                     {(new Date(post.date)).toLocaleDateString()}
                                 </span>
