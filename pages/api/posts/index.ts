@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Post as PostType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
 import Post from "../../../model/post";
 import User from "../../../model/user";
@@ -39,6 +40,10 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
         default:
             return res.status(400).json({ success: false })
     }
+}
+
+export const getPosts = async () : Promise<PostType[]> => {
+    return await Post.find({})
 }
 
 export default handler

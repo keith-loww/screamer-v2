@@ -6,6 +6,8 @@ import NavBar from '../components/HomePage/NavBar'
 import NewPostForm from '../components/HomePage/NewPostForm'
 import PostsDisplay from '../components/HomePage/PostsDisplay'
 import { Post } from '../components/types'
+import dbConnect from '../lib/dbConnect'
+import { getPosts } from './api/posts'
 
 const Home = ({posts} : {posts : Post[]}) => {
   const {user} = useUser();
@@ -31,8 +33,8 @@ const Home = ({posts} : {posts : Post[]}) => {
 
 
 export async function getServerSideProps() {
-  const { data : postData  } = await axios.get("http://localhost:3000/api/posts");
-  const posts = postData.data
+  await dbConnect()
+  const posts = await getPosts()
   return {
     props: {posts}
   }

@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import dbConnect from "../../../lib/dbConnect";
 import Post from "../../../model/post";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const {method} = req;
     const {id} = req.query
+    await dbConnect()
     
     switch(method) {
         case "GET":
