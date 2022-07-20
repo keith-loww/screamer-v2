@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.9.1",
+    "@mantine/core": "^4.2.12",
+    "@mantine/hooks": "^4.2.12",
+    "@mantine/next": "^4.2.12",
+    "@mantine/notifications": "^4.2.12",
     "@types/auth0": "^2.35.2",
     "axios": "^0.27.2",
     "daisyui": "^2.19.0",

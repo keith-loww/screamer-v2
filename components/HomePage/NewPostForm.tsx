@@ -3,26 +3,29 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
+import { showNotification } from '@mantine/notifications';
 
 type FormData = {
     content: string;
 }
 
-interface PropTypes {
-    setNotifContent: (content: string) => void;
-    setNotifType: (content: string) => void;
-}
-
-export default function NewPostForm({setNotifContent, setNotifType} : PropTypes): JSX.Element | null {
+export default function NewPostForm(): JSX.Element | null {
     const router = useRouter()
     const {user, isLoading} = useUser();
-    const { register, reset, handleSubmit } = useForm<FormData>();
+    const { register, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
 
     if (!user || isLoading) return null
 
     const submitHandler = async ({content} : FormData) => {
-        if (!content) return
+        // if (content.length < 5) {
+        //     showNotification({
+        //         message("POST MUST BE AT LEAST 5 CHARACTERS LONG")
+        //     })
+        //     return
+        // }
+        // if (content.length > 280) {
+        //     return
+        // }
         const obj = {
             content : content.toUpperCase(),
             author: user.sub
@@ -31,19 +34,16 @@ export default function NewPostForm({setNotifContent, setNotifType} : PropTypes)
         const postID = data.data.id
         const resp = await axios.get(`/api/users/${user.sub}`)
         const userObj = resp.data.data
-        console.log({userObj});
 
         await axios.put(`/api/users/${user.sub}`, {
             ...userObj,
             posts: userObj.posts.concat(postID)
         })
         reset();
-        setNotifContent("SUCCESSFULLY SCREAMED")
-        setNotifType("success")
-        setTimeout(() => {
-            setNotifContent("")
-            setNotifType("default")
-        }, 5000)
+        showNotification({
+            message: "SUCCESSFULLY SCREAMED",
+            color: "green"
+        })
         router.replace(router.asPath)
     }
 

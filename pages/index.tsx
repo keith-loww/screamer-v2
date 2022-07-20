@@ -17,9 +17,6 @@ interface PropTypes {
 
 const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
   const {user} = useUser();
-  const [notifContent, setNotifContent] = useState<string>("")
-  const [notifType, setNotifType] = useState<string>("default")
-  
   return (
     <>
       <Head>
@@ -28,22 +25,10 @@ const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-
-      {notifContent
-      ? (
-        <div className='p-4'>
-          <Notification
-          content={notifContent}
-          type={notifType} />
-        </div>
-      )
-      : null}
       
       <div className='p-2 flex flex-col items-center'>
         {user
-          ? <NewPostForm
-              setNotifContent={setNotifContent}
-              setNotifType={setNotifType} />
+          ? <NewPostForm />
           : null}
       </div>
       <PostsDisplay
