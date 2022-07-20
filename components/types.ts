@@ -22,3 +22,11 @@ export interface UserShort {
     nickname: string,
     picture: string
 }
+
+export interface Comment {
+    id: string,
+    content: string,
+    author: UserShort,
+    date: string,
+    likedBy: UserID[],
+}
