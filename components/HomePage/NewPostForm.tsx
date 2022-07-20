@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { showNotification } from '@mantine/notifications';
+import { FaCheckCircle } from "react-icons/fa"
+import { Textarea } from '@mantine/core';
 
 type FormData = {
     content: string;
@@ -13,19 +15,11 @@ export default function NewPostForm(): JSX.Element | null {
     const router = useRouter()
     const {user, isLoading} = useUser();
     const { register, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
-
     if (!user || isLoading) return null
 
+    console.log(errors);
+
     const submitHandler = async ({content} : FormData) => {
-        // if (content.length < 5) {
-        //     showNotification({
-        //         message("POST MUST BE AT LEAST 5 CHARACTERS LONG")
-        //     })
-        //     return
-        // }
-        // if (content.length > 280) {
-        //     return
-        // }
         const obj = {
             content : content.toUpperCase(),
             author: user.sub
@@ -42,7 +36,8 @@ export default function NewPostForm(): JSX.Element | null {
         reset();
         showNotification({
             message: "SUCCESSFULLY SCREAMED",
-            color: "green"
+            color: "green",
+            icon: <FaCheckCircle />
         })
         router.replace(router.asPath)
     }
@@ -55,18 +50,22 @@ export default function NewPostForm(): JSX.Element | null {
                 </h1>
                 <form onSubmit={handleSubmit(submitHandler)}
                 className="flex flex-col space-y-2">
-                    <textarea {...register("content", {
-                        maxLength : {
-                            value: 280,
-                            message: 'POST CANNOT EXCEED 280 CHARACTERS'
-                        },
-                        minLength : {
-                            value: 5,
-                            message: 'POST MUST BE AT LEAST 5 CHARACTERS LONG'
-                        },
-                    })}
-                    placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
-                    className="input input-bordered w-4/5 h-32 uppercase" />
+                    <div className='w-4/5'>
+                        <Textarea {...register("content", {
+                            maxLength : {
+                                value: 280,
+                                message: 'POST CANNOT EXCEED 280 CHARACTERS'
+                            },
+                            minLength : {
+                                value: 5,
+                                message: 'POST MUST BE AT LEAST 5 CHARACTERS LONG'
+                            },
+                        })}
+                        placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
+                        autosize
+                        error={errors ? errors.content?.message : null}
+                        className="" />
+                    </div>
                     <button className='btn w-1/3 md:w-56'>SUBMIT</button>
                 </form>
             </div>
