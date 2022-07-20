@@ -17,7 +17,7 @@ export default function UserCard({user} : {user : User}) {
                     </div>
                 </div>
                 <div className='flex flex-col'>
-                    <span className='text-2xl font-bold'>{user.nickname}</span>
+                    <span className='text-2xl font-bold'>{user.nickname.toUpperCase()}</span>
                     <div className='flex space-x-2 items-center'>
                         <BiCalendar />
                         <span className='italic text-secondary'>Joined {getUserProfileDate(new Date(user.created_at))}</span>
