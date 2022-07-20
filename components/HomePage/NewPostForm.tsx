@@ -45,7 +45,7 @@ export default function NewPostForm(): JSX.Element | null {
                 <form onSubmit={handleSubmit(submitHandler)}
                 className="flex flex-col space-y-2">
                     <textarea {...register("content")}
-                    placeholder="SCREAM HERE..."
+                    placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
                     className="input input-bordered w-4/5 h-32 uppercase" />
                     <button className='btn w-1/3 md:w-56'>SUBMIT</button>
                 </form>

@@ -4,6 +4,7 @@ import React from 'react'
 import Footer from '../../components/HomePage/Footer'
 import NavBar from '../../components/HomePage/NavBar'
 import { Post, User } from '../../components/types'
+import PostsDisplay from '../../components/UserProfile/PostsDisplay'
 import UserCard from '../../components/UserProfile/UserCard'
 import dbConnect from '../../lib/dbConnect'
 import { getUser, getUserWithPosts } from '../api/users/[id]'
@@ -18,10 +19,14 @@ const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
             <title>{user.nickname}'s Profile</title>
         </Head>
         <NavBar />
-        <div className='p-2 mt-2 flex justify-center'>
+        <div className='p-2 mt-2 flex flex-col items-center'>
             <UserCard
             user={user} />
+            <PostsDisplay
+            user={user} />
         </div>
+
+        
         <Footer />
     </>)
 }
