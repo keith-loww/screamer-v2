@@ -1,12 +1,16 @@
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
-import { Post, User } from '../../types';
+import React from 'react'
+import { Post } from '../../types';
 
-export default function PostItem({ post } : {post: Post}): JSX.Element | null {
+interface PropTypes {
+    post: Post,
+}
+
+export default function PostItem({ post } : PropTypes): JSX.Element | null {
     if (!post) return null
-
+    
     return (
         <Link
         href={`/posts/${post.id}`} >
@@ -15,11 +19,10 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
                     <div className="flex flex-row space-x-2">                
                         <Link href={`/users/${post.author.id}`}>
                             <div className="avatar">
-                                <div className="h-14 rounded-full">
+                                <div className="h-14 rounded-full relative">
                                     <Image
                                     src={post.author.picture}
                                     alt="Cannot Fetch Image"
-                                    className='rounded-full'
                                     layout='fill' />
                                 </div>
                             </div>
@@ -29,7 +32,7 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
                                 <Link
                                 href={`/users/${post.author.id}`}
                                 className='text-lg font-semibold'>
-                                    <a className='underline'>{post.author.nickname.toUpperCase()}</a>
+                                    <span className='underline'>{post.author.nickname.toUpperCase()}</span>                            
                                 </Link>
                                 <span className='text-secondary'>
                                     {(new Date(post.date)).toLocaleDateString()}

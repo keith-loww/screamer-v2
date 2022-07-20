@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
-import axios from 'axios'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
@@ -7,9 +7,9 @@ import NewPostForm from '../components/HomePage/NewPostForm'
 import PostsDisplay from '../components/HomePage/PostsDisplay'
 import { Post } from '../components/types'
 import dbConnect from '../lib/dbConnect'
-import { getPosts, getPostsWithAuthor } from './api/posts'
+import { getPostsWithAuthor } from './api/posts'
 
-const Home = ({posts} : {posts : Post[]}) => {
+const Home : NextPage<Props> = ({ posts } : {posts : Post[]}) => {
   const {user} = useUser();
   
   return (
@@ -24,16 +24,16 @@ const Home = ({posts} : {posts : Post[]}) => {
       <div className='p-2 flex flex-col items-center'>{user ? <NewPostForm /> : null}</div>
       <PostsDisplay
       posts={posts} />
-
       <Footer />
     </>
   )
 }
 
 
-export async function getServerSideProps() {
+export const getServerSideProps : GetServerSideProps = async () => {
   await dbConnect()
-  const posts : Post[] = JSON.parse(JSON.stringify(await getPostsWithAuthor()))
+  const posts = JSON.parse(JSON.stringify(await getPostsWithAuthor()))
+
   return {
     props: {posts}
   }

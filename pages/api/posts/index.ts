@@ -11,7 +11,11 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
     switch(method) {
         case 'GET' :
             try {
-                const posts = await Post.find({})
+                const posts = await Post.find({}).populate("author", {
+                    nickname: 1,
+                    id: 1,
+                    picture: 1
+                })
                 return res.status(200).json({
                     success: true,
                     data: posts

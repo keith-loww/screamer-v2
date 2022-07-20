@@ -25,6 +25,7 @@ export default function PostPage({ post } : { post: Post }): JSX.Element {
             router.push("/api/auth/login")
         } else {
             const alreadyLiked = post.likedBy.includes(user.sub)
+            console.log(alreadyLiked);
             if (alreadyLiked) {
                 await removeLike()
             } else {
@@ -125,7 +126,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     const post = JSON.parse(JSON.stringify(await getPostWithAuthor(params.id)))
     if (!post) throw new Error("cannot find post")
-    const author = JSON.parse(JSON.stringify(post.author))
 
     return {
         props: {
