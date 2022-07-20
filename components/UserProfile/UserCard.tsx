@@ -9,14 +9,17 @@ export default function UserCard({user} : {user : User}) {
             <div className='card-body'>
                 <div className='avatar'>
                     <div className='relative h-24 rounded-full'>
-                        <Image src={user.picture} layout="fill" />
+                        <Image
+                        src={user.picture}
+                        layout="fill"
+                        alt='cannot fetch image' />
                     </div>
                 </div>
                 <div className='flex flex-col'>
                     <span className='text-2xl font-bold'>{user.nickname}</span>
-                    <div>
+                    <div className='flex space-x-2 items-center'>
                         <BiCalendar />
-                        <span className='italic text-secondary'>Joined {user.created_at}</span>
+                        <span className='italic text-secondary'>Joined {(new Date(user.created_at).toLocaleDateString())}</span>
                     </div>
                 </div>
             </div>
