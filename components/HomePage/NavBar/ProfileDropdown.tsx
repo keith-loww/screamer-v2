@@ -20,9 +20,11 @@ export default function ProfileDropDown() {
         </label>
         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-            <a className="justify-between">
+            <Link
+            href={`/users/${user?.sub}`}
+            className="justify-between">
                 Profile
-            </a>
+            </Link>
             </li>
             <li>
                 <Link href="/api/auth/logout">Logout</Link>

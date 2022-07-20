@@ -9,6 +9,9 @@ import NavBar from '../../components/HomePage/NavBar';
 import { Post, User } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import { useUser } from '@auth0/nextjs-auth0';
+import dbConnect from '../../lib/dbConnect';
+import { getPost } from '../api/posts/[id]';
+import { getUser } from '../api/users/[id]';
 
 export default function PostPage({post, author} : {post: Post, author : User}): JSX.Element {
     const router = useRouter()
@@ -91,12 +94,12 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     if (!params || !params.id) throw new Error("ID not given")
-    const { data } = await axios.get(`http://localhost:3000/api/posts/${params.id}`)
-    
-    const post = data.data
+    await dbConnect()
 
-    const {data : authorData} = await axios(`http://localhost:3000/api/users/${post.author}`)
-    const author = authorData.data
+    const post = JSON.parse(JSON.stringify(await getPost(params.id)))
+    if (!post) throw new Error("cannot find post")
+
+    const author = JSON.parse(JSON.stringify(await getUser(post.author)))
 
     return {
         props: {

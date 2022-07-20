@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import PostsDisplay from './PostsDisplay';
 
 type FormData = {
     content: string;
@@ -21,7 +22,16 @@ export default function NewPostForm(): JSX.Element | null {
             content : content.toUpperCase(),
             author: user.sub
         }
-        await axios.post("/api/posts", obj)
+        const {data} = await axios.post("/api/posts", obj)
+        const postID = data.data.id
+        const resp = await axios.get(`/api/users/${user.sub}`)
+        const userObj = resp.data.data
+        console.log({userObj});
+
+        await axios.put(`/api/users/${user.sub}`, {
+            ...userObj,
+            posts: userObj.posts.concat(postID)
+        })
         reset();
         router.replace(router.asPath)
     }

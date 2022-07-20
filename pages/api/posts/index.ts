@@ -42,7 +42,7 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
     }
 }
 
-export const getPosts = async () : Promise<PostType[]> => {
+export const getPosts = async () => {
     return await Post.find({})
 }
 

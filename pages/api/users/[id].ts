@@ -23,6 +23,19 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             } catch (error) {
                 return res.status(400).json({ success: false })
             }
+        case "PUT":
+            try {
+                const updated = await User.findByIdAndUpdate(id, req.body, {new: true})
+                if (updated) {
+                    return res.status(200).json({
+                        success: true,
+                        data: updated
+                    })
+                } 
+                return res.status(400).json({ success: false })
+            } catch (error) {
+                return res.status(400).json({ success: false })
+            }
         default:
             return res.status(400).json({ success: false })
     }

@@ -34,7 +34,7 @@ const Home = ({posts} : {posts : Post[]}) => {
 
 export async function getServerSideProps() {
   await dbConnect()
-  const posts = await getPosts()
+  const posts : Post[] = JSON.parse(JSON.stringify(await getPosts()))
   return {
     props: {posts}
   }
