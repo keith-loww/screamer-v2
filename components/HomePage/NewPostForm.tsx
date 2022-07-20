@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import PostsDisplay from './PostsDisplay';
+import { ErrorMessage } from '@hookform/error-message';
 
 type FormData = {
     content: string;
@@ -38,6 +38,12 @@ export default function NewPostForm({setNotifContent, setNotifType} : PropTypes)
             posts: userObj.posts.concat(postID)
         })
         reset();
+        setNotifContent("SUCCESSFULLY SCREAMED")
+        setNotifType("success")
+        setTimeout(() => {
+            setNotifContent("")
+            setNotifType("default")
+        }, 5000)
         router.replace(router.asPath)
     }
 
@@ -49,7 +55,16 @@ export default function NewPostForm({setNotifContent, setNotifType} : PropTypes)
                 </h1>
                 <form onSubmit={handleSubmit(submitHandler)}
                 className="flex flex-col space-y-2">
-                    <textarea {...register("content")}
+                    <textarea {...register("content", {
+                        maxLength : {
+                            value: 280,
+                            message: 'POST CANNOT EXCEED 280 CHARACTERS'
+                        },
+                        minLength : {
+                            value: 5,
+                            message: 'POST MUST BE AT LEAST 5 CHARACTERS LONG'
+                        },
+                    })}
                     placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
                     className="input input-bordered w-4/5 h-32 uppercase" />
                     <button className='btn w-1/3 md:w-56'>SUBMIT</button>

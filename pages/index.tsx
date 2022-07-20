@@ -28,9 +28,17 @@ const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <Notification
-      content={notifContent}
-      type={notifType} />
+
+      {notifContent
+      ? (
+        <div className='p-4'>
+          <Notification
+          content={notifContent}
+          type={notifType} />
+        </div>
+      )
+      : null}
+      
       <div className='p-2 flex flex-col items-center'>
         {user
           ? <NewPostForm
