@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
 import Footer from '../../components/HomePage/Footer'
@@ -12,10 +12,9 @@ interface PropTypes {
     user: User
 }
 
-export default function UserProfile({user} : PropTypes) {
+const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
     return (<>
         <Head>
-            <html data-theme="business"></html>
             <title>{user.nickname}'s Profile</title>
         </Head>
         <NavBar />
@@ -38,3 +37,5 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
         props: {user}
     }
 }
+
+export default UserProfile
