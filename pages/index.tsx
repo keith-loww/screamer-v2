@@ -7,11 +7,11 @@ import NewPostForm from '../components/HomePage/NewPostForm'
 import PostsDisplay from '../components/HomePage/PostsDisplay'
 import { Post } from '../components/types'
 import dbConnect from '../lib/dbConnect'
-import { getPosts } from './api/posts'
+import { getPosts, getPostsWithAuthor } from './api/posts'
 
 const Home = ({posts} : {posts : Post[]}) => {
   const {user} = useUser();
-  console.log(user);
+  console.log(posts);
   
   return (
     <>
@@ -34,7 +34,7 @@ const Home = ({posts} : {posts : Post[]}) => {
 
 export async function getServerSideProps() {
   await dbConnect()
-  const posts : Post[] = JSON.parse(JSON.stringify(await getPosts()))
+  const posts : Post[] = JSON.parse(JSON.stringify(await getPostsWithAuthor()))
   return {
     props: {posts}
   }

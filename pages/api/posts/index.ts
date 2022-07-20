@@ -46,4 +46,10 @@ export const getPosts = async () => {
     return await Post.find({})
 }
 
+export const getPostsWithAuthor = async () => await Post.find({}).populate("author", {
+    nickname: 1,
+    id: 1,
+    picture: 1
+})
+
 export default handler

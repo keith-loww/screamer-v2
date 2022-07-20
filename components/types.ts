@@ -3,7 +3,7 @@ type UserID = string;
 export interface Post {
     id: string,
     content: string,
-    author: UserID,
+    author: UserShort,
     date: string,
     likedBy: UserID[],
 }
@@ -15,4 +15,10 @@ export interface User {
     created_at: string,
     picture: string,
     posts: Post[]
+}
+
+export interface UserShort {
+    id: string,
+    nickname: string,
+    picture: string
 }

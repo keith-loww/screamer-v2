@@ -4,22 +4,25 @@ import React from 'react'
 import Footer from '../../components/HomePage/Footer'
 import NavBar from '../../components/HomePage/NavBar'
 import { Post, User } from '../../components/types'
+import UserCard from '../../components/UserProfile/UserCard'
 import dbConnect from '../../lib/dbConnect'
-import { getPosts } from '../api/posts'
-import { getUser } from '../api/users/[id]'
+import { getUser, getUserWithPosts } from '../api/users/[id]'
 
 interface PropTypes {
     user: User
-    posts: Post[]
 }
 
-export default function UserProfile({user, posts} : PropTypes) {
+export default function UserProfile({user} : PropTypes) {
     return (<>
         <Head>
             <html data-theme="business"></html>
             <title>{user.nickname}'s Profile</title>
         </Head>
         <NavBar />
+        <div className='p-2 mt-2 flex justify-center'>
+            <UserCard
+            user={user} />
+        </div>
         <Footer />
     </>)
 }
@@ -28,12 +31,10 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     if (!params || !params.id) throw new Error("ID not given")
     await dbConnect()
 
-    const user : User = JSON.parse(JSON.stringify(await getUser(params.id)))
+    const user : User = JSON.parse(JSON.stringify(await getUserWithPosts(params.id)))
     if (!user) throw new Error("cannot find user")
-    const allPosts : Post[] = JSON.parse(JSON.stringify(await getPosts()));
-    const posts = allPosts.filter(post => post.author === user.id)
 
     return {
-        props: {user, posts}
+        props: {user}
     }
 }
