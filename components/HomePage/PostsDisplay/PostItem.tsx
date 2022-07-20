@@ -14,7 +14,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
     return (
         <Link
         href={`/posts/${post.id}`} >
-            <a className='card card-bordered shadow-md hover:shadow-lg w-full md:w-3/5'>
+            <a className='card card-bordered shadow-md hover:shadow-lg w-full md:w-3/5 xl:w-2/5'>
                 <div className='card-body'>
                     <div className="flex flex-row space-x-2">                
                         <Link href={`/users/${post.author.id}`}>
