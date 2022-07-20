@@ -12,6 +12,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
 import { getPost } from '../api/posts/[id]';
 import { getUser } from '../api/users/[id]';
+import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 
 export default function PostPage({post, author} : {post: Post, author : User}): JSX.Element {
     const router = useRouter()
@@ -59,7 +60,7 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
             <div className=' flex justify-center align-middle'>
                 <div className='card card-bordered shadow-lg w-3/5 xl:w-2/5 mt-2'>
                     <div className='card-body space-y-2'>
-                        <div className='flex flex-row space-x-4'>
+                        <div className='flex w-full flex-row space-x-4'>
                             <div className="avatar">
                                 <div className="h-24 rounded-full">
                                     <Image
@@ -76,6 +77,9 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                                 <span className='text-secondary'>
                                     {(new Date(post.date)).toLocaleString()}
                                 </span>
+                            </div>
+                            <div className='w-1/2 justify-end items-center'>
+                                <DropdownMenu />
                             </div>
                         </div>
                         <div className='text-2xl'>
