@@ -37,17 +37,17 @@ export default function NewPostForm(): JSX.Element | null {
     }
 
     return (
-        <div className='card w-3/5'>
+        <div className='card w-full md:w-3/5'>
             <div className='card-body'>
-                <h1 className='text-2xl font-semibold mb-2'>
+                <h1 className='text-xl md:text-2xl font-semibold mb-2'>
                     HEY, {user.nickname?.toUpperCase()}
                 </h1>
                 <form onSubmit={handleSubmit(submitHandler)}
                 className="flex flex-col space-y-2">
                     <textarea {...register("content")}
                     placeholder="SCREAM HERE..."
-                    className="input input-bordered w-96 h-32 uppercase" />
-                    <button className='btn w-56'>SUBMIT</button>
+                    className="input input-bordered w-4/5 h-32 uppercase" />
+                    <button className='btn w-1/3 md:w-56'>SUBMIT</button>
                 </form>
             </div>
         </div>

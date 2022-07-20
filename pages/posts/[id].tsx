@@ -69,7 +69,7 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
             </Head>
             <NavBar />
             <div className=' flex justify-center align-middle'>
-                <div className='card card-bordered shadow-lg w-3/5 xl:w-2/5 mt-2'>
+                <div className='card card-bordered shadow-lg w-full md:w-3/5 xl:w-2/5 mt-2'>
                     <div className='card-body space-y-2'>
                         <div className='flex w-full flex-row justify-between'>
                             <div className='justify-start flex flex-row space-x-4'>
