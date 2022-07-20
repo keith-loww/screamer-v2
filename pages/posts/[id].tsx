@@ -13,6 +13,7 @@ import dbConnect from '../../lib/dbConnect';
 import { getPost } from '../api/posts/[id]';
 import { getUser } from '../api/users/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
+import Link from 'next/link';
 
 export default function PostPage({post, author} : {post: Post, author : User}): JSX.Element {
     const router = useRouter()
@@ -73,18 +74,24 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                     <div className='card-body space-y-2'>
                         <div className='flex w-full flex-row justify-between'>
                             <div className='justify-start flex flex-row space-x-4'>
-                                <div className="avatar">
-                                    <div className="h-24 rounded-full relative">
-                                        <Image
-                                        src={author.picture}
-                                        alt="Cannot Fetch Image"
-                                        layout='fill' />
-                                    </div>
-                                </div>
+                                <Link
+                                href={`/users/${post.author}`} >
+                                    <a className="avatar">
+                                        <div className="h-20 rounded-full relative">
+                                            <Image
+                                            src={author.picture}
+                                            alt="Cannot Fetch Image"
+                                            layout='fill' />
+                                        </div>
+                                    </a>
+                                </Link>
                                 <div className='flex flex-col space-y-2'>
-                                    <span className='text-xl font-semibold'>
-                                        {author.nickname.toUpperCase()}
-                                    </span>
+                                    <Link
+                                    href={`/users/${post.author}`} >
+                                        <a className='text-xl font-semibold underline'>
+                                            {author.nickname.toUpperCase()}
+                                        </a>
+                                    </Link>
                                     <span className='text-secondary'>
                                         {(new Date(post.date)).toLocaleString()}
                                     </span>

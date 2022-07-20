@@ -24,15 +24,17 @@ export default function PostItem({ post } : {post: Post}): JSX.Element | null {
             <a className='card card-bordered shadow-md hover:shadow-lg w-full md:w-3/5'>
                 <div className='card-body'>
                     <div className="flex flex-row space-x-2">                
-                        <div className="avatar">
-                            <div className="h-14 rounded-full">
-                                <Image 
-                                src={authorUser.picture}
-                                alt="Cannot Fetch Image"
-                                className='rounded-full'
-                                layout='fill' />
+                        <Link href={`/users/${post.author}`}>
+                            <div className="avatar">
+                                <div className="h-14 rounded-full">
+                                    <Image
+                                    src={authorUser.picture}
+                                    alt="Cannot Fetch Image"
+                                    className='rounded-full'
+                                    layout='fill' />
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                         <div>
                             <div className='flex space-x-2 items-center'>
                                 <Link
