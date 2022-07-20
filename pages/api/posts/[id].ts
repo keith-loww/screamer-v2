@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Post as PostType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
 import Post from "../../../model/post";
 
@@ -10,11 +11,14 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     switch(method) {
         case "GET":
             try {
-                const post = await Post.findById(id)
-                return res.status(200).json({
-                    success: true,
-                    data: post
-                })
+                const post = await getPost(id)
+                if (post) {
+                    return res.status(200).json({
+                        success: true,
+                        data: post
+                    })
+                }
+                return res.status(400).json({ success: false })
             } catch (error) {
                 return res.status(400).json({ success: false })
             }
@@ -32,3 +36,5 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             return res.status(400).json({ success: false })
     }
 }
+
+export const getPost = async (id: any): Promise<PostType | null> => await Post.findById(id);
