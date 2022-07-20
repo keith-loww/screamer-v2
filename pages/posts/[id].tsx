@@ -71,27 +71,28 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
             <div className=' flex justify-center align-middle'>
                 <div className='card card-bordered shadow-lg w-3/5 xl:w-2/5 mt-2'>
                     <div className='card-body space-y-2'>
-                        <div className='flex w-full flex-row space-x-4'>
-                            <div className="avatar">
-                                <div className="h-24 rounded-full">
-                                    <Image
-                                    src={author.picture}
-                                    alt="Cannot Fetch Image"
-                                    className='rounded-full'
-                                    layout='fill' />
+                        <div className='flex w-full flex-row justify-between'>
+                            <div className='justify-start flex flex-row space-x-4'>
+                                <div className="avatar">
+                                    <div className="h-24 rounded-full relative">
+                                        <Image
+                                        src={author.picture}
+                                        alt="Cannot Fetch Image"
+                                        layout='fill' />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='flex flex-col space-y-2'>
-                                <span className='text-xl font-semibold'>
-                                    {author.nickname.toUpperCase()}
-                                </span>
-                                <span className='text-secondary'>
-                                    {(new Date(post.date)).toLocaleString()}
-                                </span>
+                                <div className='flex flex-col space-y-2'>
+                                    <span className='text-xl font-semibold'>
+                                        {author.nickname.toUpperCase()}
+                                    </span>
+                                    <span className='text-secondary'>
+                                        {(new Date(post.date)).toLocaleString()}
+                                    </span>
+                                </div>
                             </div>
 
                             {user ? (
-                                <div className='justify-end w-1/2'>
+                                <div className='justify-end relative bottom-2'>
                                     <DropdownMenu
                                     deleteHandler={deleteHandler} />
                                 </div>
