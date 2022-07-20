@@ -50,6 +50,10 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
 
+    const deleteHandler = async () => {
+        
+    }
+
     return (
         <>
             <Head>
@@ -78,9 +82,12 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                                     {(new Date(post.date)).toLocaleString()}
                                 </span>
                             </div>
-                            <div className='w-1/2 justify-end items-center'>
-                                <DropdownMenu />
-                            </div>
+
+                            {user ? (
+                                <div className='justify-end w-1/2'>
+                                    <DropdownMenu />
+                                </div>
+                            ) : null}
                         </div>
                         <div className='text-2xl'>
                             {post.content}
