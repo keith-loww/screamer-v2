@@ -1,22 +1,24 @@
 import axios from 'axios'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
 import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
-import { Post, User, UserShort } from '../../components/types'
+import { Post } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import { useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
-import { getPost, getPostWithAuthor } from '../api/posts/[id]';
-import { getUser } from '../api/users/[id]';
+import { getPostWithAuthor } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import Link from 'next/link';
-import { getPostsWithAuthor } from '../api/posts';
 
-export default function PostPage({ post } : { post: Post }): JSX.Element {
+interface PropTypes {
+    post: Post
+}
+
+const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     const router = useRouter()
     const { user } = useUser();
 
@@ -24,8 +26,8 @@ export default function PostPage({ post } : { post: Post }): JSX.Element {
         if (!user) {
             router.push("/api/auth/login")
         } else {
-            const alreadyLiked = post.likedBy.includes(user.sub)
-            console.log(alreadyLiked);
+            if (!user.sub) throw new Error("cannot find user")
+            const alreadyLiked = post.likedBy.includes(user?.sub)
             if (alreadyLiked) {
                 await removeLike()
             } else {
@@ -37,16 +39,18 @@ export default function PostPage({ post } : { post: Post }): JSX.Element {
     }
 
     const addLike = async () => {
-        const updatedPostObj: Post = {
+        const updatedPostObj = {
             ...post,
+            author: post.author.id,
             likedBy: post.likedBy.concat(user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
 
     const removeLike = async () => {
-        const updatedPostObj: Post = {
+        const updatedPostObj = {
             ...post,
+            author: post.author.id,
             likedBy: post.likedBy.filter(id => id !== user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
@@ -54,9 +58,9 @@ export default function PostPage({ post } : { post: Post }): JSX.Element {
 
     const deleteHandler = async () => {
         router.push("/post-deleted")
-        const resp = await axios.get(`/api/users/${post.author}`)
+        const resp = await axios.get(`/api/users/${post.author.id}`)
         const authorObj = resp.data.data
-        await axios.put(`/api/users/${post.author}`, {
+        await axios.put(`/api/users/${post.author.id}`, {
             ...authorObj,
             posts: authorObj.posts.filter(p => p !== post.id)
         })
@@ -66,7 +70,6 @@ export default function PostPage({ post } : { post: Post }): JSX.Element {
     return (
         <>
             <Head>
-                <html data-theme="business"></html>
                 <title>{post.author.nickname}'s Post </title>
             </Head>
             <NavBar />
@@ -133,3 +136,5 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         }
     }
 }
+
+export default PostPage
