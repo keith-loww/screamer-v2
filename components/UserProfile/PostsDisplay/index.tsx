@@ -13,7 +13,7 @@ const PostsDisplay = ({user} : PropTypes) : JSX.Element => {
                 <span className='text-2xl font-semibold p-2'>
                         {user.nickname.toUpperCase()}'S POSTS
                 </span>
-                <div className='mt-2'>
+                <div className='mt-2 space-y-2'>
                     {user.posts.map(post => (
                         <PostItem
                         key={post.id}

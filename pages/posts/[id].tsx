@@ -82,7 +82,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                                 <Link
                                 href={`/users/${post.author.id}`} >
                                     <a className="avatar">
-                                        <div className="h-20 rounded-full relative">
+                                        <div className="h-20 rounded-full relative hover:brightness-75 ease-linear duration-200">
                                             <Image
                                             src={post.author.picture}
                                             alt="Cannot Fetch Image"
@@ -93,7 +93,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                                 <div className='flex flex-col space-y-2'>
                                     <Link
                                     href={`/users/${post.author.id}`} >
-                                        <a className='text-xl font-semibold underline'>
+                                        <a className='text-xl font-semibold hover:underline'>
                                             {post.author.nickname.toUpperCase()}
                                         </a>
                                     </Link>

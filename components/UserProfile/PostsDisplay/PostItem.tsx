@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { getPostItemDate } from '../../../lib/dateHelper'
 import { Post, User } from '../../types'
 
 interface PropTypes {
@@ -17,7 +18,7 @@ const PostItem = ( { post, user } : PropTypes ) : JSX.Element => {
                     <div className="flex flex-row space-x-2">                
                         <Link href={`/users/${user.id}`}>
                             <div className="avatar">
-                                <div className="h-14 rounded-full relative">
+                                <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
                                     <Image
                                     src={user.picture}
                                     alt="Cannot Fetch Image"
@@ -30,10 +31,10 @@ const PostItem = ( { post, user } : PropTypes ) : JSX.Element => {
                                 <Link
                                 href={`/users/${user.id}`}
                                 className='text-lg font-semibold'>
-                                    <span className='underline'>{user.nickname.toUpperCase()}</span>                            
+                                    <span className='hover:underline'>{user.nickname.toUpperCase()}</span>                            
                                 </Link>
                                 <span className='text-secondary'>
-                                    {(new Date(post.date)).toLocaleDateString()}
+                                    {getPostItemDate(new Date(post.date))}
                                 </span>
                             </div>
                             <div className='text-sm'>

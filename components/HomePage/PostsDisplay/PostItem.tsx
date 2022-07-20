@@ -20,7 +20,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                     <div className="flex flex-row space-x-2">                
                         <Link href={`/users/${post.author.id}`}>
                             <div className="avatar">
-                                <div className="h-14 rounded-full relative">
+                                <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
                                     <Image
                                     src={post.author.picture}
                                     alt="Cannot Fetch Image"
@@ -33,7 +33,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                                 <Link
                                 href={`/users/${post.author.id}`}
                                 className='text-lg font-semibold'>
-                                    <span className='underline'>{post.author.nickname.toUpperCase()}</span>                            
+                                    <span className='hover:underline'>{post.author.nickname.toUpperCase()}</span>                            
                                 </Link>
                                 <span className='text-secondary'>
                                     · {getPostItemDate(new Date(post.date))}

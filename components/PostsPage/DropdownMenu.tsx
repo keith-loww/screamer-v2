@@ -12,7 +12,11 @@ export default function DropdownMenu({deleteHandler} : PropTypes) {
                 <BsThreeDots />
             </label>
             <ul tabIndex={0} className="dropdown-content border menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a onClick={deleteHandler}>Delete Post</a></li>
+                <li><a
+                className='text-accent'
+                onClick={deleteHandler}>
+                    Delete Post
+                </a></li>
             </ul>
         </div>
     )
