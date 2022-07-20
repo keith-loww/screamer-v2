@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { User } from '../types'
 import { BiCalendar } from "react-icons/bi"
+import { getUserProfileDate } from '../../lib/dateHelper'
 
 export default function UserCard({user} : {user : User}) {
     return (
@@ -19,7 +20,7 @@ export default function UserCard({user} : {user : User}) {
                     <span className='text-2xl font-bold'>{user.nickname}</span>
                     <div className='flex space-x-2 items-center'>
                         <BiCalendar />
-                        <span className='italic text-secondary'>Joined {(new Date(user.created_at).toLocaleDateString())}</span>
+                        <span className='italic text-secondary'>Joined {getUserProfileDate(new Date(user.created_at))}</span>
                     </div>
                 </div>
             </div>

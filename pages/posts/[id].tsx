@@ -13,6 +13,7 @@ import dbConnect from '../../lib/dbConnect';
 import { getPostWithAuthor } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import Link from 'next/link';
+import { getPostPageDate } from '../../lib/dateHelper';
 
 interface PropTypes {
     post: Post
@@ -97,7 +98,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                                         </a>
                                     </Link>
                                     <span className='text-secondary'>
-                                        {(new Date(post.date)).toLocaleString()}
+                                        {getPostPageDate(new Date(post.date))}
                                     </span>
                                 </div>
                             </div>
