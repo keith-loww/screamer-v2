@@ -37,7 +37,7 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
     const addLike = async () => {
         const updatedPostObj: Post = {
             ...post,
-            likedBy: post.likedBy.concat(user.sub)
+            likedBy: post.likedBy.concat(user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
@@ -45,13 +45,20 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
     const removeLike = async () => {
         const updatedPostObj: Post = {
             ...post,
-            likedBy: post.likedBy.filter(id => id !== user.sub)
+            likedBy: post.likedBy.filter(id => id !== user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
 
     const deleteHandler = async () => {
-        
+        router.push("/post-deleted")
+        const resp = await axios.get(`/api/users/${post.author}`)
+        const authorObj = resp.data.data
+        await axios.put(`/api/users/${post.author}`, {
+            ...authorObj,
+            posts: authorObj.posts.filter(p => p !== post.id)
+        })
+        await axios.delete(`/api/posts/${post.id}`)
     }
 
     return (
@@ -85,7 +92,8 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
 
                             {user ? (
                                 <div className='justify-end w-1/2'>
-                                    <DropdownMenu />
+                                    <DropdownMenu
+                                    deleteHandler={deleteHandler} />
                                 </div>
                             ) : null}
                         </div>
