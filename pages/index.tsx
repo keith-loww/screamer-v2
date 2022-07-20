@@ -11,7 +11,6 @@ import { getPosts, getPostsWithAuthor } from './api/posts'
 
 const Home = ({posts} : {posts : Post[]}) => {
   const {user} = useUser();
-  console.log(posts);
   
   return (
     <>

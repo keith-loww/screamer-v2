@@ -6,19 +6,19 @@ import { useRouter } from 'next/router';
 import React from 'react'
 import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
-import { Post, User } from '../../components/types'
+import { Post, User, UserShort } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import { useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
-import { getPost } from '../api/posts/[id]';
+import { getPost, getPostWithAuthor } from '../api/posts/[id]';
 import { getUser } from '../api/users/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import Link from 'next/link';
+import { getPostsWithAuthor } from '../api/posts';
 
-export default function PostPage({post, author} : {post: Post, author : User}): JSX.Element {
+export default function PostPage({ post } : { post: Post }): JSX.Element {
     const router = useRouter()
-    const { user, isLoading } = useUser();
-    const {id} = router.query
+    const { user } = useUser();
 
     const likeHandler = async () => {
         if (!user) {
@@ -66,7 +66,7 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
         <>
             <Head>
                 <html data-theme="business"></html>
-                <title>{author.nickname}'s Post </title>
+                <title>{post.author.nickname}'s Post </title>
             </Head>
             <NavBar />
             <div className=' flex justify-center align-middle'>
@@ -75,11 +75,11 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                         <div className='flex w-full flex-row justify-between'>
                             <div className='justify-start flex flex-row space-x-4'>
                                 <Link
-                                href={`/users/${post.author}`} >
+                                href={`/users/${post.author.id}`} >
                                     <a className="avatar">
                                         <div className="h-20 rounded-full relative">
                                             <Image
-                                            src={author.picture}
+                                            src={post.author.picture}
                                             alt="Cannot Fetch Image"
                                             layout='fill' />
                                         </div>
@@ -87,9 +87,9 @@ export default function PostPage({post, author} : {post: Post, author : User}): 
                                 </Link>
                                 <div className='flex flex-col space-y-2'>
                                     <Link
-                                    href={`/users/${post.author}`} >
+                                    href={`/users/${post.author.id}`} >
                                         <a className='text-xl font-semibold underline'>
-                                            {author.nickname.toUpperCase()}
+                                            {post.author.nickname.toUpperCase()}
                                         </a>
                                     </Link>
                                     <span className='text-secondary'>
@@ -123,15 +123,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     if (!params || !params.id) throw new Error("ID not given")
     await dbConnect()
 
-    const post = JSON.parse(JSON.stringify(await getPost(params.id)))
+    const post = JSON.parse(JSON.stringify(await getPostWithAuthor(params.id)))
     if (!post) throw new Error("cannot find post")
-
-    const author = JSON.parse(JSON.stringify(await getUser(post.author)))
+    const author = JSON.parse(JSON.stringify(post.author))
 
     return {
         props: {
-            post,
-            author
+            post
         }
     }
 }

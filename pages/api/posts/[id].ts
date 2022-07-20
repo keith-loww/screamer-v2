@@ -45,3 +45,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
 }
 
 export const getPost = async (id: any): Promise<PostType | null> => await Post.findById(id);
+export const getPostWithAuthor = async (id: any) => await Post.findById(id).populate("author", {
+    nickname: 1,
+    id: 1,
+    picture: 1
+});
