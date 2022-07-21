@@ -31,7 +31,8 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
                     content,
                     author: author,
                     date: new Date(),
-                    likes: []
+                    likedBy: [],
+                    comments: []
                 })
                 const added = await newPost.save()
                 res.status(200).json({
@@ -54,6 +55,6 @@ export const getPostsWithAuthor = async () => await Post.find({}).populate("auth
     nickname: 1,
     id: 1,
     picture: 1
-})
+}).sort({ date: -1 })
 
 export default handler

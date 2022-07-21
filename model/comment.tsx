@@ -16,10 +16,12 @@ const commentSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    likedBy: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+    likedBy: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
 });
 
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.models.Comment || mongoose.model('Comment', commentSchema);

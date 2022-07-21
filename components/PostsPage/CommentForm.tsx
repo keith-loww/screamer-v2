@@ -13,21 +13,22 @@ const CommentForm = () => {
     }
 
     return (
-        <div className='flex flex-row space-x-2 p-2'>
-            <Avatar
-            user={user} />
-            <form
-            className='flex justify-between'
-            onSubmit={handleSubmit}>
+        <div className='flex flex-col'>
+            <div className='flex flex-row space-x-2 p-2 items-center'>
+                <Avatar
+                user={user} />
                 <Textarea
-                name='content'
-                placeholder='Write a comment...'
-                className='w-full' />
+                    name='content'
+                    placeholder='SCREAM BACK...'
+                    className='w-full'
+                    autosize />
+            </div>
+            <div className='flex justify-end p-2'>
                 <button
-                className='justify-end'
-                type="submit">Submit</button>
-            </form>
-
+                    className='btn w-1/5'
+                    type="submit">Submit
+                </button>
+            </div>
         </div>
     );
 }
