@@ -1,5 +1,6 @@
 import React from 'react'
 import { Comment } from '../../types';
+import { CommentItem } from './CommentItem';
 
 interface PropTypes {
     comments: Comment[]
@@ -7,14 +8,11 @@ interface PropTypes {
 
 const CommentDisplay = ({comments }: PropTypes) => {
     return (
-        <div className='card w-full md:w-3/5 lg:w-5/12 xl:w-1/3'>
+        <div className='card w-full md:w-3/5 xl:w-2/5'>
             <div className='card-body'>
                 {comments.map((comment, index) => {
                     return (
-                        <div key={index}>
-                            <h3>{comment.author.id}</h3>
-                            <p>{comment.content}</p>
-                        </div>
+                        <CommentItem key={index} comment={comment} />
                     )
                 }
                 )}
