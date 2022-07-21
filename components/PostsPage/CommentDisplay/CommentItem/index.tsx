@@ -1,8 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
-import { getPostItemDate } from "../../../lib/dateHelper"
+import { getPostItemDate } from "../../../../lib/dateHelper"
 
-import { Comment } from "../../types"
+import { Comment } from "../../../types"
+import LikeDisplay from "./LikeDisplay"
 
 export const CommentItem = ({ comment } : {comment : Comment}) => {
     return (
@@ -34,6 +35,9 @@ export const CommentItem = ({ comment } : {comment : Comment}) => {
                             {comment.content.toUpperCase()}
                         </div>
                     </div>
+                </div>
+                <div className="mt-2">
+                    <LikeDisplay comment={comment} />
                 </div>
             </div>
         </div>

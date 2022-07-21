@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { getPostItemDate } from '../../../lib/dateHelper'
+import LikeAndCommentDisplay from '../../HomePage/PostsDisplay/PostItem/LikeAndCommentDisplay'
 import { Post, User } from '../../types'
 
 interface PropTypes {
@@ -41,6 +42,9 @@ const PostItem = ( { post, user } : PropTypes ) : JSX.Element => {
                                 {post.content.toUpperCase()}
                             </div>
                         </div>
+                    </div>
+                    <div className='mt-2'>
+                        <LikeAndCommentDisplay post={post} />
                     </div>
                 </div>
             </a>

@@ -6,7 +6,7 @@ import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { Post } from '../../../types'
 
-const LikeDisplay = ({post} : {post : Post}) => {
+const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     const {user} = useUser()
     const router = useRouter()
     const alreadyLiked = user && post.likedBy.includes(user.sub)
@@ -74,4 +74,4 @@ const LikeDisplay = ({post} : {post : Post}) => {
     )
 }
 
-export default LikeDisplay
+export default LikeAndCommentDisplay

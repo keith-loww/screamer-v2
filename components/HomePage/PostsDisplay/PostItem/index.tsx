@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import { getPostItemDate } from '../../../../lib/dateHelper';
 import { Post } from '../../../types';
-import LikeDisplay from './LikeAndCommentDisplay';
+import LikeAndCommentDisplay from './LikeAndCommentDisplay';
 
 interface PropTypes {
     post: Post,
@@ -46,7 +46,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                         </div>
                     </div>
                     <div className='mt-2'>
-                        <LikeDisplay post={post} />
+                        <LikeAndCommentDisplay post={post} />
                     </div>
                 </div>
             </div>
