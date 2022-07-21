@@ -37,9 +37,11 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "DELETE":
             try {
+                const post = await Post.findById(id)
+                
                 await Post.findByIdAndDelete(id)
-                await deleteComments(req.body.comments)
-                await deletePostFromUser(id, req.body.author)
+                await deleteComments(post.comments)
+                await deletePostFromUser(id, post.author)
                 return res.status(200)
             } catch (error) {
                 return res.status(400).json({ success: false })
@@ -69,5 +71,5 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
     }
 })
 
-const deleteComments = async (ids: any) => await Comment.deleteMany({ _id: { $in: ids } })
+const deleteComments = async (ids: string[]) => await Comment.deleteMany({ _id: { $in: ids } })
 const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: postId } })
