@@ -17,7 +17,6 @@ const PostsDisplay = ({user} : PropTypes) : JSX.Element => {
                     {user.posts.map(post => (
                         <PostItem
                         key={post.id}
-                        user={user}
                         post={post} />
                     ))}
                 </div>

@@ -7,7 +7,7 @@ import { Post, User } from '../../components/types'
 import PostsDisplay from '../../components/UserProfile/PostsDisplay'
 import UserCard from '../../components/UserProfile/UserCard'
 import dbConnect from '../../lib/dbConnect'
-import { getUser, getUserWithPosts } from '../api/users/[id]'
+import { getUserWithPostsAndAuthors } from '../api/users/[id]'
 
 interface PropTypes {
     user: User
@@ -35,7 +35,7 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     if (!params || !params.id) throw new Error("ID not given")
     await dbConnect()
 
-    const user : User = JSON.parse(JSON.stringify(await getUserWithPosts(params.id)))
+    const user : User = JSON.parse(JSON.stringify(await getUserWithPostsAndAuthors(params.id)))
     if (!user) throw new Error("cannot find user")
 
     return {
