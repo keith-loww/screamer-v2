@@ -1,4 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
+import { Loader } from '@mantine/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
@@ -15,7 +16,7 @@ interface PropTypes {
 }
 
 const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
-  const {user} = useUser();
+  const { user, isLoading } = useUser();
   return (
     <>
       <Head>
