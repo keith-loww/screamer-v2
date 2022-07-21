@@ -14,6 +14,13 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             } catch (error) {
                 return res.status(500).json({ success: false, message: error.message })
             }
+        case "PUT":
+            try {
+                const updatedComment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
+                res.status(200).json({ success:true, data: updatedComment });
+            } catch (error) {
+                return res.status(500).json({ success: false, message: error.message })
+            }
         default:
             return res.status(405).json({ success: false, message: "Method not allowed" })
     }
