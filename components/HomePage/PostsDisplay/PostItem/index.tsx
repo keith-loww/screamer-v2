@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import { getPostItemDate } from '../../../../lib/dateHelper';
 import { Post } from '../../../types';
-import LikeDisplay from './LikeDisplay';
+import LikeDisplay from './LikeAndCommentDisplay';
 
 interface PropTypes {
     post: Post,

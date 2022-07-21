@@ -49,8 +49,9 @@ const LikeDisplay = ({post} : {post : Post}) => {
 
     return (
         <div className='flex justify-start space-x-6'>
-            <div className='flex items-center space-x-2'>
+            <div className='flex items-center space-x-1'>
                 <button
+                className='btn btn-ghost btn-sm btn-circle'
                 onClick={likeHandler}>
                     {alreadyLiked
                     ? <AiFillLike />
@@ -60,10 +61,13 @@ const LikeDisplay = ({post} : {post : Post}) => {
                     {post.likedBy.length}
                 </span>
             </div>
-            <div className='flex items-center space-x-2'>
-                <BiCommentError />
+            <div className='flex items-center space-x-1'>
+                <button
+                className='btn btn-ghost btn-sm btn-circle'>
+                    <BiCommentError />
+                </button>
                 <span>
-                    {post.likedBy.length}
+                    {post.comments.length}
                 </span>
             </div>
         </div>
