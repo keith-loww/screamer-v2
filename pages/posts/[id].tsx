@@ -22,8 +22,6 @@ interface PropTypes {
 }
 
 const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
-    console.log(post);
-    
     const router = useRouter()
     const { user } = useUser();
 
@@ -33,29 +31,35 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
         } else {
             if (!user.sub) throw new Error("cannot find user")
             const alreadyLiked = post.likedBy.includes(user?.sub)
+
+            // axios get post
+            const resp = await axios.get(`/api/posts/${post.id}`)
+            const postData = resp.data.data
             if (alreadyLiked) {
-                await removeLike()
+                await removeLike(postData)
             } else {
-                await addLike() 
+                await addLike(postData) 
             }
             router.replace(router.asPath)
         }
         
     }
 
-    const addLike = async () => {
+    const addLike = async (postData) => {
         const updatedPostObj = {
             ...post,
             author: post.author.id,
+            comments: postData.comments,
             likedBy: post.likedBy.concat(user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
 
-    const removeLike = async () => {
+    const removeLike = async (postData) => {
         const updatedPostObj = {
             ...post,
             author: post.author.id,
+            comments: postData.comments,
             likedBy: post.likedBy.filter(id => id !== user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)

@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                     data: updated
                 })
             } catch (error) {
-                return res.status(400).json({ success: false })
+                return res.status(400).json({ success: false, error })
             }
         case "DELETE":
             try {
