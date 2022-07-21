@@ -1,10 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import dbConnect from "../../../lib/dbConnect";
 import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 import User from "../../../model/user";
 
 // create next handler for comments like posts
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
+    await dbConnect();
     const { method } = req;
     switch(method) {
         case "POST":
@@ -15,7 +17,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 const newPost = new Comment({
                     content,
                     author,
-                    date: new Date()
+                    date: new Date(),
                     post,
                     likedBy: []
                 })

@@ -5,6 +5,9 @@ import React from 'react';
 import { Post } from '../types';
 import Avatar from './Avatar';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { showNotification } from '@mantine/notifications';
+import { FaCheckCircle } from 'react-icons/fa';
 
 interface PropTypes {
     post: Post
@@ -31,6 +34,12 @@ const CommentForm = ( {post} : PropTypes ) => {
                 author: post.author.id
             }
             await axios.put(`/api/posts/${post.id}`, postObj);
+            showNotification({
+                message: "SUCCESSFULLY SCREAMED BACK",
+                color: "green",
+                icon: <FaCheckCircle />
+            });
+            reset();
         } catch (error) {
             console.log(error);
         }
@@ -57,7 +66,8 @@ const CommentForm = ( {post} : PropTypes ) => {
                     name='content'
                     placeholder='SCREAM BACK...'
                     className='w-full'
-                    autosize />
+                    autosize
+                    error={errors.content?.message} />
             </div>
             <div className='flex justify-end p-2'>
                 <button

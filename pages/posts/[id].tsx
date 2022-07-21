@@ -10,7 +10,7 @@ import { Post } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import { useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
-import { getPostWithAuthor, getPostWithAuthorAndComments } from '../api/posts/[id]';
+import { getPostWithAuthorAndComments } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import Link from 'next/link';
 import { getPostPageDate } from '../../lib/dateHelper';
