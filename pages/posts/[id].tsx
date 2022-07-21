@@ -10,10 +10,11 @@ import { Post } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import { useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
-import { getPostWithAuthor } from '../api/posts/[id]';
+import { getPostWithAuthor, getPostWithAuthorAndComments } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import Link from 'next/link';
 import { getPostPageDate } from '../../lib/dateHelper';
+import CommentForm from '../../components/PostsPage/CommentForm';
 
 interface PropTypes {
     post: Post
@@ -117,6 +118,11 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                         post={post}
                         likeHandler={likeHandler} />
                     </div>
+                    {user
+                    ? <div>
+                            <CommentForm />
+                        </div>
+                    : null}
                 </div>
             </div>
             <Footer />
@@ -128,7 +134,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     if (!params || !params.id) throw new Error("ID not given")
     await dbConnect()
 
-    const post = JSON.parse(JSON.stringify(await getPostWithAuthor(params.id)))
+    const post = JSON.parse(JSON.stringify(await getPostWithAuthorAndComments(params.id)))
     if (!post) throw new Error("cannot find post")
 
     return {

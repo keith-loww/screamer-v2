@@ -50,3 +50,13 @@ export const getPostWithAuthor = async (id: any) => await Post.findById(id).popu
     id: 1,
     picture: 1
 });
+
+export const getPostWithAuthorAndComments = async (id: any) => await Post.findById(id).populate("author", {
+    nickname: 1,
+    id: 1,
+    picture: 1
+}).populate("comments").populate("comments.author", {
+    nickname: 1,
+    id: 1,
+    picture: 1
+})
