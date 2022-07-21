@@ -14,7 +14,8 @@ type FormData = {
 export default function NewPostForm(): JSX.Element | null {
     const router = useRouter()
     const {user, isLoading} = useUser();
-    const { register, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
+    const { register, setValue, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
+    const { onChange } = register("content")
     if (!user || isLoading) return null
 
     const submitHandler = async ({content} : FormData) => {
@@ -61,6 +62,7 @@ export default function NewPostForm(): JSX.Element | null {
                         })}
                         placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
                         autosize
+                        onChange={(e) => setValue("content", e.target.value.toUpperCase())}
                         error={errors ? errors.content?.message : null}
                         className="" />
                     </div>
