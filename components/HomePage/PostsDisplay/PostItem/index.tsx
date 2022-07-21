@@ -45,7 +45,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className='mt-2'>
                         <LikeDisplay post={post} />
                     </div>
                 </div>
