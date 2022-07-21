@@ -15,7 +15,6 @@ export default function NewPostForm(): JSX.Element | null {
     const router = useRouter()
     const {user, isLoading} = useUser();
     const { register, setValue, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
-    const { onChange } = register("content")
     if (!user || isLoading) return null
 
     const submitHandler = async ({content} : FormData) => {
