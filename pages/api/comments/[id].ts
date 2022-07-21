@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/dbConnect";
 import Comment from "../../../model/comment";
-import User from "../../../model/user";
+import Post from "../../../model/post";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     await dbConnect();
@@ -24,6 +24,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "DELETE":
             try {
+                const comment = await getComment(id);
+                await deleteCommentFromPost(id, comment.post);
                 await Comment.findByIdAndDelete(id);
                 res.status(200).json({ success: true, data: null });
             } catch (error) {
@@ -35,3 +37,4 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
 }
 
 const getComment = async (id: string) => await Comment.findById(id);
+const deleteCommentFromPost = async (id: string, postId: string) => await Post.findByIdAndUpdate(postId, { $pull: { comments: id } });
