@@ -47,9 +47,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
 
     const addLike = async (postData) => {
         const updatedPostObj = {
-            ...post,
-            author: post.author.id,
-            comments: postData.comments,
+            ...postData,
             likedBy: post.likedBy.concat(user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
@@ -57,9 +55,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
 
     const removeLike = async (postData) => {
         const updatedPostObj = {
-            ...post,
-            author: post.author.id,
-            comments: postData.comments,
+            ...postData,
             likedBy: post.likedBy.filter(id => id !== user?.sub)
         }
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
