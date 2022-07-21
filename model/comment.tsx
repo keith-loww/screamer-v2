@@ -8,7 +8,9 @@ const commentSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        required: true
+        required: true,
+        minLength: 5,
+        maxLength: 280
     },
     date: {
         type: Date,
