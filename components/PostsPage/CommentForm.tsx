@@ -1,5 +1,6 @@
 // create jsx element CommentForm and export default CommentForm
 import { useUser } from '@auth0/nextjs-auth0';
+import { Textarea } from '@mantine/core';
 import React from 'react';
 import Avatar from './Avatar';
 
@@ -12,17 +13,16 @@ const CommentForm = () => {
     }
 
     return (
-        <div className='flex flex-row'>
+        <div className='flex flex-row space-x-2 p-2'>
             <Avatar
             user={user} />
             <form
             className='flex justify-between'
             onSubmit={handleSubmit}>
-                <input
-                type="text"
-                name="comment"
-                placeholder="Add a comment..."
-                />
+                <Textarea
+                name='content'
+                placeholder='Write a comment...'
+                className='w-full' />
                 <button
                 className='justify-end'
                 type="submit">Submit</button>
