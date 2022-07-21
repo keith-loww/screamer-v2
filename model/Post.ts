@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Comment from "./comment";
 const postSchema = new mongoose.Schema({
     content: {
         type: String,
@@ -23,7 +24,7 @@ const postSchema = new mongoose.Schema({
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Comment"
+            ref: Comment.modelName
         }
     ]
 })

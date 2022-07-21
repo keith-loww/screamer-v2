@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const commentSchema = new mongoose.Schema({
     author: {
         type: String,
-        ref: 'User',
+        ref: "User",
         required: true
     },
     content: {
