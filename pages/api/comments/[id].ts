@@ -17,8 +17,9 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "PUT":
             try {
+                console.log(req.body);
                 const updatedComment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
-                res.status(200).json({ success: true, data: updatedComment });
+                return res.status(200).json({ success: true, data: updatedComment });
             } catch (error) {
                 return res.status(400).json({ success: false, message: error.message })
             }
