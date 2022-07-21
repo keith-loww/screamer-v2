@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Post as PostType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
+import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
@@ -34,6 +35,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "DELETE":
             try {
+                await deleteComments(req.body.comments)
                 await Post.findByIdAndDelete(id) 
                 return res.status(200)
             } catch (error) {
@@ -63,3 +65,5 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
         select: "nickname id picture"
     }
 })
+
+const deleteComments = async (ids: any) => await Comment.deleteMany({ _id: { $in: ids } })
