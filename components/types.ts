@@ -6,6 +6,7 @@ export interface Post {
     author: UserShort,
     date: string,
     likedBy: UserID[],
+    comments: Comment[]
 }
 
 export interface User {
