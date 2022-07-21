@@ -17,8 +17,6 @@ export default function NewPostForm(): JSX.Element | null {
     const { register, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
     if (!user || isLoading) return null
 
-    console.log(errors);
-
     const submitHandler = async ({content} : FormData) => {
         const obj = {
             content : content.toUpperCase(),

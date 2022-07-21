@@ -1,5 +1,6 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import axios from 'axios'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
@@ -62,10 +63,13 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                 </span>
             </div>
             <div className='flex items-center space-x-1'>
-                <button
-                className='btn btn-ghost btn-sm btn-circle'>
-                    <BiCommentError />
-                </button>
+                <Link
+                href={`/posts/${post.id}`}>
+                    <button
+                    className='btn btn-ghost btn-sm btn-circle'>
+                        <BiCommentError />
+                    </button>
+                </Link>
                 <span>
                     {post.comments.length}
                 </span>

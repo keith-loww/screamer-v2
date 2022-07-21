@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import { getPostItemDate } from '../../../../lib/dateHelper';
 import { Post } from '../../../types';
+import DropdownMenu from './DropdownMenu';
 import LikeAndCommentDisplay from './LikeAndCommentDisplay';
 
 interface PropTypes {
@@ -14,11 +15,10 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
     if (!post) return null
     
     return (
-        <Link
-        href={`/posts/${post.id}`} >
-            <div className='card card-bordered shadow-md hover:shadow-lg w-full md:w-3/5 lg:w-5/12 xl:w-2/5'>
-                <div className='card-body'>
-                    <div className="flex flex-row space-x-2">                
+        <div className='card card-bordered shadow-md hover:shadow-lg w-full md:w-3/5 lg:w-5/12 xl:w-2/5'>
+            <div className='card-body'>
+                <div className="flex flex-row justify-between">                
+                    <div className='flex space-x-2 w-11/12'>
                         <Link href={`/users/${post.author.id}`}>
                             <div className="avatar">
                                 <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
@@ -34,22 +34,25 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                                 <Link
                                 href={`/users/${post.author.id}`}
                                 className='text-lg font-semibold'>
-                                    <span className='hover:underline'>{post.author.nickname.toUpperCase()}</span>                            
+                                    <span className='hover:underline'>{post.author.nickname.toUpperCase()}</span>
                                 </Link>
                                 <span className='text-secondary'>
                                     · {getPostItemDate(new Date(post.date))}
                                 </span>
                             </div>
-                            <div className='text-sm'>
+                            <div className='text-sm break-all'>
                                 {post.content.toUpperCase()}
                             </div>
                         </div>
                     </div>
-                    <div className='mt-2'>
-                        <LikeAndCommentDisplay post={post} />
+                    <div className='flex-end'>
+                        <DropdownMenu />
                     </div>
                 </div>
+                <div className='mt-2'>
+                    <LikeAndCommentDisplay post={post} />
+                </div>
             </div>
-        </Link>
+        </div>
     )
 }
