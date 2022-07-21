@@ -18,8 +18,6 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
         } else {
             if (!user.sub) throw new Error("cannot find user")
             const alreadyLiked = post.likedBy.includes(user?.sub)
-
-            // axios get post
             const resp = await axios.get(`/api/posts/${post.id}`)
             const postData = resp.data.data
             if (alreadyLiked) {
