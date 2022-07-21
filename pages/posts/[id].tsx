@@ -22,6 +22,8 @@ interface PropTypes {
 }
 
 const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
+    console.log(post);
+    
     const router = useRouter()
     const { user } = useUser();
 
@@ -78,7 +80,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                 <title>{post.author.nickname}'s Post </title>
             </Head>
             <NavBar />
-            <div className=' flex justify-center align-middle'>
+            <div className=' flex justify-center align-middle flex-col items-center'>
                 <div className='card card-bordered shadow-lg w-full md:w-3/5 xl:w-2/5 mt-2'>
                     <div className='card-body space-y-2'>
                         <div className='flex w-full flex-row justify-between'>
@@ -126,8 +128,8 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                             </div>
                         : null}
                     </div>
-                    <CommentDisplay comments={post.comments} />
                 </div>
+                <CommentDisplay comments={post.comments} />
             </div>
             <Footer />
         </>
