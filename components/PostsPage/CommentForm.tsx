@@ -17,7 +17,7 @@ interface PropTypes {
 const CommentForm = ( {post} : PropTypes ) => {
     const {user} = useUser();
     const router = useRouter();
-    const {register, reset, handleSubmit, formState : {errors}} = useForm<FormData>();
+    const {register, reset, setValue, handleSubmit, formState : {errors}} = useForm<FormData>();
 
 
     if (!user) return null;
@@ -29,13 +29,7 @@ const CommentForm = ( {post} : PropTypes ) => {
                 author: user.sub,
                 post: post.id
             }
-            const resp = await axios.post(  '/api/comments', commentObj);
-            // const postObj = {
-            //     ...post,
-            //     comments: [...post.comments, resp.data.data.id],
-            //     author: post.author.id
-            // }
-            // await axios.put(`/api/posts/${post.id}`, postObj);
+            await axios.post(  '/api/comments', commentObj);
             showNotification({
                 message: "SUCCESSFULLY SCREAMED BACK",
                 color: "green",
@@ -70,6 +64,7 @@ const CommentForm = ( {post} : PropTypes ) => {
                     placeholder='SCREAM BACK...'
                     className='w-full'
                     autosize
+                    onChange={(e) => {setValue('content', e.target.value.toUpperCase())}}
                     error={errors.content?.message} />
             </div>
             <div className='flex justify-end p-2'>
