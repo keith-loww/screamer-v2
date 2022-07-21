@@ -55,8 +55,10 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
     nickname: 1,
     id: 1,
     picture: 1
-}).populate("comments").populate("comments.author", {
-    nickname: 1,
-    id: 1,
-    picture: 1
+}).populate("comments").populate({
+    path: "comments",
+    populate: {
+        path: "author",
+        select: "nickname id picture"
+    }
 })
