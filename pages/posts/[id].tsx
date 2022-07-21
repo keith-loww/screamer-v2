@@ -64,13 +64,23 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
 
     const deleteHandler = async () => {
         router.push("/post-deleted")
-        const resp = await axios.get(`/api/users/${post.author.id}`)
-        const authorObj = resp.data.data
+        const resp = await axios.get(`/api/posts/${post.id}`)
+        const postData = resp.data.data
+        deleteAllComments(postData.comments)
+        
+        const authorResp = await axios.get(`/api/users/${post.author.id}`)
+        const authorObj = authorResp.data.data
         await axios.put(`/api/users/${post.author.id}`, {
             ...authorObj,
             posts: authorObj.posts.filter(p => p !== post.id)
         })
         await axios.delete(`/api/posts/${post.id}`)
+    }
+
+    const deleteAllComments = async (ids: string[]) => {
+        for (const id of ids) {
+            await axios.delete(`/api/comments/${id}`)
+        }
     }
 
     return (

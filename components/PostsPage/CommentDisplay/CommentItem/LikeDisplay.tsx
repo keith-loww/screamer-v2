@@ -48,8 +48,6 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
         await axios.put(`/api/comments/${comment.id}`, updatedCommentObj)
     }
 
-    
-
     return (
         <div className='flex justify-start space-x-6'>
             <div className='flex items-center space-x-1'>
