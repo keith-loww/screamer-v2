@@ -1,7 +1,9 @@
 import { useUser } from '@auth0/nextjs-auth0';
+import { showNotification } from '@mantine/notifications';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react'
 import { getPostItemDate } from '../../../../lib/dateHelper';
 import { Post } from '../../../types';
@@ -19,8 +21,13 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
 
     const deleteHandler = async () => {
         try {
+            router.replace("/post-deleted");
+            showNotification({
+                message: "POST SUCCESSFULLY DELETED",
+                color: "green",
+                type: "success",
+            });
             await axios.delete(`/api/posts/${post.id}`);
-            router.replace(router.asPath);
         } catch (err) {
             console.error(err);
         }
