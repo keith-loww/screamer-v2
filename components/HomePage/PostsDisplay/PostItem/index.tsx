@@ -2,8 +2,9 @@ import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
-import { getPostItemDate } from '../../../lib/dateHelper';
-import { Post } from '../../types';
+import { getPostItemDate } from '../../../../lib/dateHelper';
+import { Post } from '../../../types';
+import LikeDisplay from './LikeDisplay';
 
 interface PropTypes {
     post: Post,
@@ -43,6 +44,9 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                                 {post.content.toUpperCase()}
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <LikeDisplay post={post} />
                     </div>
                 </div>
             </div>
