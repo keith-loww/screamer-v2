@@ -1,0 +1,30 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import Comment from "../../../model/comment";
+import Post from "../../../model/post";
+import User from "../../../model/user";
+
+// create next handler for comments like posts
+export default async function handler(req: NextApiRequest, res : NextApiResponse) {
+    const { method } = req;
+    switch(method) {
+        case "POST":
+            try {
+                const { content, author : authorID, post : postID } = req.body
+                const author = await User.findById(authorID)
+                const post = await Post.findById(postID)
+                const newPost = new Comment({
+                    content,
+                    author,
+                    date: new Date()
+                    post,
+                    likedBy: []
+                })
+                const added = await newPost.save()
+                return res.status(201).json({success: true, data: added})
+            } catch (error) {
+                return res.status(500).json({ success: true, message: error.message })
+            }
+        default:
+            return res.status(405).json({ success: false, message: "Method not allowed" })
+    }
+}

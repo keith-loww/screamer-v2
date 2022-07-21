@@ -21,7 +21,12 @@ const commentSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+        required: true
+    }
 });
 
-module.exports = mongoose.models.Comment || mongoose.model('Comment', commentSchema);
+export default mongoose.models.Comment || mongoose.model('Comment', commentSchema);

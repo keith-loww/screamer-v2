@@ -2,22 +2,58 @@
 import { useUser } from '@auth0/nextjs-auth0';
 import { Textarea } from '@mantine/core';
 import React from 'react';
+import { Post } from '../types';
 import Avatar from './Avatar';
+import axios from 'axios';
 
-const CommentForm = () => {
+interface PropTypes {
+    post: Post
+}
+
+const CommentForm = ( {post} : PropTypes ) => {
     const {user} = useUser();
+    const {register, reset, handleSubmit, formState : {errors}} = useForm<FormData>();
+
+
     if (!user) return null;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const submitHandler = async ( { content } : FormData) => {
+        try {
+            const commentObj = {
+                content : content.toUpperCase(),
+                author: user.sub,
+                post: post.id
+            }
+            const resp = await axios.post('/api/comments', commentObj);
+            const postObj = {
+                ...post,
+                comments: [...post.comments, resp.data.data.id],
+                author: post.author.id
+            }
+            await axios.put(`/api/posts/${post.id}`, postObj);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
-        <div className='flex flex-col'>
+        <form
+        onSubmit={handleSubmit(submitHandler)}
+        className='flex flex-col'>
             <div className='flex flex-row space-x-2 p-2 items-center'>
                 <Avatar
                 user={user} />
                 <Textarea
+                    {...register("content", {
+                            maxLength : {
+                                value: 280,
+                                message: 'COMMENT CANNOT EXCEED 280 CHARACTERS'
+                                },
+                            minLength : {
+                                value: 5,
+                                message: 'COMMENT MUST BE AT LEAST 5 CHARACTERS'
+                                }
+                            })}
                     name='content'
                     placeholder='SCREAM BACK...'
                     className='w-full'
@@ -29,7 +65,7 @@ const CommentForm = () => {
                     type="submit">Submit
                 </button>
             </div>
-        </div>
+        </form>
     );
 }
 

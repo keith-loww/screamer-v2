@@ -119,7 +119,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                         likeHandler={likeHandler} />
                         {user
                         ? <div>
-                                <CommentForm />
+                                <CommentForm post={post} />
                             </div>
                         : null}
                     </div>
