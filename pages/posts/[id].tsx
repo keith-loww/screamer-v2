@@ -22,8 +22,7 @@ interface PropTypes {
 }
 
 const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
-    console.log(post);
-    
+    console.log(post)
     const router = useRouter()
     const { user } = useUser();
 

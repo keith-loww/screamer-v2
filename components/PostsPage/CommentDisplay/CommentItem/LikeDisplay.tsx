@@ -6,6 +6,7 @@ import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { Comment } from '../../../types'
 
 const LikeDisplay = ({comment} : {comment : Comment}) => {
+    console.log(comment);
     const {user} = useUser()
     const router = useRouter()
 
@@ -18,7 +19,6 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
             if (!user.sub) throw new Error("cannot find user")
             const alreadyLiked = comment.likedBy.includes(user?.sub)
 
-            // axios get comment
             const resp = await axios.get(`/api/comments/${comment.id}`)
             const commData = resp.data.data
             if (alreadyLiked) {
@@ -34,6 +34,7 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
     const addLike = async (commentData) => {
         const updatedCommentObj = {
             ...commentData,
+            author: comment.author.id,
             likedBy: comment.likedBy.concat(user?.sub)
         }
         await axios.put(`/api/comments/${comment.id}`, updatedCommentObj)
@@ -43,9 +44,11 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
         const updatedCommentObj = {
             ...commentData,
             likedBy: comment.likedBy.filter(id => id !== user?.sub)
-        }
+        }   
         await axios.put(`/api/comments/${comment.id}`, updatedCommentObj)
     }
+
+    
 
     return (
         <div className='flex justify-start space-x-6'>

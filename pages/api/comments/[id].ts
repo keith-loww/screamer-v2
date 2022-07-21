@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/dbConnect";
 import Comment from "../../../model/comment";
+import User from "../../../model/user";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     await dbConnect();
@@ -10,7 +11,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
         case "GET":
             try {
                 const comment = await getComment(id);
-                res.status(200).json({comment});
+                res.status(200).json({success: true, data: comment});
             } catch (error) {
                 return res.status(500).json({ success: false, message: error.message })
             }

@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
+import User from './user';
 
 const commentSchema = new mongoose.Schema({
     author: {
         type: String,
-        ref: "User",
+        ref: User.modelName,
         required: true
     },
     content: {
