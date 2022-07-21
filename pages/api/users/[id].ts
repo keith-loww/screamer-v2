@@ -43,3 +43,11 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
 
 export const getUser = async (id) => await User.findById(id)
 export const getUserWithPosts = async (id) => await User.findById(id).populate("posts")
+
+export const getUserWithPostsAndAuthors = async (id) => await User.findById(id).populate({
+    path: "posts",
+    populate: {
+        path: "author",
+        select: "nickname id picture"
+    }
+})
