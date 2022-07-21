@@ -10,17 +10,20 @@ import { Post } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import { useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
-import { getPostWithAuthorAndComments } from '../api/posts/[id]';
+import { getPostWithAuthor, getPostWithAuthorAndComments } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import Link from 'next/link';
 import { getPostPageDate } from '../../lib/dateHelper';
 import CommentForm from '../../components/PostsPage/CommentForm';
+import CommentDisplay from '../../components/PostsPage/CommentDisplay';
 
 interface PropTypes {
     post: Post
 }
 
 const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
+    console.log(post);
+    
     const router = useRouter()
     const { user } = useUser();
 
@@ -123,6 +126,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                             </div>
                         : null}
                     </div>
+                    <CommentDisplay comments={post.comments} />
                 </div>
             </div>
             <Footer />

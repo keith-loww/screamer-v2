@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { showNotification } from '@mantine/notifications';
 import { FaCheckCircle } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 interface PropTypes {
     post: Post
@@ -15,6 +16,7 @@ interface PropTypes {
 
 const CommentForm = ( {post} : PropTypes ) => {
     const {user} = useUser();
+    const router = useRouter();
     const {register, reset, handleSubmit, formState : {errors}} = useForm<FormData>();
 
 
@@ -40,6 +42,7 @@ const CommentForm = ( {post} : PropTypes ) => {
                 icon: <FaCheckCircle />
             });
             reset();
+            router.replace(router.asPath);
         } catch (error) {
             console.log(error);
         }

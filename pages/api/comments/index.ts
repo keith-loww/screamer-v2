@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 const added = await newPost.save()
                 return res.status(201).json({success: true, data: added})
             } catch (error) {
-                return res.status(500).json({ success: true, message: error.message })
+                return res.status(500).json({ success: false, message: error.message })
             }
         default:
             return res.status(405).json({ success: false, message: "Method not allowed" })
