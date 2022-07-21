@@ -14,14 +14,15 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 const { content, author : authorID, post : postID } = req.body
                 const author = await User.findById(authorID)
                 const post = await Post.findById(postID)
-                const newPost = new Comment({
+                const newComment = new Comment({
                     content,
                     author,
                     date: new Date(),
                     post,
                     likedBy: []
                 })
-                const added = await newPost.save()
+                const added = await newComment.save()
+                addCommentToPost(post, added.id)
                 return res.status(201).json({success: true, data: added})
             } catch (error) {
                 return res.status(500).json({ success: false, message: error.message })
@@ -30,3 +31,6 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             return res.status(405).json({ success: false, message: "Method not allowed" })
     }
 }
+
+
+export const addCommentToPost = async (postId: string, commentId: string) => await Post.findByIdAndUpdate(postId, { $push: { comments: commentId } }, { new: true });

@@ -22,7 +22,6 @@ interface PropTypes {
 }
 
 const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
-    console.log(post)
     const router = useRouter()
     const { user } = useUser();
 
@@ -66,7 +65,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
         router.push("/post-deleted")
         const resp = await axios.get(`/api/posts/${post.id}`)
         const postData = resp.data.data
-        deleteAllComments(postData.comments)
+        // deleteAllComments(postData.comments)
         
         const authorResp = await axios.get(`/api/users/${post.author.id}`)
         const authorObj = authorResp.data.data

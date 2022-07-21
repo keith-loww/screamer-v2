@@ -29,13 +29,13 @@ const CommentForm = ( {post} : PropTypes ) => {
                 author: user.sub,
                 post: post.id
             }
-            const resp = await axios.post('/api/comments', commentObj);
-            const postObj = {
-                ...post,
-                comments: [...post.comments, resp.data.data.id],
-                author: post.author.id
-            }
-            await axios.put(`/api/posts/${post.id}`, postObj);
+            const resp = await axios.post(  '/api/comments', commentObj);
+            // const postObj = {
+            //     ...post,
+            //     comments: [...post.comments, resp.data.data.id],
+            //     author: post.author.id
+            // }
+            // await axios.put(`/api/posts/${post.id}`, postObj);
             showNotification({
                 message: "SUCCESSFULLY SCREAMED BACK",
                 color: "green",

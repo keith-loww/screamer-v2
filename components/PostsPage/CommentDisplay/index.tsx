@@ -8,8 +8,8 @@ interface PropTypes {
 
 const CommentDisplay = ({comments }: PropTypes) => {
     return (
-        <div className='card w-full md:w-3/5 xl:w-2/5'>
-            <h1 className='text-2xl font-semibold mt-4 mb-2'>REPLIES</h1>
+        <div className='w-full md:w-3/5 xl:w-2/5 p-2'>
+            <h1 className='text-2xl font-semibold mb-2'>REPLIES</h1>
             {comments.map((comment, index) => {
                 return (
                     <CommentItem key={index} comment={comment} />
