@@ -40,3 +40,11 @@ export type PostData = {
     likedBy: string[],
     comments: string[]
 }
+
+export type CommentData = {
+    id: string,
+    content: string,
+    author: string,
+    date: string,
+    likedBy: string[],
+}

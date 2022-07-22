@@ -3,14 +3,14 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
-import { Comment } from '../../../types'
+import { Comment, CommentData } from '../../../types'
 
 const LikeDisplay = ({comment} : {comment : Comment}) => {
     console.log(comment);
     const {user} = useUser()
     const router = useRouter()
 
-    const alreadyLiked = user && comment.likedBy.includes(user.sub)
+    const alreadyLiked = user && user.sub && comment.likedBy.includes(user.sub)
 
     const likeHandler = async () => {
         if (!user) {
@@ -20,7 +20,7 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
             const alreadyLiked = comment.likedBy.includes(user?.sub)
 
             const resp = await axios.get(`/api/comments/${comment.id}`)
-            const commData = resp.data.data
+            const commData : CommentData = resp.data.data
             if (alreadyLiked) {
                 await removeLike(commData)
             } else {
@@ -31,7 +31,8 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
         
     }
 
-    const addLike = async (commentData) => {
+    const addLike = async (commentData: CommentData) => {
+        if (!user || !user.sub) throw new Error("cannot find user")
         const updatedCommentObj = {
             ...commentData,
             author: comment.author.id,
@@ -40,7 +41,8 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
         await axios.put(`/api/comments/${comment.id}`, updatedCommentObj)
     }
 
-    const removeLike = async (commentData) => {
+    const removeLike = async (commentData: CommentData) => {
+        if (!user || !user.sub) throw new Error("cannot find user")
         const updatedCommentObj = {
             ...commentData,
             likedBy: comment.likedBy.filter(id => id !== user?.sub)
