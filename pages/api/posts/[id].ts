@@ -50,8 +50,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 }
                 
                 await Post.findByIdAndDelete(id)
-                await deleteComments(post.comments)
-                await deletePostFromUser(id, post.author)
+                deleteComments(post.comments)
+                deletePostFromUser(id, post.author)
                 res.status(200)
             } catch (error) {
                 console.log({error})
