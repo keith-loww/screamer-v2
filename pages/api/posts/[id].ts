@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import PostItem from "../../../components/HomePage/PostsDisplay/PostItem";
 import { Post as PostType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
 import User from "../../../model/user"
 import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 import { getSession } from "@auth0/nextjs-auth0";
-import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const session = getSession(req, res)
@@ -88,4 +87,4 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
 })
 
 const deleteComments = async (ids: string[]) => await Comment.deleteMany({ _id: { $in: ids } })
-const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: postId } })
+const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: new mongoose.Schema.Types.ObjectId(postId) } })

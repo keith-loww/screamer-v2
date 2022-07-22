@@ -1,21 +1,20 @@
 import axios from 'axios'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
 import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
-import { Post } from '../../components/types'
+import { Post, PostData } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
-import { getAccessToken, useUser } from '@auth0/nextjs-auth0';
+import {  useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
-import { getPostWithAuthor, getPostWithAuthorAndComments } from '../api/posts/[id]';
+import { getPostWithAuthorAndComments } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
-import Link from 'next/link';
-import { getPostPageDate } from '../../lib/dateHelper';
 import CommentForm from '../../components/PostsPage/CommentForm';
 import CommentDisplay from '../../components/PostsPage/CommentDisplay';
+import AvatarNameDateDisplay from '../../components/PostsPage/AvatarNameDateDisplay';
+
 
 interface PropTypes {
     post: Post
@@ -34,9 +33,9 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
 
             // axios get post
             const resp = await axios.get(`/api/posts/${post.id}`)
-            const postData = resp.data.data
+            const postData : PostData = resp.data.data
             if (alreadyLiked) {
-                await removeLike(postData)
+                await removeLike(postData)  
             } else {
                 await addLike(postData) 
             }
@@ -45,7 +44,8 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
         
     }
 
-    const addLike = async (postData) => {
+    const addLike = async (postData : PostData) => {
+        if (!user | !user?.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
             likedBy: post.likedBy.concat(user?.sub)
@@ -53,7 +53,8 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
         await axios.put(`/api/posts/${post.id}`, updatedPostObj)
     }
 
-    const removeLike = async (postData) => {
+    const removeLike = async (postData : PostData) => {
+        if (!user | !user?.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
             likedBy: post.likedBy.filter(id => id !== user?.sub)
@@ -91,31 +92,8 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                 <div className='card card-bordered shadow-lg w-full md:w-3/5 xl:w-2/5 mt-2'>
                     <div className='card-body space-y-2'>
                         <div className='flex w-full flex-row justify-between'>
-                            <div className='justify-start flex flex-row space-x-4'>
-                                <Link
-                                href={`/users/${post.author.id}`} >
-                                    <a className="avatar">
-                                        <div className="h-20 rounded-full relative hover:brightness-75 ease-linear duration-200">
-                                            <Image
-                                            src={post.author.picture}
-                                            alt="Cannot Fetch Image"
-                                            layout='fill' />
-                                        </div>
-                                    </a>
-                                </Link>
-                                <div className='flex flex-col space-y-2'>
-                                    <Link
-                                    href={`/users/${post.author.id}`} >
-                                        <a className='text-xl font-semibold hover:underline'>
-                                            {post.author.nickname.toUpperCase()}
-                                        </a>
-                                    </Link>
-                                    <span className='text-secondary'>
-                                        {getPostPageDate(new Date(post.date))}
-                                    </span>
-                                </div>
-                            </div>
-
+                            <AvatarNameDateDisplay
+                            post={post} />
                             {user ? (
                                 <div className='justify-end relative bottom-2'>
                                     <DropdownMenu
