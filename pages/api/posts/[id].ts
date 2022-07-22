@@ -87,4 +87,4 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
 })
 
 const deleteComments = async (ids: string[]) => await Comment.deleteMany({ _id: { $in: ids } })
-const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: new mongoose.Schema.Types.ObjectId(postId) } })
+const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: postId } })
