@@ -47,9 +47,12 @@ export const getUserWithPosts = async (id : string) => await User.findById(id).p
 
 export const getUserWithPostsAndAuthors = async (id : string) => await User.findById(id).populate({
     path: "posts",
+    options: {
+        sort: { date: -1 },
+    },
     populate: {
         path: "author",
-        model: "User",
-        select: "nickname id picture"
+        model: User.modelName,
+        select: "nickname id picture",
     }
 })
