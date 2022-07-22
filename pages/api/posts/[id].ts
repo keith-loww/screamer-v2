@@ -9,6 +9,7 @@ import { getSession } from "@auth0/nextjs-auth0";
 import jwt from "jsonwebtoken";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
+    const session = getSession(req, res)
     const {method} = req;
     const {id} = req.query
     await dbConnect()
@@ -29,6 +30,9 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "PUT":
             try {
+                if (!session) {
+                    return res.status(401).json({ success: false, message: "Unauthorized" })
+                }
                 const updated = await Post.findByIdAndUpdate(id, req.body) 
                 return res.status(200).json({
                     success: true,
@@ -39,9 +43,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "DELETE":
             try {
-                const session = getSession(req, res)
                 const post = await Post.findById(id)
-                if (session.user.sub !== post.author) {
+                if (!session || session.user.sub !== post.author) {
                     return res.status(400).json({ success: false, error: "You are not authorized to delete this post" })
                 }
                 
