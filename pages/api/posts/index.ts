@@ -35,7 +35,7 @@ const handler = async (req : NextApiRequest, res : NextApiResponse) => {
                     comments: []
                 })
                 const added = await newPost.save()
-                res.status(200).json({
+                return res.status(200).json({
                     success: true,
                     data: added
                 })

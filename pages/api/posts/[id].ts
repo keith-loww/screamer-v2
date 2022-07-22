@@ -45,17 +45,19 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             try {
                 const post = await Post.findById(id)
                 if (!session || session.user.sub !== post.author) {
-                    return res.status(400).json({ success: false, error: "You are not authorized to delete this post" })
+                    res.status(400).json({ success: false, error: "You are not authorized to delete this post" })
+                    break;
                 }
                 
                 await Post.findByIdAndDelete(id)
                 await deleteComments(post.comments)
                 await deletePostFromUser(id, post.author)
-                return res.status(200)
+                res.status(200)
             } catch (error) {
                 console.log({error})
-                return res.status(400).json({ success: false })
+                res.status(400).json({ success: false })
             }
+            break;
         default:
             return res.status(400).json({ success: false })
     }
