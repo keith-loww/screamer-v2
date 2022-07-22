@@ -7,6 +7,7 @@ import { Post, User } from '../../components/types'
 import PostsDisplay from '../../components/UserProfile/PostsDisplay'
 import UserCard from '../../components/UserProfile/UserCard'
 import dbConnect from '../../lib/dbConnect'
+import { isString } from '../../lib/typeguards'
 import { getUserWithPostsAndAuthors } from '../api/users/[id]'
 
 interface PropTypes {
@@ -33,6 +34,7 @@ const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
 
 export const getServerSideProps : GetServerSideProps = async ({params}) => {
     if (!params || !params.id) throw new Error("ID not given")
+    if (!isString(params.id)) throw new Error("ID not a string")
     await dbConnect()
 
     const user : User = JSON.parse(JSON.stringify(await getUserWithPostsAndAuthors(params.id)))

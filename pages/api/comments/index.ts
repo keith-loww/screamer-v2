@@ -24,13 +24,16 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 const added = await newComment.save()
                 addCommentToPost(post, added.id)
                 return res.status(201).json({success: true, data: added})
-            } catch (error) {
-                return res.status(500).json({ success: false, message: error.message })
+            } catch (error : unknown) {
+                if (error instanceof Error) {
+                    return res.status(400).json({success: false, message: error.message})
+                }
+                return res.status(400).json({ success: false })
             }
         default:
             return res.status(405).json({ success: false, message: "Method not allowed" })
     }
 }
 
-
+// @ts-ignore
 export const addCommentToPost = async (postId: string, commentId: string) => await Post.findByIdAndUpdate(postId, { $push: { comments: commentId } }, { new: true });

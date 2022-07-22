@@ -5,12 +5,13 @@ import User from "../../../model/user"
 import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 import { getSession } from "@auth0/nextjs-auth0";
-import mongoose from "mongoose";
+import { isString } from "../../../lib/typeguards";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const session = getSession(req, res)
     const {method} = req;
     const {id} = req.query
+    if (!isString(id)) return res.status(400).json({ error: "Invalid id" });
     await dbConnect()
     
     switch(method) {
@@ -87,4 +88,6 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
 })
 
 const deleteComments = async (ids: string[]) => await Comment.deleteMany({ _id: { $in: ids } })
+
+// @ts-ignore
 const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: postId } })

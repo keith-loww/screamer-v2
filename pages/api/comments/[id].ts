@@ -53,4 +53,5 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
 }
 
 const getComment = async (id: string) => await Comment.findById(id);
+// @ts-ignore
 const deleteCommentFromPost = async (id: string, postId: string) => await Post.findByIdAndUpdate(postId, { $pull: { comments: id } });
