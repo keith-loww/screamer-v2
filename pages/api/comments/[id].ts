@@ -1,3 +1,4 @@
+import { getSession } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/dbConnect";
 import Comment from "../../../model/comment";
@@ -7,6 +8,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     await dbConnect();
     const { method } = req;
     const { id } = req.query;
+    const session = getSession(req, res);
+
     switch(method) {
         case "GET":
             try {
@@ -26,6 +29,10 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
         case "DELETE":
             try {
                 const comment = await getComment(id);
+                if (!session || session.user.sub !== comment.author) {
+                    return res.status(400).json({ success: false, error: "You are not authorized to delete this comment" })
+                }
+
                 await deleteCommentFromPost(id, comment.post);
                 await Comment.findByIdAndDelete(id);
                 res.status(200).json({ success: true, data: null });
