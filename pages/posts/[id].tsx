@@ -45,7 +45,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     }
 
     const addLike = async (postData : PostData) => {
-        if (!user | !user?.sub) throw new Error("cannot find user")
+        if (!user || !user?.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
             likedBy: post.likedBy.concat(user?.sub)
@@ -54,7 +54,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     }
 
     const removeLike = async (postData : PostData) => {
-        if (!user | !user?.sub) throw new Error("cannot find user")
+        if (!user || !user?.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
             likedBy: post.likedBy.filter(id => id !== user?.sub)
@@ -64,22 +64,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
 
     const deleteHandler = async () => {
         router.push("/post-deleted")
-        const resp = await axios.get(`/api/posts/${post.id}`)
-        const postData = resp.data.data
-        
-        const authorResp = await axios.get(`/api/users/${post.author.id}`)
-        const authorObj = authorResp.data.data
-        await axios.put(`/api/users/${post.author.id}`, {
-            ...authorObj,
-            posts: authorObj.posts.filter(p => p !== post.id)
-        })
-        await axios.delete(`/api/posts/${post.id}`)
-    }
-
-    const deleteAllComments = async (ids: string[]) => {
-        for (const id of ids) {
-            await axios.delete(`/api/comments/${id}`)
-        }
+        await axios.get(`/api/posts/${post.id}`)
     }
 
     return (
@@ -89,7 +74,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
             </Head>
             <NavBar />
             <div className=' flex justify-center align-middle flex-col items-center'>
-                <div className='card card-bordered shadow-lg w-full md:w-3/5 xl:w-2/5 mt-2'>
+                <div className='card card-bordered shadow-lg w-full md:w-3/5 xl:w-2/5 my-2'>
                     <div className='card-body space-y-2'>
                         <div className='flex w-full flex-row justify-between'>
                             <AvatarNameDateDisplay
@@ -118,7 +103,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
             </div>
             <Footer />
         </>
-    )
+    )   
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
