@@ -5,13 +5,16 @@ import React from 'react'
 
 export default function ProfileDropDown() {
     const { user } = useUser()
+    if (!user) {
+        return null
+    }
 
     return (
         <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full relative">
             <Image
-            src={user?.picture}
+            src={user.picture ? user.picture : ""}
             alt="Cannot fetch picture"
             layout='fill'
             objectFit='contain'

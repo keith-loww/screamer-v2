@@ -16,7 +16,7 @@ interface PropTypes {
 const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
     return (<>
         <Head>
-            <title>{user.nickname}'s Profile</title>
+            <title>{user.nickname}&#39;s Profile</title>
         </Head>
         <NavBar />
         <div className='p-2 mt-2 flex flex-col items-center'>

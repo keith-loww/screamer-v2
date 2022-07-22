@@ -24,8 +24,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
             router.replace("/post-deleted");
             showNotification({
                 message: "POST SUCCESSFULLY DELETED",
-                color: "green",
-                type: "success",
+                color: "green"
             });
             await axios.delete(`/api/posts/${post.id}`);
         } catch (err) {

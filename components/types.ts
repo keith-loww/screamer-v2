@@ -31,3 +31,12 @@ export interface Comment {
     date: string,
     likedBy: UserID[],
 }
+
+export type PostData = {
+    id: string,
+    content: string,
+    author: string,
+    date: string,
+    likedBy: string[],
+    comments: string[]
+}

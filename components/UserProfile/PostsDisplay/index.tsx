@@ -11,7 +11,7 @@ const PostsDisplay = ({user} : PropTypes) : JSX.Element => {
         <div className='flex flex-col w-full md:w-3/5 xl:w-1/3 mt-4'>
             <div className='flex-1'>
                 <span className='text-2xl font-semibold p-2'>
-                        {user.nickname.toUpperCase()}'S POSTS
+                        {user.nickname.toUpperCase()}&#39;S POSTS
                 </span>
                 <div className='mt-2 space-y-2'>
                     {user.posts.map(post => (

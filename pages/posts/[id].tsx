@@ -84,7 +84,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     return (
         <>
             <Head>
-                <title>{post.author.nickname}'s Post </title>
+                <title>{post.author.nickname}&#39;s Post </title>
             </Head>
             <NavBar />
             <div className=' flex justify-center align-middle flex-col items-center'>
