@@ -10,7 +10,7 @@ interface PropTypes {
 
 export default function LikeDisplay({post, likeHandler} : PropTypes): JSX.Element {
     const {user, isLoading} = useUser()
-    const alreadyLiked = user && post.likedBy.includes(user.sub)
+    const alreadyLiked = user && user.sub && post.likedBy.includes(user.sub)
 
     return (
         <div className='flex flex-row space-x-2 items-center'>

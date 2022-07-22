@@ -1,6 +1,7 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/dbConnect";
+import { isString } from "../../../lib/typeguards";
 import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 
@@ -8,6 +9,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     await dbConnect();
     const { method } = req;
     const { id } = req.query;
+    if (!isString) return res.status(400).json({ error: "Invalid id" });
+
     const session = getSession(req, res);
 
     switch(method) {

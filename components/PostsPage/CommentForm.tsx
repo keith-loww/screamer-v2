@@ -14,6 +14,10 @@ interface PropTypes {
     post: Post
 }
 
+type FormData = {
+    content: string;
+}
+
 const CommentForm = ( {post} : PropTypes ) => {
     const {user} = useUser();
     const router = useRouter();
