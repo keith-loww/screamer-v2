@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     await dbConnect();
     const { method } = req;
     const { id } = req.query;
-    if (!isString) return res.status(400).json({ error: "Invalid id" });
+    if (!isString(id)) return res.status(400).json({ error: "Invalid id" });
 
     const session = getSession(req, res);
 
@@ -19,7 +19,10 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 const comment = await getComment(id);
                 res.status(200).json({success: true, data: comment});
             } catch (error) {
-                return res.status(500).json({ success: false, message: error.message })
+                if (error instanceof Error) {
+                    return res.status(400).json({succes: false, error: error.message});
+                }
+                return res.status(400).json({success: false, error: "Unknown error"});
             }
         case "PUT":
             try {
@@ -27,7 +30,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 const updatedComment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
                 return res.status(200).json({ success: true, data: updatedComment });
             } catch (error) {
-                return res.status(400).json({ success: false, message: error.message })
+                if (error instanceof Error) return res.status(400).json({ success: false, message: error })
+                return res.status(400).json({ success: false })                
             }
         case "DELETE":
             try {
@@ -40,7 +44,8 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 await Comment.findByIdAndDelete(id);
                 res.status(200).json({ success: true, data: null });
             } catch (error) {
-                return res.status(400).json({ success: false, message: error.message })
+                if (error instanceof Error) return res.status(400).json({ success: false, message: error.message })
+                return res.status(400).json({ success: false })
             }
         default:
             return res.status(405).json({ success: false, message: "Method not allowed" })
