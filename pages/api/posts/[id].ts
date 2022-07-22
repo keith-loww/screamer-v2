@@ -52,12 +52,13 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 await Post.findByIdAndDelete(id)
                 deleteComments(post.comments)
                 deletePostFromUser(id, post.author)
-                res.status(200)
+                return res.status(200).json({
+                    success: true
+                })
             } catch (error) {
                 console.log({error})
-                res.status(400).json({ success: false })
+                return res.status(400).json({ success: false })
             }
-            break;
         default:
             return res.status(400).json({ success: false })
     }
