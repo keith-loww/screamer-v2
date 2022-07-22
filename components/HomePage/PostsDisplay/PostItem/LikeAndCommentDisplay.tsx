@@ -3,6 +3,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { ActionIcon } from '@mantine/core'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { Post, PostData } from '../../../types'
@@ -52,13 +53,12 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     return (
         <div className='flex justify-start space-x-6'>
             <div className='flex items-center space-x-1'>
-                <button
-                className='btn btn-ghost btn-sm btn-circle'
-                onClick={likeHandler}>
-                    {alreadyLiked
-                    ? <AiFillLike />
-                    : <AiOutlineLike />}
-                </button>
+                <ActionIcon
+                variant='transparent'
+                onClick={likeHandler}
+                >
+                    {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
+                </ActionIcon>
                 <span>
                     {post.likedBy.length}
                 </span>
@@ -66,10 +66,10 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
             <div className='flex items-center space-x-1'>
                 <Link
                 href={`/posts/${post.id}`}>
-                    <button
-                    className='btn btn-ghost btn-sm btn-circle'>
+                    <ActionIcon
+                    variant='transparent'>
                         <BiCommentError />
-                    </button>
+                    </ActionIcon>
                 </Link>
                 <span>
                     {post.comments.length}
