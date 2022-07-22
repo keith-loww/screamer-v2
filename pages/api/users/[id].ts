@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { User as UserType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
+import { isString } from "../../../lib/typeguards";
 import User from "../../../model/user";
 
 
@@ -8,6 +8,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     const {method} = req;
     const { id } = req.query
     await dbConnect()
+    if (!isString(id)) return res.status(400).json({error: 'id must be a string'})
     
     switch(method) {
         case "GET":
@@ -41,13 +42,14 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     }
 }
 
-export const getUser = async (id) => await User.findById(id)
-export const getUserWithPosts = async (id) => await User.findById(id).populate("posts")
+export const getUser = async (id : string) => await User.findById(id)
+export const getUserWithPosts = async (id : string) => await User.findById(id).populate("posts")
 
-export const getUserWithPostsAndAuthors = async (id) => await User.findById(id).populate({
+export const getUserWithPostsAndAuthors = async (id : string) => await User.findById(id).populate({
     path: "posts",
     populate: {
         path: "author",
+        model: "User",
         select: "nickname id picture"
     }
 })
