@@ -8,7 +8,7 @@ import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
 import { Post } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
-import { useUser } from '@auth0/nextjs-auth0';
+import { getAccessToken, useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
 import { getPostWithAuthor, getPostWithAuthorAndComments } from '../api/posts/[id]';
 import DropdownMenu from '../../components/PostsPage/DropdownMenu';
@@ -65,7 +65,6 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
         router.push("/post-deleted")
         const resp = await axios.get(`/api/posts/${post.id}`)
         const postData = resp.data.data
-        // deleteAllComments(postData.comments)
         
         const authorResp = await axios.get(`/api/users/${post.author.id}`)
         const authorObj = authorResp.data.data

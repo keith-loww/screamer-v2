@@ -2,18 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import PostItem from "../../../components/HomePage/PostsDisplay/PostItem";
 import { Post as PostType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
-import User from "../../../model/User"
+import User from "../../../model/user"
 import Comment from "../../../model/comment";
 import Post from "../../../model/post";
-
-const getTokenFromRequest = (req: NextApiRequest) => {
-    const auth = req.headers.authorization;
-    if (auth && auth.split(' ')[0] === 'Bearer') {
-        return auth.split(' ')[1];
-    }
-    return null;
-}
-
+import { getSession } from "@auth0/nextjs-auth0";
+import jwt from "jsonwebtoken";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const {method} = req;
@@ -46,12 +39,18 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "DELETE":
             try {
+                const session = getSession(req, res)
                 const post = await Post.findById(id)
+                if (session.user.sub !== post.author) {
+                    return res.status(400).json({ success: false, error: "You are not authorized to delete this post" })
+                }
+                
                 await Post.findByIdAndDelete(id)
                 await deleteComments(post.comments)
                 await deletePostFromUser(id, post.author)
                 return res.status(200)
             } catch (error) {
+                console.log({error})
                 return res.status(400).json({ success: false })
             }
         default:
