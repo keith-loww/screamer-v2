@@ -8,6 +8,8 @@ interface Props {
 }
 
 const Avatar = ({ user }: Props) => {
+    if (!user || !user.sub) return null
+
     return (
         <Link href={`/users/${user.sub}`}>
             <div className="avatar">

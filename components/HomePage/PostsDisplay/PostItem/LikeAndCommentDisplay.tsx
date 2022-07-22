@@ -32,6 +32,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     }
 
     const addLike = async (postData : PostData) => {
+        if (!user.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
             likedBy: post.likedBy.concat(user?.sub)
@@ -40,6 +41,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     }
 
     const removeLike = async (postData : PostData) => {
+        if (!user.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
             likedBy: post.likedBy.filter(id => id !== user?.sub)
