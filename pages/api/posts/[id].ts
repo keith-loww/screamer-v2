@@ -6,6 +6,15 @@ import User from "../../../model/User"
 import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 
+const getTokenFromRequest = (req: NextApiRequest) => {
+    const auth = req.headers.authorization;
+    if (auth && auth.split(' ')[0] === 'Bearer') {
+        return auth.split(' ')[1];
+    }
+    return null;
+}
+
+
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const {method} = req;
     const {id} = req.query
@@ -38,7 +47,6 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
         case "DELETE":
             try {
                 const post = await Post.findById(id)
-                
                 await Post.findByIdAndDelete(id)
                 await deleteComments(post.comments)
                 await deletePostFromUser(id, post.author)
