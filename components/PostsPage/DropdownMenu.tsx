@@ -1,6 +1,5 @@
 import { Menu } from '@mantine/core'
 import React from 'react'
-import { BsThreeDots } from 'react-icons/bs'
 import { FaRegTrashAlt } from 'react-icons/fa'
 
 interface PropTypes {

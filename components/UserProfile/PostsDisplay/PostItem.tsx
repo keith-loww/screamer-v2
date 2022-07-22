@@ -32,53 +32,50 @@ const PostItem = ( { post } : PropTypes ) : JSX.Element => {
     }
 
     return (
-        <Link
-        href={`/posts/${post.id}`} >
-            <a className='card card-bordered shadow-md hover:shadow-lg w-full'>
-                <div className='card-body'>
-                    <div className="flex flex-row justify-between">                
-                        <div className='flex space-x-2 w-11/12'>
-                            <Link href={`/users/${post.author.id}`}>
-                                <div className="avatar">
-                                    <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
-                                        <Image
-                                        src={post.author.picture}
-                                        alt="Cannot Fetch Image"
-                                        layout='fill' />
-                                    </div>
+        <div className='card card-bordered shadow-md hover:shadow-lg w-full'>
+            <div className='card-body'>
+                <div className="flex flex-row justify-between">                
+                    <div className='flex space-x-2 w-11/12'>
+                        <Link href={`/users/${post.author.id}`}>
+                            <div className="avatar">
+                                <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
+                                    <Image
+                                    src={post.author.picture}
+                                    alt="Cannot Fetch Image"
+                                    layout='fill' />
                                 </div>
-                            </Link>
-                            <div>
-                                <div className='flex space-x-2 items-center'>
-                                    <Link
-                                    href={`/users/${post.author.id}`}
-                                    className='text-lg font-semibold'>
-                                        <span className='hover:underline'>{post.author.nickname.toUpperCase()}</span>
-                                    </Link>
-                                    <span className='text-secondary'>
-                                        {getPostItemDate(new Date(post.date))}
-                                    </span>
-                                </div>
-                                <div className='text-sm'>
-                                    {post.content.toUpperCase()}
-                                </div>
+                            </div>
+                        </Link>
+                        <div>
+                            <div className='flex space-x-2 items-center'>
+                                <Link
+                                href={`/users/${post.author.id}`}
+                                className='text-lg font-semibold'>
+                                    <span className='hover:underline'>{post.author.nickname.toUpperCase()}</span>
+                                </Link>
+                                <span className='text-secondary'>
+                                    {getPostItemDate(new Date(post.date))}
+                                </span>
+                            </div>
+                            <div className='text-sm'>
+                                {post.content.toUpperCase()}
                             </div>
                         </div>
-                        {user
-                        ? (
-                            <div className='flex-end'>
-                                <DropdownMenu
-                                deleteHandler={deleteHandler}
-                                 />
-                            </div>
-                        ) : null}
                     </div>
-                    <div className='mt-2'>
-                        <LikeAndCommentDisplay post={post} />
-                    </div>
+                    {user
+                    ? (
+                        <div className='flex-end'>
+                            <DropdownMenu
+                            deleteHandler={deleteHandler}
+                                />
+                        </div>
+                    ) : null}
                 </div>
-            </a>
-        </Link>
+                <div className='mt-2'>
+                    <LikeAndCommentDisplay post={post} />
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -1,5 +1,6 @@
+import { Menu } from '@mantine/core'
 import React from 'react'
-import { BsThreeDots } from 'react-icons/bs'
+import { FaRegTrashAlt } from 'react-icons/fa'
 
 interface PropTypes {
     deleteHandler: () => void
@@ -7,17 +8,11 @@ interface PropTypes {
 
 export default function DropdownMenu({deleteHandler} : PropTypes) {
     return (
-        <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost rounded-full m-1">
-                <BsThreeDots />
-            </label>
-            <ul tabIndex={0} className="dropdown-content border menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a
-                className='text-accent'
-                onClick={deleteHandler}>
-                    Delete Post
-                </a></li>
-            </ul>
-        </div>
+        <Menu placement='end'>
+            <Menu.Item
+            color="red"
+            icon={<FaRegTrashAlt />}
+            onClick={deleteHandler}>Delete</Menu.Item>
+        </Menu>
     )
 }
