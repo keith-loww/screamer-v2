@@ -35,6 +35,10 @@ export interface Comment {
     comments: Comment[]
 }
 
+export interface CommentWithoutComments extends Omit<Comment, "comments"> {
+    comments: string[]
+}
+
 export type PostData = {
     id: string,
     content: string,
