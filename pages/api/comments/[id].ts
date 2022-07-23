@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
         case "GET":
             try {
                 const comment = await getComment(id);
-                res.status(200).json({success: true, data: comment});
+                return res.status(200).json({success: true, data: comment});
             } catch (error) {
                 if (error instanceof Error) {
                     return res.status(400).json({succes: false, error: error.message});
@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
             }
         case "PUT":
             try {
-                console.log(req.body);
+                if (!session) return res.status(401).json({success: false, error: "Unauthorized"});
                 const updatedComment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
                 return res.status(200).json({ success: true, data: updatedComment });
             } catch (error) {
@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
 
                 await deleteCommentFromPost(id, comment.post);
                 await deleteCommentsRecusrive(id);
-                res.status(200).json({ success: true, data: null });
+                return res.status(200).json({ success: true, data: null });
             } catch (error) {
                 if (error instanceof Error) return res.status(400).json({ success: false, message: error.message })
                 return res.status(400).json({ success: false })
