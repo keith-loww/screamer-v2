@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card, Group } from "@mantine/core";
+import { Card, Divider, Group } from "@mantine/core";
 import { Comment } from '../../types';
 import InfoSection from './InfoSection';
+import LikeDisplay from './LikeDisplay';
 
 interface PropTypes {
     comment: Comment
@@ -13,6 +14,14 @@ const CommentCard = ({ comment }: PropTypes) => {
             <Group>
                 <InfoSection comment={comment} />
             </Group>
+            <Group mt="md">
+                <div className='text-xl'>
+                    {comment.content}
+                </div>
+            </Group>
+            <Divider my="sm" />
+            <LikeDisplay
+            comment={comment} />
         </Card>
     )
 }

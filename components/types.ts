@@ -50,6 +50,9 @@ export type CommentData = {
     author: string,
     date: string,
     likedBy: string[],
+    comments: string[],
+    replyToType: "Post" | "Comment",
+    replyTo: string,
 }
 
 export type ReplyTo = {

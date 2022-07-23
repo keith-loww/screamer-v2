@@ -19,7 +19,6 @@ interface PropTypes {
 }
 
 const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
-    console.log(comment)
     const router = useRouter()
     const { user } = useUser()
 
