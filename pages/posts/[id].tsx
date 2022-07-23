@@ -15,6 +15,7 @@ import CommentForm from '../../components/PostsPage/CommentForm';
 import CommentDisplay from '../../components/PostsPage/CommentDisplay';
 import AvatarNameDateDisplay from '../../components/PostsPage/AvatarNameDateDisplay';
 import { Divider } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 
 
 interface PropTypes {
@@ -65,7 +66,11 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
 
     const deleteHandler = async () => {
         router.push("/post-deleted")
-        await axios.get(`/api/posts/${post.id}`)
+        await axios.delete(`/api/posts/${post.id}`)
+        showNotification({
+            message: "POST SUCESSFULLY DELETED",
+            color: "green"
+        })
     }
 
     return (
