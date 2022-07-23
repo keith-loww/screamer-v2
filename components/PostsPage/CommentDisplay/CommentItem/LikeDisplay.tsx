@@ -1,8 +1,11 @@
 import { useUser } from '@auth0/nextjs-auth0'
+import { ActionIcon } from '@mantine/core'
 import axios from 'axios'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
+import { BiCommentError } from 'react-icons/bi'
 import { Comment, CommentData } from '../../../types'
 
 const LikeDisplay = ({comment} : {comment : Comment}) => {
@@ -53,15 +56,26 @@ const LikeDisplay = ({comment} : {comment : Comment}) => {
     return (
         <div className='flex justify-start space-x-6'>
             <div className='flex items-center space-x-1'>
-                <button
-                className='btn btn-ghost btn-sm btn-circle'
-                onClick={likeHandler}>
-                    {alreadyLiked
-                    ? <AiFillLike />
-                    : <AiOutlineLike />}
-                </button>
+                <ActionIcon
+                variant='transparent'
+                onClick={likeHandler}
+                >
+                    {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
+                </ActionIcon>
                 <span>
                     {comment.likedBy.length}
+                </span>
+            </div>
+            <div className='flex items-center space-x-1'>
+                <Link
+                href={`/comments/${comment.id}`}>
+                    <ActionIcon
+                    variant='transparent'>
+                        <BiCommentError />
+                    </ActionIcon>
+                </Link>
+                <span>
+                    {comment.comments.length}
                 </span>
             </div>
         </div>
