@@ -1,7 +1,7 @@
 // create jsx element CommentForm and export default CommentForm
 import { useUser } from '@auth0/nextjs-auth0';
-import { Textarea } from '@mantine/core';
-import React from 'react';
+import { Button, Textarea } from '@mantine/core';
+import React, { useState } from 'react';
 import { Post } from '../types';
 import Avatar from './Avatar';
 import axios from 'axios';
@@ -21,13 +21,16 @@ type FormData = {
 const CommentForm = ( {post} : PropTypes ) => {
     const {user} = useUser();
     const router = useRouter();
+    const [btnLoading, setBtnLoading] = useState(false);
     const {register, reset, setValue, handleSubmit, formState : {errors}} = useForm<FormData>();
 
 
     if (!user) return null;
 
     const submitHandler = async ( { content } : FormData) => {
+        if (!content) return;
         try {
+            setBtnLoading(true);
             const commentObj = {
                 content : content.toUpperCase(),
                 author: user.sub,
@@ -41,6 +44,7 @@ const CommentForm = ( {post} : PropTypes ) => {
                 icon: <FaCheckCircle />
             });
             reset();
+            setBtnLoading(false);
             router.replace(router.asPath);
         } catch (error) {
             console.log(error);
@@ -73,10 +77,16 @@ const CommentForm = ( {post} : PropTypes ) => {
                     error={errors.content?.message} />
             </div>
             <div className='flex justify-end p-2'>
-                <button
-                    className='btn w-1/5'
-                    type="submit">Submit
-                </button>
+                <Button
+                    loading={btnLoading}
+                    loaderPosition='right'
+                    className='min-w-1/5'
+                    type="submit"
+                    uppercase
+                    color="gray"
+                    variant='outline' >
+                    Submit
+                </Button>
             </div>
         </form>
     );
