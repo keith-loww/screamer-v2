@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReplyTo, ReplyToType } from '../../types'
-import { Card, Group } from "@mantine/core";
+import { Card, Divider, Group } from "@mantine/core";
 import ContentSection from './ContentSection';
 import LikeAndCommentDisplay from './LikeAndCommentDisplay';
 
@@ -16,6 +16,7 @@ const ReplyToCard = ({ replyTo, type }: PropTypes) => {
                 <ContentSection
                 replyTo={replyTo} />
             </Group>
+            <Divider my="md" />
             <Group>
                 <LikeAndCommentDisplay 
                 type={type}
