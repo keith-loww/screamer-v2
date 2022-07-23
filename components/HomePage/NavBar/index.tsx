@@ -23,7 +23,7 @@ export default function NavBar() : JSX.Element {
                 </Button>
                 </Link>
             </div>
-            <div className="justify-end flex items-center">
+            <div className="justify-end flex items-center space-x-2">
                 <Button
                 variant='subtle'
                 color="gray"

@@ -4,14 +4,10 @@ import { UserProvider } from '@auth0/nextjs-auth0';
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useState } from 'react';
-import { useHotkeys } from '@mantine/hooks';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
-  const toggleColorScheme = (value?: ColorScheme) => {
-    console.log(colorScheme)
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
-  };
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('dark')
+  const toggleColorScheme = (value?: ColorScheme) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
 
   return (
