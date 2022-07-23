@@ -6,6 +6,7 @@ import Comment from "../../../model/comment";
 import Post from "../../../model/post";
 import { getSession } from "@auth0/nextjs-auth0";
 import { isString } from "../../../lib/typeguards";
+import { deleteCommentsRecusrive } from "../comments/[id]";
 
 export default async function handler(req: NextApiRequest, res : NextApiResponse) {
     const session = getSession(req, res)
@@ -87,7 +88,11 @@ export const getPostWithAuthorAndComments = async (id: any) => await Post.findBy
     }
 })
 
-const deleteComments = async (ids: string[]) => await Comment.deleteMany({ _id: { $in: ids } })
+const deleteComments = async (ids: string[]) => {
+    for (const id of ids) {
+        await deleteCommentsRecusrive(id)
+    }
+}
 
 // @ts-ignore
 const deletePostFromUser = async (postId: string, userId: string) => await User.findByIdAndUpdate(userId, { $pull: { posts: postId } })

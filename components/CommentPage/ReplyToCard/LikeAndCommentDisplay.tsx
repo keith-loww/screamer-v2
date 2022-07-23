@@ -60,7 +60,7 @@ const LikeAndCommentDisplay = ({ replyTo, type }: PropTypes) => {
                 </div>
                 <div className='flex items-center space-x-1'>
                     <Link
-                    href={isPost(type) ? `/posts/${replyTo.id}` : `/comments/${replyTo}`}>
+                    href={isPost(type) ? `/posts/${replyTo.id}` : `/comments/${replyTo.id}`}>
                         <ActionIcon
                         variant='transparent'>
                             <BiCommentError />

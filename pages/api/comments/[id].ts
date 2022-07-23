@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                 }
 
                 await deleteCommentFromPost(id, comment.post);
-                await Comment.findByIdAndDelete(id);
+                await deleteCommentsRecusrive(id);
                 res.status(200).json({ success: true, data: null });
             } catch (error) {
                 if (error instanceof Error) return res.status(400).json({ success: false, message: error.message })
@@ -72,7 +72,7 @@ const deleteCommentFromPost = async (id: string, postId: string) => await Post.f
 
 // recursiviely delete all 
 
-const deleteCommentsRecusrive = async (id: string) => {
+export const deleteCommentsRecusrive = async (id: string) => {
     const comment = await Comment.findById(id);
     if (!comment) return;
     comment.comments.forEach(async (commentId : string) => {
