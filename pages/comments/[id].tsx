@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
-import { AppShell } from '@mantine/core'
+import { AppShell, Timeline } from '@mantine/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -31,10 +31,19 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
         footer={<Footer />} >
             <div className='flex justify-center'>
                 <div className='w-full md:w-3/5 xl:w-1/3'>
-                    <ReplyToCard
-                        type={comment.replyToType}
-                        replyTo={comment.replyTo}
-                    />
+                    <Timeline active={1}>
+                        <Timeline.Item>
+                            <ReplyToCard
+                            type={comment.replyToType}
+                            replyTo={comment.replyTo} />
+                        </Timeline.Item>
+                        <Timeline.Item>
+                            <ReplyToCard
+                            type={comment.replyToType}
+                            replyTo={comment.replyTo} />
+                        </Timeline.Item>
+                    </Timeline>
+                    
                 </div>
             </div>
         </AppShell>
