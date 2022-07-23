@@ -3,6 +3,7 @@ import { Card, Divider, Group } from "@mantine/core";
 import { Comment } from '../../types';
 import InfoSection from './InfoSection';
 import LikeDisplay from './LikeDisplay';
+import NewCommentForm from './NewCommentForm';
 
 interface PropTypes {
     comment: Comment
@@ -22,6 +23,8 @@ const CommentCard = ({ comment }: PropTypes) => {
             <Divider my="sm" />
             <LikeDisplay
             comment={comment} />
+            <Divider my="sm" />
+            <NewCommentForm comment={comment} />    
         </Card>
     )
 }
