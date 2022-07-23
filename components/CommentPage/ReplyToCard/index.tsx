@@ -11,7 +11,7 @@ interface PropTypes {
 
 const ReplyToCard = ({ replyTo, type }: PropTypes) => {
     return (
-        <Card>
+        <Card shadow="sm">
             <Group>
                 <ContentSection
                 replyTo={replyTo} />

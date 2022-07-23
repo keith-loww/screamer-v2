@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { getPostItemDate } from '../../../lib/dateHelper'
 import { ReplyTo } from '../../types'
 
 interface PropTypes {
@@ -25,8 +26,11 @@ const ContentSection = ({ replyTo }: PropTypes) => {
                 </Link>
             </div>
             <div className='flex flex-col'>
-                <div className='font-semibold hover:underline'>
-                    {replyTo.author.nickname.toUpperCase()}
+                <div className='space-x-2'>
+                    <span className='font-semibold hover:underline'>
+                        {replyTo.author.nickname.toUpperCase()}
+                    </span>
+                    <span className='text-secondary'>· {getPostItemDate(new Date(replyTo.date))}</span>
                 </div>
                 <span>
                     {replyTo.content}

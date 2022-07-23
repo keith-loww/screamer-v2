@@ -30,7 +30,7 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
         header={<NavBar />}
         footer={<Footer />} >
             <div className='flex justify-center'>
-                <div className='w-1/3'>
+                <div className='w-full md:w-3/5 xl:w-1/3'>
                     <ReplyToCard
                         type={comment.replyToType}
                         replyTo={comment.replyTo}
