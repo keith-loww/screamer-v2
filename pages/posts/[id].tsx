@@ -80,7 +80,8 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                         <div className='flex w-full flex-row justify-between'>
                             <AvatarNameDateDisplay
                             post={post} />
-                            {user ? (
+                            {(user && user.sub === post.author.id)
+                            ? (
                                 <div className='justify-end relative bottom-2'>
                                     <DropdownMenu
                                     deleteHandler={deleteHandler} />
