@@ -71,9 +71,10 @@ export default function NewPostForm(): JSX.Element | null {
                         className="" />
                     </div>
                     <Button
+                    variant='outline'
                     type="submit"
                     loading={btnLoading}
-                    className='btn w-1/3 md:w-56'>SUBMIT</Button>
+                    className='w-1/3 md:w-56'>SUBMIT</Button>
                 </form>
             </div>
         </div>

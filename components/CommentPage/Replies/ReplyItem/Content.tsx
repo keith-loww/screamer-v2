@@ -2,10 +2,10 @@ import { Avatar } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
 import { getPostItemDate } from '../../../../lib/dateHelper'
-import { Comment } from '../../../types'
+import {  CommentWithoutComments } from '../../../types'
 
 interface PropTypes {
-    comment: Comment
+    comment: CommentWithoutComments
 }
 
 const Content = ({ comment }: PropTypes) => {

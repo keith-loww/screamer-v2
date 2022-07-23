@@ -9,6 +9,10 @@ export interface Post {
     comments: Comment[]
 }
 
+export interface PostWithoutComments extends Omit<Post, 'comments'> {
+    comments: string[]
+}
+
 export interface User {
     id: string,
     name: string,
