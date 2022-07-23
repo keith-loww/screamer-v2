@@ -11,8 +11,7 @@ import { Post, PostData } from '../../../types'
 const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     const {user} = useUser()
     const router = useRouter()
-    if (!user || !user.sub) return null
-    const alreadyLiked = user && post.likedBy.includes(user.sub)
+    const alreadyLiked = user && user.sub && post.likedBy.includes(user.sub)
 
     const likeHandler = async () => {
         if (!user) {
@@ -33,6 +32,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     }
 
     const addLike = async (postData : PostData) => {
+        if (!user || !user.sub) throw new Error("cannot find user")
         if (!user.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
@@ -42,6 +42,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     }
 
     const removeLike = async (postData : PostData) => {
+        if (!user || !user.sub) throw new Error("cannot find user")
         if (!user.sub) throw new Error("cannot find user")
         const updatedPostObj = {
             ...postData,
