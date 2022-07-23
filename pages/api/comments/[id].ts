@@ -52,7 +52,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     }
 }
 
-const getComment = async (id: string) => await Comment.findById(id);
+export const getComment = async (id: string) => await Comment.findById(id);
 export const getCommentForPage = async (id: string) => await Comment.findById(id).populate("author").populate({
         path: "replyTo",
         populate: {

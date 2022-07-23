@@ -14,6 +14,7 @@ import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import CommentForm from '../../components/PostsPage/CommentForm';
 import CommentDisplay from '../../components/PostsPage/CommentDisplay';
 import AvatarNameDateDisplay from '../../components/PostsPage/AvatarNameDateDisplay';
+import { Divider } from '@mantine/core';
 
 
 interface PropTypes {
@@ -89,13 +90,14 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                         <div className='text-2xl'>
                             {post.content}
                         </div>
+                        <Divider />
                         <LikeDisplay
                         post={post}
                         likeHandler={likeHandler} />
                         {user
-                        ? <div>
+                        ? (<div>                       
                                 <CommentForm post={post} />
-                            </div>
+                            </div>)
                         : null}
                     </div>
                 </div>

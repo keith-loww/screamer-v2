@@ -9,7 +9,6 @@ import { BiCommentError } from 'react-icons/bi'
 import { Comment, CommentData } from '../../../types'
 
 const LikeDisplay = ({comment} : {comment : Comment}) => {
-    console.log(comment);
     const {user} = useUser()
     const router = useRouter()
 
