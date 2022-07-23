@@ -43,7 +43,7 @@ const LikeAndCommentDisplay = ({ replyTo, type }: PropTypes) => {
         } else {
             await axios.put(`/api/comments/${replyTo.id}`, updatedReplyTo)
         }
-        router.replace(router.pathname)
+        router.replace(router.asPath)
     }
     return (
         <div className='flex justify-start space-x-6'>
