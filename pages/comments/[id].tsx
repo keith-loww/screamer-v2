@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
+import CommentCard from '../../components/CommentPage/CommentCard'
 import ReplyToCard from '../../components/CommentPage/ReplyToCard'
 import Footer from '../../components/HomePage/Footer'
 import NavBar from '../../components/HomePage/NavBar'
@@ -38,9 +39,8 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
                             replyTo={comment.replyTo} />
                         </Timeline.Item>
                         <Timeline.Item>
-                            <ReplyToCard
-                            type={comment.replyToType}
-                            replyTo={comment.replyTo} />
+                            <CommentCard
+                            comment={comment} />
                         </Timeline.Item>
                     </Timeline>
                     
