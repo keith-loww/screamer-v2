@@ -1,11 +1,11 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { showNotification } from '@mantine/notifications';
 import { FaCheckCircle } from "react-icons/fa"
-import { Textarea } from '@mantine/core';
+import { Button, Textarea } from '@mantine/core';
 
 type FormData = {
     content: string;
@@ -14,10 +14,13 @@ type FormData = {
 export default function NewPostForm(): JSX.Element | null {
     const router = useRouter()
     const {user, isLoading} = useUser();
+    const [btnLoading, setBtnLoading] = useState(false);
+
     const { register, setValue, reset, handleSubmit, formState : { errors } } = useForm<FormData>();
     if (!user || isLoading) return null
 
     const submitHandler = async ({content} : FormData) => {
+        setBtnLoading(true)
         const obj = {
             content : content.toUpperCase(),
             author: user.sub
@@ -37,6 +40,7 @@ export default function NewPostForm(): JSX.Element | null {
             color: "green",
             icon: <FaCheckCircle />
         })
+        setBtnLoading(false)
         router.replace(router.asPath)
     }
 
@@ -65,7 +69,10 @@ export default function NewPostForm(): JSX.Element | null {
                         error={errors ? errors.content?.message : null}
                         className="" />
                     </div>
-                    <button className='btn w-1/3 md:w-56'>SUBMIT</button>
+                    <Button
+                    type="submit"
+                    loading={btnLoading}
+                    className='btn w-1/3 md:w-56'>SUBMIT</Button>
                 </form>
             </div>
         </div>

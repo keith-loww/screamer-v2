@@ -7,7 +7,6 @@ import React from 'react'
 import CommentCard from '../../components/CommentPage/CommentCard'
 import Replies from '../../components/CommentPage/Replies'
 import ReplyToCard from '../../components/CommentPage/ReplyToCard'
-import Footer from '../../components/HomePage/Footer'
 import NavBar from '../../components/HomePage/NavBar'
 import { Comment } from '../../components/types'
 import dbConnect from '../../lib/dbConnect'
@@ -29,7 +28,7 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
         </Head>
         <AppShell
         header={<NavBar />}
-        footer={<Footer />} >
+        >
             <div className='flex justify-center'>
                 <div className='w-full md:w-3/5 xl:w-2/5'>
                     <Timeline
