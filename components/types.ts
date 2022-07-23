@@ -51,3 +51,12 @@ export type CommentData = {
     date: string,
     likedBy: string[],
 }
+
+export type ReplyToType = {
+    id: string,
+    author: UserShort,
+    content: string,
+    date: string,
+    likedBy: UserID[],
+    comments: string[]
+}
