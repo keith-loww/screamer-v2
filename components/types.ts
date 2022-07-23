@@ -32,6 +32,7 @@ export interface Comment {
     replyToType: "Post" | "Comment",
     replyTo: Post | Comment,
     likedBy: UserID[],
+    comments: Comment[]
 }
 
 export type PostData = {

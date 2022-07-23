@@ -12,7 +12,7 @@ interface PropTypes {
     comment: Comment
 }
 
-const CommentPage : NextPage = ({ comment }: PropTypes) => {
+const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
     console.log(comment)
     return (<>
         <Head>
