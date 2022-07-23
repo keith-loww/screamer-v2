@@ -20,12 +20,12 @@ const PostItem = ( { post } : PropTypes ) : JSX.Element => {
 
     const deleteHandler = async () => {
         try {
-            router.replace("/post-deleted");
             await axios.delete(`/api/posts/${post.id}`);
             showNotification({
                 message: "POST SUCCESSFULLY DELETED",
                 color: "green"
             });
+            router.replace(router.asPath);
         } catch (err) {
             console.error(err);
         }
