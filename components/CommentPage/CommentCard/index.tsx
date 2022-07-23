@@ -4,6 +4,7 @@ import { Comment } from '../../types';
 import InfoSection from './InfoSection';
 import LikeDisplay from './LikeDisplay';
 import NewCommentForm from './NewCommentForm';
+import DropDownMenu from './DropDownMenu';
 
 interface PropTypes {
     comment: Comment
@@ -13,7 +14,13 @@ const CommentCard = ({ comment }: PropTypes) => {
     return (
         <Card shadow="sm">
             <Group>
-                <InfoSection comment={comment} />
+                <div className='flex flex-row justify-between w-full'>
+                    <InfoSection comment={comment} />
+                    <div className='justify-end'>
+                        <DropDownMenu
+                        comment={comment} />
+                    </div>
+                </div>
             </Group>
             <Group mt="md">
                 <div className='text-xl'>

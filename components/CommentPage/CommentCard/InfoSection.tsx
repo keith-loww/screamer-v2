@@ -9,7 +9,7 @@ interface PropTypes {
 
 const InfoSection = ({ comment }: PropTypes) => {
     return (
-        <div className='flex flex-row space-x-4 justify-start'>
+        <div className='flex flex-row space-x-4 justify-start w-full'>
             <Avatar
             className='rounded-full'
             src={comment.author.picture}
