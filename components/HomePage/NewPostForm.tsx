@@ -20,6 +20,7 @@ export default function NewPostForm(): JSX.Element | null {
     if (!user || isLoading) return null
 
     const submitHandler = async ({content} : FormData) => {
+        if (!content) return;
         setBtnLoading(true)
         const obj = {
             content : content.toUpperCase(),
