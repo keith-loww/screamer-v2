@@ -14,7 +14,7 @@ interface PropTypes {
 }
 
 const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
   return (
     <>
       <Head>

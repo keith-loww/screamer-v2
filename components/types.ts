@@ -29,6 +29,8 @@ export interface Comment {
     content: string,
     author: UserShort,
     date: string,
+    replyToType: "Post" | "Comment",
+    replyTo: Post | Comment,
     likedBy: UserID[],
 }
 
