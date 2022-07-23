@@ -1,3 +1,4 @@
+import { Stack } from '@mantine/core'
 import React from 'react'
 import { Post } from '../../types'
 import PostItem from './PostItem'
@@ -5,12 +6,12 @@ import PostItem from './PostItem'
 export default function PostsDisplay({posts} : {posts: Post[]}): JSX.Element {
 
     return (
-        <div className='p-2 flex flex-col items-center space-y-2 w-full'>
+        <Stack>
             {posts.map(post => (
                 <PostItem
                 key={post.id}
                 post={post} />
             ))}
-        </div>
+        </Stack>
     )
 }
