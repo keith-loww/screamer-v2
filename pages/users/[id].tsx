@@ -26,9 +26,6 @@ const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
             <PostsDisplay
             user={user} />
         </div>
-
-        
-        <Footer />
     </>)
 }
 

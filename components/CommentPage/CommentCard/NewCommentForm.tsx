@@ -25,6 +25,7 @@ const NewCommentForm = ({ comment }: PropTypes) => {
             </div>
             <div className='w-full flex flex-row justify-end'>
                 <Button
+                className='w-1/4'
                 uppercase
                 variant='outline'
                 >

@@ -103,7 +103,6 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                 </div>
                 <CommentDisplay comments={post.comments} />
             </div>
-            <Footer />
         </>
     )   
 }

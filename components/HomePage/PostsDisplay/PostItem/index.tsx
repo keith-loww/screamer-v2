@@ -36,7 +36,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
         <div className='card card-bordered shadow-md hover:shadow-lg w-full md:w-3/5 lg:w-5/12 xl:w-2/5'>
             <div className='card-body'>
                 <div className="flex flex-row justify-between">                
-                    <div className='flex space-x-2 w-11/12'>
+                    <div className='flex space-x-2 w-full'>
                         <Link href={`/users/${post.author.id}`}>
                             <div className="avatar">
                                 <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
@@ -47,7 +47,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                                 </div>
                             </div>
                         </Link>
-                        <div>
+                        <div className='w-full'>
                             <div className='flex space-x-2 items-center'>
                                 <Link
                                 href={`/users/${post.author.id}`}
@@ -58,9 +58,11 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                                     · {getPostItemDate(new Date(post.date))}
                                 </span>
                             </div>
-                            <div className='text-sm break-all'>
-                                {post.content.toUpperCase()}
-                            </div>
+                            <Link href={`/posts/${post.id}`} >
+                                <div className='text-sm break-all h-full'>
+                                    {post.content.toUpperCase()}
+                                </div>
+                            </Link>
                         </div>
                     </div>
                     {user

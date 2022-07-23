@@ -31,7 +31,6 @@ const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
       </div>
       <PostsDisplay
       posts={posts} />
-      <Footer />
     </>
   )
 }
