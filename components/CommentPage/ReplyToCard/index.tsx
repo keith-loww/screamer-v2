@@ -1,10 +1,27 @@
 import React from 'react'
+import { ReplyTo, ReplyToType } from '../../types'
+import { Card, Group } from "@mantine/core";
+import ContentSection from './ContentSection';
+import LikeAndCommentDisplay from './LikeAndCommentDisplay';
 
-const ReplyToCard = () => {
+interface PropTypes {
+    type: ReplyToType,
+    replyTo: ReplyTo
+}
+
+const ReplyToCard = ({ replyTo, type }: PropTypes) => {
     return (
-        <div>
-            ReplyToCard
-        </div>
+        <Card>
+            <Group>
+                <ContentSection
+                replyTo={replyTo} />
+            </Group>
+            <Group>
+                <LikeAndCommentDisplay 
+                type={type}
+                replyTo={replyTo} />
+            </Group>
+        </Card>
     )
 }
 

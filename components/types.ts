@@ -30,7 +30,7 @@ export interface Comment {
     author: UserShort,
     date: string,
     replyToType: "Post" | "Comment",
-    replyTo: Post | Comment,
+    replyTo: ReplyTo,
     likedBy: UserID[],
     comments: Comment[]
 }
@@ -52,7 +52,7 @@ export type CommentData = {
     likedBy: string[],
 }
 
-export type ReplyToType = {
+export type ReplyTo = {
     id: string,
     author: UserShort,
     content: string,
@@ -60,3 +60,5 @@ export type ReplyToType = {
     likedBy: UserID[],
     comments: string[]
 }
+
+export type ReplyToType = "Post" | "Comment";
