@@ -1,5 +1,6 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
+import { ReplyToType } from "../../../components/types";
 import dbConnect from "../../../lib/dbConnect";
 import { isString } from "../../../lib/typeguards";
 import Comment from "../../../model/comment";
@@ -40,7 +41,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                     return res.status(400).json({ success: false, error: "You are not authorized to delete this comment" })
                 }
 
-                await deleteCommentFromPost(id, comment.post);
+                await deleteCommentFromReplyTo(id, comment.replyTo, comment.replyToType);
                 await deleteCommentsRecusrive(id);
                 return res.status(200).json({ success: true, data: null });
             } catch (error) {
@@ -69,6 +70,21 @@ export const getCommentForPage = async (id: string) => await Comment.findById(id
 
 // @ts-ignore
 const deleteCommentFromPost = async (id: string, postId: string) => await Post.findByIdAndUpdate(postId, { $pull: { comments: id } });
+
+const deleteCommentFromReplyTo = async (id: string, replyToId: string, replyToType: ReplyToType) => {
+    switch (replyToType) {
+        case "Post":
+            // @ts-ignore
+            await Post.findByIdAndUpdate(replyToId, { $pull: { comments: id } });
+            break;
+        case "Comment":
+            // @ts-ignore
+            await Comment.findByIdAndUpdate(replyToId, { $pull: { comments: id } });
+            break;
+        default:
+            throw new Error("Invalid replyToType");
+    }
+}
 
 // recursiviely delete all 
 
