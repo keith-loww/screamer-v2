@@ -14,6 +14,7 @@ const ReplyToCard = ({ replyTo, type }: PropTypes) => {
         <Card shadow="sm">
             <Group>
                 <ContentSection
+                type={type}
                 replyTo={replyTo} />
             </Group>
             <Divider my="md" />

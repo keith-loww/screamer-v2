@@ -37,7 +37,6 @@ const LikeDisplay = ({ comment }: PropTypes) => {
         router.replace(router.pathname)
     }
 
-
     return (
         <div className='w-full flex space-x-2'>
             <div className='flex space-x-2 items-center'>

@@ -30,8 +30,11 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
         header={<NavBar />}
         footer={<Footer />} >
             <div className='flex justify-center'>
-                <div className='w-full md:w-3/5 xl:w-1/3'>
-                    <Timeline active={1}>
+                <div className='w-full md:w-3/5 xl:w-2/5'>
+                    <Timeline
+                    bulletSize={12}
+                    color="gray"
+                    active={1}>
                         <Timeline.Item>
                             <ReplyToCard
                             type={comment.replyToType}
