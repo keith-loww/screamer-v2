@@ -53,5 +53,19 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
 }
 
 const getComment = async (id: string) => await Comment.findById(id);
+export const getCommentForPage = async (id: string) => await Comment.findById(id).populate("author").populate({
+        path: "replyTo",
+        populate: {
+            path: "author",
+            select: "nickname picture id"
+        }
+    }).populate({
+        path: "comments",
+        populate: {
+            path: "author",
+            select: "nickname picture id"
+        }
+    });
+
 // @ts-ignore
 const deleteCommentFromPost = async (id: string, postId: string) => await Post.findByIdAndUpdate(postId, { $pull: { comments: id } });

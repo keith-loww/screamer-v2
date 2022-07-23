@@ -1,12 +1,14 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import React from 'react'
 import { Comment } from '../../components/types'
+import { getCommentForPage } from '../api/comments/[id]'
 
 interface PropTypes {
     comment: Comment
 }
 
-const CommentPage = ({ comment }: PropTypes) => {
+const CommentPage : NextPage = ({ comment }: PropTypes) => {
+    console.log(comment)
     return (
         <div>
             <h1>{comment.content}</h1>
@@ -18,7 +20,7 @@ const CommentPage = ({ comment }: PropTypes) => {
 export const getServerSideProps : GetServerSideProps = async ({ params }) => {
     if (!params || !params.id) throw new Error("no id")
 
-    const comment = await fetch(`/api/comments/${params.id}`).then(res => res.json())
+    const comment = await getCommentForPage(params.id)
     return { props: { comment } }
 }
 
