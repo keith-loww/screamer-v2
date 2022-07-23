@@ -15,16 +15,18 @@ export default function NavBar() : JSX.Element {
             <div className='justify-start'>
                 <Link href="/">
                 <Button
-                variant='white'
+                variant='subtle'
+                color="gray"
                 className="text-xl space-x-2">
                     <IoMegaphoneSharp className='hover:animate-ping' />
                     <span>SCREAMER V2</span>
                 </Button>
                 </Link>
             </div>
-            <div className="navbar-end">
+            <div className="justify-end flex items-center">
                 <Button
-                variant='white'
+                variant='subtle'
+                color="gray"
                 onClick={() => toggleColorScheme()} >
                     TOGGLE
                 </Button>
