@@ -23,11 +23,22 @@ const commentSchema = new mongoose.Schema({
             ref: 'User'
         }
     ],
-    post: {
+    replyTo: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post',
+        refPath: 'replyToType',
         required: true
     },
+    replyToType: {
+        type: String,
+        required: true,
+        enum: ['Post', 'Comment']
+    },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
+        }
+    ]
 });
 
 commentSchema.set('toJSON', {

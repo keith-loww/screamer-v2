@@ -11,18 +11,24 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     switch(method) {
         case "POST":
             try {
-                const { content, author : authorID, post : postID } = req.body
+                const { content, author : authorID, replyTo : replyToID, replyToType } = req.body
                 const author = await User.findById(authorID)
-                const post = await Post.findById(postID)
+                let replyTo
+                if (replyToType === "Post") {
+                    replyTo = await Post.findById(replyToID)
+                } else {
+                    replyTo = await Comment.findById(replyToID)
+                }
                 const newComment = new Comment({
                     content,
                     author,
                     date: new Date(),
-                    post,
-                    likedBy: []
+                    likedBy: [],
+                    replyTo,
+                    replyToType,
                 })
                 const added = await newComment.save()
-                addCommentToPost(post, added.id)
+                await addCommentToReplyTo(replyToType, replyToID, added.id)
                 return res.status(201).json({success: true, data: added})
             } catch (error : unknown) {
                 if (error instanceof Error) {
@@ -35,5 +41,17 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
     }
 }
 
-// @ts-ignore
-export const addCommentToPost = async (postId: string, commentId: string) => await Post.findByIdAndUpdate(postId, { $push: { comments: commentId } }, { new: true });
+
+
+const addCommentToReplyTo = async (replyToType: "Post" | "Comment", replyToId: string, commentId: string) => {
+    switch(replyToType) {
+        case "Post":
+            // @ts-ignore
+            await Post.findByIdAndUpdate(replyToId, { $push: { comments: commentId } })
+            break
+        case "Comment":
+            // @ts-ignore
+            await Comment.findByIdAndUpdate(replyToId, { $push: { comments: commentId } })
+            break
+    }
+}

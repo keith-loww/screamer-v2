@@ -31,7 +31,8 @@ const CommentForm = ( {post} : PropTypes ) => {
             const commentObj = {
                 content : content.toUpperCase(),
                 author: user.sub,
-                post: post.id
+                replyTo: post.id,
+                replyToType: "Post"
             }
             await axios.post(  '/api/comments', commentObj);
             showNotification({
