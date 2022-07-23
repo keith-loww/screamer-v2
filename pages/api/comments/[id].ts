@@ -69,3 +69,14 @@ export const getCommentForPage = async (id: string) => await Comment.findById(id
 
 // @ts-ignore
 const deleteCommentFromPost = async (id: string, postId: string) => await Post.findByIdAndUpdate(postId, { $pull: { comments: id } });
+
+// recursiviely delete all 
+
+const deleteCommentsRecusrive = async (id: string) => {
+    const comment = await Comment.findById(id);
+    if (!comment) return;
+    comment.comments.forEach(async (commentId : string) => {
+        await deleteCommentsRecusrive(commentId);
+    });
+    await Comment.findByIdAndDelete(id);
+}
