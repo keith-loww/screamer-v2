@@ -1,6 +1,6 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { Avatar, Button, Textarea } from '@mantine/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { Comment } from '../../types'
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
@@ -19,11 +19,14 @@ interface FormData {
 const NewCommentForm = ({ comment }: PropTypes) => {
     const { user } = useUser()
     const router = useRouter()
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const { register, handleSubmit, reset, formState : { errors }, setValue } = useForm<FormData>()
 
     if (!user) return null
 
     const submitHandler = async (data: any) => {
+        if (!data.content) return
+        setIsSubmitting(true)
         const { content } = data
         const obj = {
             content,
@@ -37,6 +40,7 @@ const NewCommentForm = ({ comment }: PropTypes) => {
             color: "green",
             icon: <FaCheckCircle />
         })
+        setIsSubmitting(false)
         reset()
         router.replace(router.asPath)
     }
@@ -66,10 +70,13 @@ const NewCommentForm = ({ comment }: PropTypes) => {
                 onChange={(e) => setValue("content", e.target.value.toUpperCase())}
                 placeholder='SCREAM BACK...'
                 className='w-full'
-                autosize />
+                autosize
+                disabled={isSubmitting} />
             </div>
             <div className='w-full flex flex-row justify-end'>
                 <Button
+                loading={isSubmitting}
+                loaderPosition='right'
                 type='submit'
                 className='w-1/4'
                 uppercase
