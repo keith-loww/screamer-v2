@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
-import { Comment } from '../../types'
+import { Comment, CommentData } from '../../types'
 
 interface PropTypes {
     comment: Comment
@@ -17,19 +17,17 @@ const LikeDisplay = ({ comment }: PropTypes) => {
 
     const likeHandler = async () => {
         if (!user) router.push("/api/auth/login")
+        const resp = await axios.get(`/api/comments/${comment.id}`)
+        const originalComment : CommentData = resp.data.data
         let newObj
         if (alreadyLiked) {
             newObj = {
-                ...comment,
-                author: comment.author.id,
-                replyTo: comment.replyTo.id,
+                ...originalComment,
                 likedBy: comment.likedBy.filter(id => id !== user.sub)
             }   
         } else {
             newObj = {
-                ...comment,
-                author: comment.author.id,
-                replyTo: comment.replyTo.id,
+                ...originalComment,
                 likedBy: [...comment.likedBy, user?.sub]
             }
         }
