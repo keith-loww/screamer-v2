@@ -62,7 +62,7 @@ const PostItem = ( { post } : PropTypes ) : JSX.Element => {
                             </div>
                         </div>
                     </div>
-                    {user
+                    {(user && user.sub === post.author.id)
                     ? (
                         <div className='flex-end'>
                             <DropdownMenu
