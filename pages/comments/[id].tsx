@@ -24,7 +24,7 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
 
     return (<>
         <Head>
-            <title>{comment.id}</title>
+            <title>{comment.author.nickname.toUpperCase()}&#39;s COMMENT</title>
         </Head>
         <AppShell
         header={<NavBar />}
@@ -45,7 +45,6 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
                             comment={comment} />
                         </Timeline.Item>
                     </Timeline>
-                    
                 </div>
             </div>
         </AppShell>
