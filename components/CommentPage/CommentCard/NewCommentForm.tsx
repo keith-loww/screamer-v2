@@ -25,24 +25,32 @@ const NewCommentForm = ({ comment }: PropTypes) => {
     if (!user) return null
 
     const submitHandler = async (data: any) => {
-        if (!data.content) return
-        setIsSubmitting(true)
-        const { content } = data
-        const obj = {
-            content,
-            author: user.sub,
-            replyToType: "Comment",
-            replyTo: comment.id
+        try {
+            if (!data.content) return
+            setIsSubmitting(true)
+            const { content } = data
+            const obj = {
+                content,
+                author: user.sub,
+                replyToType: "Comment",
+                replyTo: comment.id
+            }
+            await axios.post("/api/comments", obj)
+            showNotification({
+                message: "SUCCESSFULLY SCREAMED BACK",
+                color: "green",
+                icon: <FaCheckCircle />
+            })
+            setIsSubmitting(false)
+            reset()
+            router.replace(router.asPath)
+        } catch (error) {
+            showNotification({
+                message: "ERROR SCREAMING BACK",
+                color: "red",
+            })
+            setIsSubmitting(false)
         }
-        await axios.post("/api/comments", obj)
-        showNotification({
-            message: "SUCCESSFULLY SCREAMED BACK",
-            color: "green",
-            icon: <FaCheckCircle />
-        })
-        setIsSubmitting(false)
-        reset()
-        router.replace(router.asPath)
     }
 
     return (
