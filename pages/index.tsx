@@ -2,7 +2,6 @@ import { useUser } from '@auth0/nextjs-auth0'
 import { AppShell } from '@mantine/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
-import Footer from '../components/HomePage/Footer'
 import NavBar from '../components/HomePage/NavBar'
 import NewPostForm from '../components/HomePage/NewPostForm'
 import PostsDisplay from '../components/HomePage/PostsDisplay'
@@ -27,7 +26,7 @@ const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
       header={<NavBar />}
       >
         <div className='flex justify-center'>
-          <div className='w-full md:w-3/5 xl:w-1/3'>
+          <div className='w-full md:w-3/5 xl:w-2/5'>
             <div className='p-2 flex flex-col items-center'>
               {user
                 ? <NewPostForm />

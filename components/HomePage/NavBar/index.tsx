@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { IoMegaphoneSharp } from 'react-icons/io5'
 import ProfileDropDown from './ProfileDropdown';
+import { BsSun, BsMoon } from 'react-icons/bs';
 
 export default function NavBar() : JSX.Element {
     const {user} = useUser();
@@ -23,13 +24,12 @@ export default function NavBar() : JSX.Element {
                 </Button>
                 </Link>
             </div>
-            <div className="justify-end flex items-center space-x-2">
-                <Button
-                variant='subtle'
-                color="gray"
+            <div className="justify-end flex items-center space-x-4">
+                <ActionIcon
+                variant='outline'
                 onClick={() => toggleColorScheme()} >
-                    TOGGLE
-                </Button>
+                    {colorScheme === 'light' ? <BsSun /> : <BsMoon />}
+                </ActionIcon>
                 {user ? 
                 <ProfileDropDown />
                 : <LoginBtn />}

@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0';
-import { Card, Divider } from '@mantine/core';
+import { Avatar, Card, Divider } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import axios from 'axios';
 import Image from 'next/image';
@@ -35,19 +35,17 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
 
     return (
         <Card
+        p="xl"
         className='w-full'
         shadow="sm" >
             <div className="flex flex-row justify-between">
-                <div className='flex space-x-2 w-full'>
+                <div className='flex space-x-2 w-fulL'>
                     <Link href={`/users/${post.author.id}`}>
-                        <div className="avatar">
-                            <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
-                                <Image
-                                src={post.author.picture}
-                                alt="Cannot Fetch Image"
-                                layout='fill' />
-                            </div>
-                        </div>
+                        <Avatar
+                        className='rounded-full'
+                        src={post.author.picture}
+                        size="lg"
+                        />
                     </Link>
                     <div className='w-full'>
                         <div className='flex space-x-2 items-center'>
