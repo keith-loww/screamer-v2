@@ -65,7 +65,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                             </Link>
                         </div>
                     </div>
-                    {user
+                    {(user && user?.sub === post.author.id)
                     ? (
                         <div className='flex-end'>
                             <DropdownMenu
