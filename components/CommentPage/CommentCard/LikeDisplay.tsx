@@ -34,18 +34,19 @@ const LikeDisplay = ({ comment }: PropTypes) => {
             }
         }
         await axios.put(`/api/comments/${comment.id}`, newObj)
-        router.replace(router.pathname)
+        router.replace(router.asPath)
     }
 
     return (
         <div className='w-full flex space-x-2'>
             <div className='flex space-x-2 items-center'>
                 <ActionIcon
+                size="lg"
                 variant='transparent'
                 onClick={likeHandler} >
                     {alreadyLiked
-                    ? <AiFillLike />
-                    : <AiOutlineLike />}
+                    ? <AiFillLike size={20} />
+                    : <AiOutlineLike size={20} />}
                 </ActionIcon>
                 <span>
                     {comment.likedBy.length}
