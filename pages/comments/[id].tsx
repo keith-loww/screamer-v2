@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import CommentCard from '../../components/CommentPage/CommentCard'
+import Replies from '../../components/CommentPage/Replies'
 import ReplyToCard from '../../components/CommentPage/ReplyToCard'
 import Footer from '../../components/HomePage/Footer'
 import NavBar from '../../components/HomePage/NavBar'
@@ -41,8 +42,11 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
                             replyTo={comment.replyTo} />
                         </Timeline.Item>
                         <Timeline.Item>
-                            <CommentCard
-                            comment={comment} />
+                            <div>
+                                <CommentCard
+                                comment={comment} />
+                                <Replies comments={comment.comments} />
+                            </div>
                         </Timeline.Item>
                     </Timeline>
                 </div>
