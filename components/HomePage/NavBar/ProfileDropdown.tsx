@@ -1,4 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
+import { Avatar, Menu } from '@mantine/core'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -10,29 +11,18 @@ export default function ProfileDropDown() {
     }
 
     return (
-        <div className="dropdown dropdown-end">
-        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full relative">
-            <Image
-            src={user.picture ? user.picture : ""}
-            alt="Cannot fetch picture"
-            layout='fill'
-            objectFit='contain'
-            quality={100} />
-            </div>
-        </label>
-        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li>
-            <Link
-            href={`/users/${user?.sub}`}
-            className="justify-between">
-                Profile
-            </Link>
-            </li>
-            <li>
-                <Link href="/api/auth/logout">Logout</Link>
-            </li>
-        </ul>
-        </div>
+        <Menu control={(<Avatar className='rounded-full' src={user.picture} size={48} />)
+        }>  
+            <Menu.Item>
+                <Link href={`/users/${user.sub}`}>
+                    Profile
+                </Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link href="/api/auth/logout">
+                    Logout
+                </Link>
+            </Menu.Item>
+        </Menu>
     )
 }
