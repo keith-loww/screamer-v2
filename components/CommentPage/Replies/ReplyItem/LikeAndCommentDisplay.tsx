@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
-import { ActionIcon } from '@mantine/core'
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -37,24 +37,34 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
     return (
         <div className='flex justify-start space-x-6'>
                 <div className='flex items-center space-x-1'>
-                    <ActionIcon
-                    variant='transparent'
-                    onClick={likeHandler}
-                    >
-                        {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
-                    </ActionIcon>
+                    <Tooltip
+                    position='bottom'
+                    placement='center'
+                    label="Like this comment" >
+                        <ActionIcon
+                        variant='transparent'
+                        onClick={likeHandler}
+                        >
+                            {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
+                        </ActionIcon>
+                    </Tooltip>
                     <span>
                         {comment.likedBy.length}
                     </span>
                 </div>
                 <div className='flex items-center space-x-1'>
-                    <Link
-                    href={`/comments/${comment.id}`}>
-                        <ActionIcon
-                        variant='transparent'>
-                            <BiCommentError />
-                        </ActionIcon>
-                    </Link>
+                    <Tooltip
+                    position='bottom'
+                    placement='center'
+                    label="Comments" >
+                        <Link
+                        href={`/comments/${comment.id}`}>
+                            <ActionIcon
+                            variant='transparent'>
+                                <BiCommentError />
+                            </ActionIcon>
+                        </Link>
+                    </Tooltip>
                     <span>
                         {comment.comments.length}
                     </span>

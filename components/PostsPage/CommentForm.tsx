@@ -80,12 +80,11 @@ const CommentForm = ( {post} : PropTypes ) => {
                 <Button
                     loading={btnLoading}
                     loaderPosition='right'
-                    className='min-w-1/5'
+                    className='w-1/4'
                     type="submit"
                     uppercase
-                    color="gray"
                     variant='outline' >
-                    Submit
+                    REPLY
                 </Button>
             </div>
         </form>

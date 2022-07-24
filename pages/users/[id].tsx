@@ -1,3 +1,4 @@
+import { AppShell } from '@mantine/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
@@ -19,13 +20,17 @@ const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
         <Head>
             <title>{user.nickname}&#39;s Profile</title>
         </Head>
-        <NavBar />
-        <div className='p-2 mt-2 flex flex-col items-center'>
-            <UserCard
-            user={user} />
-            <PostsDisplay
-            user={user} />
-        </div>
+        <AppShell
+        header={<NavBar />} >
+            <div className='flex justify-center'>
+                <div className='w-full md:w-3/5 xl:w-2/5 flex flex-row flex-wrap'>
+                    <UserCard
+                    user={user} />
+                    <PostsDisplay
+                    user={user} />
+                </div>
+            </div>
+        </AppShell>
     </>)
 }
 
