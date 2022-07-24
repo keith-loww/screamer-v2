@@ -98,7 +98,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                                 </div>
                             ) : null}
                         </div>
-                        <div className='text-2xl mt-2'>
+                        <div className='text-2xl mt-2 break-all whitespace-pre-wrap'>
                             {post.content}
                         </div>
                         <Divider my="md" />

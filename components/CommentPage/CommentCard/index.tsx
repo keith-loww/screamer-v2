@@ -23,7 +23,7 @@ const CommentCard = ({ comment }: PropTypes) => {
                 </div>
             </Group>
             <Group mt="md">
-                <div className='text-xl'>
+                <div className='text-xl break-all whitespace-pre-wrap'>
                     {comment.content}
                 </div>
             </Group>

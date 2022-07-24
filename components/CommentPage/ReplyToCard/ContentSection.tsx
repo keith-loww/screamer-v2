@@ -35,7 +35,7 @@ const ContentSection = ({ replyTo, type }: PropTypes) => {
                 href={isPost(type)
                 ? `/posts/${replyTo.id}`
                 : `/comments/${replyTo.id}`} >
-                    <span className='h-full'>
+                    <span className='h-full break-all whitespace-pre-wrap'>
                         {replyTo.content}
                     </span>
                 </Link>
