@@ -10,6 +10,7 @@ import { getPostItemDate } from '../../../../lib/dateHelper';
 import { Post } from '../../../types';
 import DropdownMenu from './DropdownMenu';
 import LikeAndCommentDisplay from './LikeAndCommentDisplay';
+import { FaRegTrashAlt } from 'react-icons/fa'
 
 interface PropTypes {
     post: Post,
@@ -24,7 +25,8 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
         try {
             showNotification({
                 message: "POST SUCCESSFULLY DELETED",
-                color: "green"
+                color: "green",
+                icon: <FaRegTrashAlt />
             });
             await axios.delete(`/api/posts/${post.id}`);
             router.replace(router.asPath);
