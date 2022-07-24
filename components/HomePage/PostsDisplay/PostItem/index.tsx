@@ -61,7 +61,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                             </span>
                         </div>
                         <Link href={`/posts/${post.id}`} >
-                            <div className='text-sm break-all w-full h-full'>
+                            <div className='text-sm whitespace-pre-wrap break-all w-full h-full'>
                                 {post.content.toUpperCase()}
                             </div>
                         </Link>
