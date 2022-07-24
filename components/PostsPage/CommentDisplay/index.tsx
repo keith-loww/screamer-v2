@@ -1,9 +1,9 @@
 import React from 'react'
-import { Comment } from '../../types';
-import { CommentItem } from './CommentItem';
+import ReplyItem from '../../CommentPage/Replies/ReplyItem';
+import { Comment, CommentWithoutComments } from '../../types';
 
 interface PropTypes {
-    comments: Comment[]
+    comments: CommentWithoutComments[]
 }
 
 const CommentDisplay = ({comments }: PropTypes) => {
@@ -16,7 +16,7 @@ const CommentDisplay = ({comments }: PropTypes) => {
             <div className='space-y-2'>
                 {comments.map((comment, index) => {
                     return (
-                        <CommentItem key={index} comment={comment} />
+                        <ReplyItem key={index} comment={comment} />
                     )
                 }
                 )}

@@ -2,6 +2,7 @@ import { UserProfile } from '@auth0/nextjs-auth0'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import {Avatar as ManatineAvatar} from '@mantine/core'
 
 interface Props {
     user: UserProfile
@@ -12,14 +13,11 @@ const Avatar = ({ user }: Props) => {
 
     return (
         <Link href={`/users/${user.sub}`}>
-            <div className="avatar">
-                <div className="h-14 rounded-full relative hover:brightness-75 ease-linear duration-200">
-                    <Image
-                    src={user.picture ? user.picture : ""}
-                    alt="Cannot Fetch Image"
-                    layout='fill' />
-                </div>
-            </div>
+            <ManatineAvatar
+                className='rounded-full'
+                size="md"
+                src={user.picture}
+            />
         </Link>
     )
 }

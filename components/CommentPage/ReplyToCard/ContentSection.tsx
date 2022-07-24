@@ -1,3 +1,4 @@
+import { Avatar } from '@mantine/core'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -17,15 +18,10 @@ const ContentSection = ({ replyTo, type }: PropTypes) => {
             <div>
                 <Link
                 href={`/users/${replyTo.author.id}`} >
-                    <div className='avatar'>
-                        <div className='relative rounded-full h-16 hover:brightness-75'>
-                            <Image
-                            src={replyTo.author.picture}
-                            alt="could not load avatar"
-                            layout='fill'
-                             />
-                        </div>
-                    </div>
+                    <Avatar
+                    size="lg"
+                    className='rounded-full hover:brightness-75 ease-linear duration-200'
+                    src={replyTo.author.picture} />
                 </Link>
             </div>
             <div className='flex flex-col w-full'>

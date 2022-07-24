@@ -16,11 +16,14 @@ export default function NavBar() : JSX.Element {
             <div className='justify-start'>
                 <Link href="/">
                 <Button
+                className="text-xl flex space-x-2"
                 variant='subtle'
                 color="gray"
-                className="text-xl space-x-2">
-                    <IoMegaphoneSharp className='hover:animate-ping' />
-                    <span>SCREAMER V2</span>
+                >
+                    <div className='flex items-center space-x-2'>
+                        <IoMegaphoneSharp className='hover:animate-ping' />
+                        <span>SCREAMER V2</span>
+                    </div>
                 </Button>
                 </Link>
             </div>
@@ -41,7 +44,9 @@ export default function NavBar() : JSX.Element {
 function LoginBtn() : JSX.Element {
     return (
         <Link href="/api/auth/login">
-            <a className="btn">LOGIN</a>
+            <Button
+            variant='outline'
+            >LOGIN</Button>
         </Link>
     )
 }

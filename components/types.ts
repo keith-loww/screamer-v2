@@ -6,7 +6,7 @@ export interface Post {
     author: UserShort,
     date: string,
     likedBy: UserID[],
-    comments: Comment[]
+    comments: CommentWithoutComments[]
 }
 
 export interface PostWithoutComments extends Omit<Post, 'comments'> {

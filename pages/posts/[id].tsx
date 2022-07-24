@@ -14,7 +14,7 @@ import DropdownMenu from '../../components/PostsPage/DropdownMenu';
 import CommentForm from '../../components/PostsPage/CommentForm';
 import CommentDisplay from '../../components/PostsPage/CommentDisplay';
 import AvatarNameDateDisplay from '../../components/PostsPage/AvatarNameDateDisplay';
-import { Divider } from '@mantine/core';
+import { AppShell, Card, Divider } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 
 
@@ -78,10 +78,13 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
             <Head>
                 <title>{post.author.nickname.toUpperCase()}&#39;s POST </title>
             </Head>
-            <NavBar />
-            <div className=' flex justify-center align-middle flex-col items-center'>
-                <div className='card card-bordered shadow-lg w-full md:w-3/5 xl:w-2/5 my-2'>
-                    <div className='card-body space-y-2'>
+            <AppShell
+            header={<NavBar />} >
+                <div className=' flex justify-center align-middle flex-col items-center'>
+                    <Card
+                    p="xl"
+                    shadow="sm"
+                    className='w-full md:w-3/5 xl:w-2/5 my-2'>
                         <div className='flex w-full flex-row justify-between'>
                             <AvatarNameDateDisplay
                             post={post} />
@@ -93,22 +96,25 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                                 </div>
                             ) : null}
                         </div>
-                        <div className='text-2xl'>
+                        <div className='text-2xl mt-2'>
                             {post.content}
                         </div>
-                        <Divider />
+                        <Divider my="md" />
                         <LikeDisplay
                         post={post}
                         likeHandler={likeHandler} />
                         {user
-                        ? (<div>                       
+                        ? (
+                            <div>
+                                <Divider my="md" />
                                 <CommentForm post={post} />
-                            </div>)
+                            </div>
+                            )
                         : null}
-                    </div>
+                    </Card>
+                    <CommentDisplay comments={post.comments} />
                 </div>
-                <CommentDisplay comments={post.comments} />
-            </div>
+            </AppShell>
         </>
     )   
 }
