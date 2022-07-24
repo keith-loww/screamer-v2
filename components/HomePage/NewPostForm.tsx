@@ -46,39 +46,37 @@ export default function NewPostForm(): JSX.Element | null {
     }
 
     return (
-        <div className='card w-full'>
-            <div className='card-body'>
-                <h1 className='text-xl md:text-2xl font-semibold mb-2'>
-                    HEY, {user.nickname?.toUpperCase()}
-                </h1>
-                <form onSubmit={handleSubmit(submitHandler)}
-                className="flex flex-col space-y-2">
-                    <div className='w-4/5'>
-                        <Textarea {...register("content", {
-                            maxLength : {
-                                value: 280,
-                                message: 'POST CANNOT EXCEED 280 CHARACTERS'
-                            },
-                            minLength : {
-                                value: 5,
-                                message: 'POST MUST BE AT LEAST 5 CHARACTERS LONG'
-                            },
-                        })}
-                        placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
-                        autosize
-                        onChange={(e) => setValue("content", e.target.value.toUpperCase())}
-                        error={errors ? errors.content?.message : null}
-                        className="" />
-                    </div>
-                    <Button
-                    variant='outline'
-                    type="submit"
-                    loading={btnLoading}
-                    className='w-1/3 md:w-56'>
-                        SUBMIT
-                    </Button>
-                </form>
-            </div>
+        <div className='w-full'>
+            <h1 className='text-xl md:text-2xl font-semibold mb-2'>
+                HEY, {user.nickname?.toUpperCase()}
+            </h1>
+            <form onSubmit={handleSubmit(submitHandler)}
+            className="flex flex-col space-y-2">
+                <div className='w-4/5'>
+                    <Textarea {...register("content", {
+                        maxLength : {
+                            value: 280,
+                            message: 'POST CANNOT EXCEED 280 CHARACTERS'
+                        },
+                        minLength : {
+                            value: 5,
+                            message: 'POST MUST BE AT LEAST 5 CHARACTERS LONG'
+                        },
+                    })}
+                    placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
+                    autosize
+                    onChange={(e) => setValue("content", e.target.value.toUpperCase())}
+                    error={errors ? errors.content?.message : null}
+                    className="" />
+                </div>
+                <Button
+                variant='outline'
+                type="submit"
+                loading={btnLoading}
+                className='w-1/3 md:w-56'>
+                    SUBMIT
+                </Button>
+            </form>
         </div>
     )
 }

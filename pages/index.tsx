@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
-import { AppShell } from '@mantine/core'
+import { AppShell, Divider } from '@mantine/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import NavBar from '../components/HomePage/NavBar'
@@ -32,6 +32,7 @@ const Home : NextPage<PropTypes> = ({ posts } : PropTypes) => {
                 ? <NewPostForm />
                 : null}
             </div>
+            <Divider my="xl" />
             <PostsDisplay
             posts={posts} />
           </div>

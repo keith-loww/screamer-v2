@@ -40,8 +40,8 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
         p="xl"
         className='w-full'
         shadow="sm" >
-            <div className="flex flex-row justify-between">
-                <div className='flex space-x-2 w-fulL'>
+            <div className="flex flex-row justify-between w-full">
+                <div className='flex space-x-2 w-full'>
                     <Link href={`/users/${post.author.id}`}>
                         <Avatar
                         className='rounded-full'
@@ -61,7 +61,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                             </span>
                         </div>
                         <Link href={`/posts/${post.id}`} >
-                            <div className='text-sm break-all h-full'>
+                            <div className='text-sm break-all w-full h-full'>
                                 {post.content.toUpperCase()}
                             </div>
                         </Link>
