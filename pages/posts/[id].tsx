@@ -66,7 +66,6 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     }
 
     const deleteHandler = async () => {
-        // router.push("/post-deleted")
         await axios.delete(`/api/posts/${post.id}`)
         showNotification({
             message: "POST SUCESSFULLY DELETED",

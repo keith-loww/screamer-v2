@@ -1,9 +1,9 @@
 import React from 'react'
-import { Comment } from '../../types'
+import { CommentWithoutComments } from '../../types'
 import ReplyItem from './ReplyItem'
 
 interface PropTypes {
-    comments: Comment[]
+    comments: CommentWithoutComments[]
 }
 
 const Replies = ({ comments }: PropTypes) => {  

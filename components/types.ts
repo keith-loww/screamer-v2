@@ -36,7 +36,7 @@ export interface Comment {
     replyToType: "Post" | "Comment",
     replyTo: ReplyTo,
     likedBy: UserID[],
-    comments: Comment[]
+    comments: CommentWithoutComments[]
 }
 
 export interface CommentWithoutComments extends Omit<Comment, "comments"> {

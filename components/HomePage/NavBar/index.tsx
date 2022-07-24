@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0';
-import { ActionIcon, Button, Header, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Button, Header, Tooltip, useMantineColorScheme } from '@mantine/core';
 import Link from 'next/link'
 import React from 'react'
 import { IoMegaphoneSharp } from 'react-icons/io5'
@@ -28,11 +28,16 @@ export default function NavBar() : JSX.Element {
                 </Link>
             </div>
             <div className="justify-end flex items-center space-x-4">
-                <ActionIcon
-                variant='outline'
-                onClick={() => toggleColorScheme()} >
-                    {colorScheme === 'light' ? <BsSun /> : <BsMoon />}
-                </ActionIcon>
+                <Tooltip
+                position='bottom'
+                placement='end'
+                label="Toggle Light/Dark Mode" >
+                    <ActionIcon
+                    variant='outline'
+                    onClick={() => toggleColorScheme()} >
+                        {colorScheme === 'light' ? <BsSun /> : <BsMoon />}
+                    </ActionIcon>
+                </Tooltip>
                 {user ? 
                 <ProfileDropDown />
                 : <LoginBtn />}
