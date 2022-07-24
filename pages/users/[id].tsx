@@ -18,7 +18,7 @@ interface PropTypes {
 const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
     return (<>
         <Head>
-            <title>{user.nickname}&#39;s Profile</title>
+            <title>{user.nickname.toUpperCase()}&#39;s PROFILE</title>
         </Head>
         <AppShell
         header={<NavBar />} >
