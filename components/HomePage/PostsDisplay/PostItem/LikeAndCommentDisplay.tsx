@@ -3,7 +3,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { ActionIcon } from '@mantine/core'
+import { ActionIcon, Tooltip } from '@mantine/core'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { Post, PostData } from '../../../types'
@@ -54,24 +54,35 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     return (
         <div className='flex justify-start space-x-6'>
             <div className='flex items-center space-x-1'>
-                <ActionIcon
-                variant='transparent'
-                onClick={likeHandler}
-                >
-                    {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
-                </ActionIcon>
+                <Tooltip
+                position='bottom'
+                placement='center'
+                withArrow
+                label="Like this post" >
+                    <ActionIcon
+                    variant='transparent'
+                    onClick={likeHandler}
+                    >
+                        {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
+                    </ActionIcon>
+                </Tooltip>
                 <span>
                     {post.likedBy.length}
                 </span>
             </div>
             <div className='flex items-center space-x-1'>
-                <Link
-                href={`/posts/${post.id}`}>
-                    <ActionIcon
-                    variant='transparent'>
-                        <BiCommentError />
-                    </ActionIcon>
-                </Link>
+                <Tooltip
+                position='bottom'
+                placement='center'
+                label="Comments" >
+                    <Link
+                    href={`/posts/${post.id}`}>
+                        <ActionIcon
+                        variant='transparent'>
+                            <BiCommentError />
+                        </ActionIcon>
+                    </Link>
+                </Tooltip>
                 <span>
                     {post.comments.length}
                 </span>
