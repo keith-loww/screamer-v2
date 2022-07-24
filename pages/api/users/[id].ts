@@ -52,6 +52,7 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                     return res.status(400).json({ success: false, error: error.message })
                 }
                 return res.status(400).json({ success: false })
+            }
         default:
             return res.status(400).json({ success: false })
     }
