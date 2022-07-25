@@ -27,44 +27,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     const router = useRouter()
     const { user } = useUser();
 
-    const likeHandler = async () => {
-        if (!user) {
-            router.push("/api/auth/login")
-        } else {
-            if (!user.sub) throw new Error("cannot find user")
-            const alreadyLiked = post.likedBy.includes(user?.sub)
-
-            // axios get post
-            const resp = await axios.get(`/api/posts/${post.id}`)
-            const postData : PostData = resp.data.data
-            if (alreadyLiked) {
-                await removeLike(postData)  
-            } else {
-                await addLike(postData) 
-            }
-            router.replace(router.asPath)
-        }
-        
-    }
-
-    const addLike = async (postData : PostData) => {
-        if (!user || !user?.sub) throw new Error("cannot find user")
-        const updatedPostObj = {
-            ...postData,
-            likedBy: post.likedBy.concat(user?.sub)
-        }
-        await axios.put(`/api/posts/${post.id}`, updatedPostObj)
-    }
-
-    const removeLike = async (postData : PostData) => {
-        if (!user || !user?.sub) throw new Error("cannot find user")
-        const updatedPostObj = {
-            ...postData,
-            likedBy: post.likedBy.filter(id => id !== user?.sub)
-        }
-        await axios.put(`/api/posts/${post.id}`, updatedPostObj)
-    }
-
+    
     const deleteHandler = async () => {
         await axios.delete(`/api/posts/${post.id}`)
         showNotification({
@@ -103,8 +66,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                         </div>
                         <Divider my="md" />
                         <LikeDisplay
-                        post={post}
-                        likeHandler={likeHandler} />
+                        post={post} />
                         {user
                         ? (
                             <div>

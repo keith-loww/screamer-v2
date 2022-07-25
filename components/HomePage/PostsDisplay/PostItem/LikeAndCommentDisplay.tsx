@@ -87,10 +87,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                     <ActionIcon
                     variant='transparent'
                     onClick={likeHandler}
-                    loading={likeLoading}
-                    loaderProps={{
-                        variant: "dots"
-                    }}
+                    disabled={likeLoading}
                     >
                         {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
                     </ActionIcon>

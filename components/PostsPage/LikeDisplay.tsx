@@ -1,17 +1,79 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { ActionIcon, Tooltip } from '@mantine/core'
-import React, { useContext } from 'react'
+import { showNotification, updateNotification } from '@mantine/notifications'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import React, { useContext, useState } from 'react'
 import {AiFillLike, AiOutlineLike} from "react-icons/ai"
-import { Post } from '../types'
+import { FaCheckCircle } from 'react-icons/fa'
+import { Post, PostData } from '../types'
 
 interface PropTypes {
-    post: Post,
-    likeHandler: () => void
+    post: Post
 }
 
-export default function LikeDisplay({post, likeHandler} : PropTypes): JSX.Element {
+export default function LikeDisplay({post} : PropTypes): JSX.Element {
     const {user, isLoading} = useUser()
+    const router = useRouter()
     const alreadyLiked = user && user.sub && post.likedBy.includes(user.sub)
+    const [loading, setLoading] = useState(false)
+
+
+    const likeHandler = async () => {
+        if (!user) router.push("/api/auth/login")
+        try { 
+            if (!user || !user.sub) throw new Error("cannot find user")
+            const alreadyLiked = post.likedBy.includes(user?.sub)
+            setLoading(true)
+            showNotification({
+                id: "like-post",
+                message: alreadyLiked ? "Unliking..." : "Liking...",
+                loading: true,
+                autoClose: false,
+                disallowClose: true
+            })
+
+            // axios get post
+            const resp = await axios.get(`/api/posts/${post.id}`)
+            const postData : PostData = resp.data.data
+            if (alreadyLiked) {
+                await removeLike(postData)  
+            } else {
+                await addLike(postData) 
+            }
+            setLoading(false)
+            updateNotification({
+                id: "like-post",
+                message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
+                loading: false,
+                autoClose: true,
+                color: "green",
+                icon: <FaCheckCircle />
+            })
+            router.replace(router.asPath)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const addLike = async (postData : PostData) => {
+        if (!user || !user?.sub) throw new Error("cannot find user")
+        const updatedPostObj = {
+            ...postData,
+            likedBy: post.likedBy.concat(user?.sub)
+        }
+        await axios.put(`/api/posts/${post.id}`, updatedPostObj)
+    }
+
+    const removeLike = async (postData : PostData) => {
+        if (!user || !user?.sub) throw new Error("cannot find user")
+        const updatedPostObj = {
+            ...postData,
+            likedBy: post.likedBy.filter(id => id !== user?.sub)
+        }
+        await axios.put(`/api/posts/${post.id}`, updatedPostObj)
+    }
+
 
     return (
         <div className='flex flex-row space-x-2 items-center'>
@@ -21,7 +83,8 @@ export default function LikeDisplay({post, likeHandler} : PropTypes): JSX.Elemen
             label="Like this post" >
                 <ActionIcon
                 variant='transparent'
-                onClick={likeHandler} >
+                onClick={likeHandler}
+                disabled={loading} >
                 {alreadyLiked
                 ? <AiFillLike size={24} />
                 : <AiOutlineLike size={24} />}
