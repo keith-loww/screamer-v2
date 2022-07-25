@@ -4,11 +4,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ActionIcon, Tooltip } from '@mantine/core'
-import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
+import { AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { Post, PostData } from '../../../types'
 import { showNotification, updateNotification } from '@mantine/notifications'
 import { FaCheckCircle } from 'react-icons/fa'
+import { getRandomId } from '../../../../lib/LikePostNotifId'
+
 
 const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     const {user} = useUser()
@@ -20,12 +22,13 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
         if (!user) {
             router.push("/api/auth/login")
         } else {
+            const notifID = getRandomId()
             try {
                 setLikeLoading(true)
                 if (!user.sub) throw new Error("cannot find user")
                 const alreadyLiked = post.likedBy.includes(user?.sub)
                 showNotification({
-                    id: "like-post",
+                    id: `like-post-${post.id}-${notifID}`,
                     message: alreadyLiked ? "Unliking..." : "Liking...",
                     loading: true,
                     autoClose: false,
@@ -38,22 +41,30 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                 } else {
                     await addLike(postData) 
                 }
+                
                 updateNotification({
-                    id: "like-post",
+                    id: `like-post-${post.id}-${notifID}`,
                     message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
                     loading: false,
                     autoClose: true,
                     color: "green",
-                    icon: <FaCheckCircle />
+                    icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
                 })
                 router.replace(router.asPath)
                 setLikeLoading(false)
             } catch (error) {
                 console.log(error)
                 setLikeLoading(false)
+                updateNotification({
+                    id: `like-post-${post.id}-${notifID}`,
+                    message: "ERROR LIKING",
+                    loading: false,
+                    autoClose: true,
+                    color: "red",
+                    icon: <AiOutlineExclamation />
+                })
             }
         }
-        
     }
 
     const addLike = async (postData : PostData) => {
