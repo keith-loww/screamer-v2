@@ -18,26 +18,31 @@ const ContentSection = ({ replyTo, type }: PropTypes) => {
             <div>
                 <Link
                 href={`/users/${replyTo.author.id}`} >
-                    <Avatar
-                    size="lg"
-                    className='rounded-full hover:brightness-75 ease-linear duration-200'
-                    src={replyTo.author.picture} />
+                    <a>
+                        <Avatar
+                        size="lg"
+                        className='rounded-full hover:brightness-75 ease-linear duration-200'
+                        src={replyTo.author.picture} />
+                    </a>
                 </Link>
             </div>
             <div className='flex flex-col w-full'>
                 <div className='space-x-2'>
-                    <span className='font-semibold hover:underline'>
-                        {replyTo.author.nickname.toUpperCase()}
-                    </span>
+                    <Link
+                    href={`/users/${replyTo.author.id}`} >
+                        <a className='font-semibold hover:underline'>
+                            {replyTo.author.nickname.toUpperCase()}
+                        </a>
+                    </Link>
                     <span className='text-secondary'>· {getPostItemDate(new Date(replyTo.date))}</span>
                 </div>
                 <Link
                 href={isPost(type)
                 ? `/posts/${replyTo.id}`
                 : `/comments/${replyTo.id}`} >
-                    <span className='h-full break-all whitespace-pre-wrap'>
+                    <a className='h-full break-words whitespace-pre-wrap'>
                         {replyTo.content}
-                    </span>
+                    </a>
                 </Link>
             </div>
         </div>

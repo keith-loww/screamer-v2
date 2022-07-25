@@ -32,7 +32,7 @@ const Content = ({ comment }: PropTypes) => {
                     </span>
                 </div>
                 <Link href={`/comments/${comment.id}`} >
-                    <a className='h-full break-words whitespace-pre-wrap'>
+                    <a className='h-full w-full break-words whitespace-pre-wrap'>
                         {comment.content}
                     </a>
                 </Link>
