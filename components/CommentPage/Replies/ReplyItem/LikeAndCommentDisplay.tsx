@@ -4,10 +4,11 @@ import { showNotification, updateNotification } from '@mantine/notifications'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
+import { AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { FaCheckCircle } from 'react-icons/fa'
 import AddOrRemoveLike from '../../../../lib/CommentLikeHelper'
+import { getRandomId } from '../../../../lib/LikePostNotifId'
 import { CommentData, CommentWithoutComments } from '../../../types'
 
 
@@ -24,10 +25,11 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
     const likeHandler = async () => {
         if (!user) router.push('/api/auth/login')
         if (!user || !user.sub) throw new Error("user not found");
+        const notifID = getRandomId()
         try {
             setLikeLoading(true)
             showNotification({
-                id: "like-comment",
+                id: `like-comment-${comment.id}-${notifID}`,
                 message: alreadyLiked ? "Unliking..." : "Liking...",
                 loading: true,
                 autoClose: false,
@@ -37,18 +39,23 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
             router.replace(router.asPath)
             setLikeLoading(false)
             updateNotification({
-                id: "like-comment",
-                message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
+                id: `like-comment-${comment.id}-${notifID}`,
+                message: alreadyLiked ? "SUCESSFULLY UNLIKED COMMENT" : "SUCCESSFULLY LIKED COMMENT",
                 loading: false,
                 autoClose: true,
                 color: "green",
-                icon: <FaCheckCircle />
+                icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
             })
         } catch (error) {
             console.log(error)
-            showNotification({
+            setLikeLoading(false)
+            updateNotification({
                 message: "ERROR LIKING COMMENT",
-                color: "red"
+                color: "red",
+                icon: <AiOutlineExclamation />,
+                autoClose: true,
+                id: `like-comment-${comment.id}-${notifID}`,
+                loading: false
             })
         }
     }
