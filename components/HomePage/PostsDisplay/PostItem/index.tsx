@@ -43,27 +43,29 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
             <div className="flex flex-row justify-between w-full">
                 <div className='flex space-x-2 w-full'>
                     <Link href={`/users/${post.author.id}`}>
-                        <Avatar
-                        className='rounded-full'
-                        src={post.author.picture}
-                        size="lg"
-                        />
+                        <a>
+                            <Avatar
+                            className='rounded-full'
+                            src={post.author.picture}
+                            size="lg"
+                            />
+                        </a>
                     </Link>
                     <div className='w-full'>
                         <div className='flex space-x-2 items-center'>
                             <Link
                             href={`/users/${post.author.id}`}
                             className='text-lg font-semibold'>
-                                <span className='hover:underline'>{post.author.nickname.toUpperCase()}</span>
+                                <a className='hover:underline'>{post.author.nickname.toUpperCase()}</a>
                             </Link>
                             <span className='text-secondary'>
                                 · {getPostItemDate(new Date(post.date))}
                             </span>
                         </div>
                         <Link href={`/posts/${post.id}`} >
-                            <div className='text-sm whitespace-pre-wrap break-all w-full h-full'>
+                            <a className='text-sm whitespace-pre-wrap break-words w-full h-full'>
                                 {post.content.toUpperCase()}
-                            </div>
+                            </a>
                         </Link>
                     </div>
                 </div>
