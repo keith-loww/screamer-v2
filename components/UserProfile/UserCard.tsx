@@ -12,7 +12,7 @@ export default function UserCard({user} : {user : User}) {
         sx={(theme) => ({
             backgroundColor: theme.colorScheme === "dark"
                 ? theme.colors.blue[9]
-                : theme.colors.blue[7],
+                : theme.colors.pink[1],
         })} >
             <Avatar
             size="xl"
