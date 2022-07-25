@@ -36,7 +36,7 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
                 disallowClose: true
             })
             await AddOrRemoveLike(comment.id, user?.sub)
-            router.replace(router.asPath)
+            router.replace(router.asPath, router.asPath, { scroll: false })
             setLikeLoading(false)
             updateNotification({
                 id: `like-comment-${comment.id}-${notifID}`,
