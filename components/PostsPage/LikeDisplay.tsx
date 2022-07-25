@@ -4,8 +4,9 @@ import { showNotification, updateNotification } from '@mantine/notifications'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
-import {AiFillLike, AiOutlineLike} from "react-icons/ai"
+import {AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike} from "react-icons/ai"
 import { FaCheckCircle } from 'react-icons/fa'
+import { getRandomId } from '../../lib/LikePostNotifId'
 import { Post, PostData } from '../types'
 
 interface PropTypes {
@@ -21,12 +22,13 @@ export default function LikeDisplay({post} : PropTypes): JSX.Element {
 
     const likeHandler = async () => {
         if (!user) router.push("/api/auth/login")
+        const notifID = getRandomId()
         try { 
             if (!user || !user.sub) throw new Error("cannot find user")
             const alreadyLiked = post.likedBy.includes(user?.sub)
             setLoading(true)
             showNotification({
-                id: "like-post",
+                id: `like-post-${post.id}-${notifID}`,
                 message: alreadyLiked ? "Unliking..." : "Liking...",
                 loading: true,
                 autoClose: false,
@@ -43,16 +45,25 @@ export default function LikeDisplay({post} : PropTypes): JSX.Element {
             }
             setLoading(false)
             updateNotification({
-                id: "like-post",
-                message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
+                id: `like-post-${post.id}-${notifID}`,
+                message: alreadyLiked ? "SUCESSFULLY UNLIKED POST" : "SUCCESSFULLY LIKED POST",
                 loading: false,
                 autoClose: true,
                 color: "green",
-                icon: <FaCheckCircle />
+                icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
             })
             router.replace(router.asPath)
         } catch (error) {
             console.log(error)
+            setLoading(false)
+            updateNotification({
+                id: `like-post-${post.id}-${notifID}`,
+                message: "ERROR LIKING",
+                loading: false,
+                autoClose: true,
+                color: "red",
+                icon: <AiOutlineExclamation />
+            })
         }
     }
 

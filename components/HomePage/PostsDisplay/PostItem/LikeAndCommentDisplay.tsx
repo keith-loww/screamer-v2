@@ -8,7 +8,6 @@ import { AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike } from '
 import { BiCommentError } from 'react-icons/bi'
 import { Post, PostData } from '../../../types'
 import { showNotification, updateNotification } from '@mantine/notifications'
-import { FaCheckCircle } from 'react-icons/fa'
 import { getRandomId } from '../../../../lib/LikePostNotifId'
 
 
@@ -44,7 +43,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                 
                 updateNotification({
                     id: `like-post-${post.id}-${notifID}`,
-                    message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
+                    message: alreadyLiked ? "SUCESSFULLY UNLIKED POST" : "SUCCESSFULLY LIKED POST",
                     loading: false,
                     autoClose: true,
                     color: "green",
