@@ -1,11 +1,12 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { ActionIcon, Tooltip } from '@mantine/core'
-import { showNotification } from '@mantine/notifications'
+import { showNotification, updateNotification } from '@mantine/notifications'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
+import { FaCheckCircle } from 'react-icons/fa'
 import AddOrRemoveLike from '../../../../lib/CommentLikeHelper'
 import { CommentData, CommentWithoutComments } from '../../../types'
 
@@ -17,14 +18,32 @@ interface PropTypes {
 const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
     const { user } = useUser()
     const router = useRouter()
+    const [likeLoading, setLikeLoading] = useState(false)
     const alreadyLiked = user && user.sub && comment.likedBy.includes(user.sub)
 
     const likeHandler = async () => {
         if (!user) router.push('/api/auth/login')
         if (!user || !user.sub) throw new Error("user not found");
         try {
+            setLikeLoading(true)
+            showNotification({
+                id: "like-comment",
+                message: alreadyLiked ? "Unliking..." : "Liking...",
+                loading: true,
+                autoClose: false,
+                disallowClose: true
+            })
             await AddOrRemoveLike(comment.id, user?.sub)
             router.replace(router.asPath)
+            setLikeLoading(false)
+            updateNotification({
+                id: "like-comment",
+                message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
+                loading: false,
+                autoClose: true,
+                color: "green",
+                icon: <FaCheckCircle />
+            })
         } catch (error) {
             console.log(error)
             showNotification({
@@ -42,6 +61,7 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
                     placement='center'
                     label="Like this comment" >
                         <ActionIcon
+                        disabled={likeLoading}
                         variant='transparent'
                         onClick={likeHandler}
                         >
