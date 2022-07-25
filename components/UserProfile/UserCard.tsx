@@ -7,7 +7,13 @@ import { Avatar, Card } from '@mantine/core'
 
 export default function UserCard({user} : {user : User}) {
     return (
-        <Card p="xl" className='w-full'>
+        <Card p="xl" className='w-full' 
+        withBorder
+        sx={(theme) => ({
+            backgroundColor: theme.colorScheme === "dark"
+                ? theme.colors.blue[9]
+                : theme.colors.blue[7],
+        })} >
             <Avatar
             size="xl"
             className='rounded-full'
