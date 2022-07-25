@@ -2,31 +2,56 @@ import { useUser } from '@auth0/nextjs-auth0'
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { Post, PostData } from '../../../types'
+import { showNotification, updateNotification } from '@mantine/notifications'
+import { FaCheckCircle } from 'react-icons/fa'
 
 const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     const {user} = useUser()
     const router = useRouter()
+    const [likeLoading, setLikeLoading] = useState(false)
     const alreadyLiked = user && user.sub && post.likedBy.includes(user.sub)
 
     const likeHandler = async () => {
         if (!user) {
             router.push("/api/auth/login")
         } else {
-            if (!user.sub) throw new Error("cannot find user")
-            const alreadyLiked = post.likedBy.includes(user?.sub)
-            const resp = await axios.get(`/api/posts/${post.id}`)
-            const postData : PostData = resp.data.data
-            if (alreadyLiked) {
-                await removeLike(postData)
-            } else {
-                await addLike(postData) 
+            try {
+                setLikeLoading(true)
+                if (!user.sub) throw new Error("cannot find user")
+                const alreadyLiked = post.likedBy.includes(user?.sub)
+                showNotification({
+                    id: "like-post",
+                    message: alreadyLiked ? "Unliking..." : "Liking...",
+                    loading: true,
+                    autoClose: false,
+                    disallowClose: true
+                })
+                const resp = await axios.get(`/api/posts/${post.id}`)
+                const postData : PostData = resp.data.data
+                if (alreadyLiked) {
+                    await removeLike(postData)
+                } else {
+                    await addLike(postData) 
+                }
+                updateNotification({
+                    id: "like-post",
+                    message: alreadyLiked ? "SUCESSFULLY UNLIKED" : "SUCCESSFULLY LIKED",
+                    loading: false,
+                    autoClose: true,
+                    color: "green",
+                    icon: <FaCheckCircle />
+                })
+                router.replace(router.asPath)
+                setLikeLoading(false)
+            } catch (error) {
+                console.log(error)
+                setLikeLoading(false)
             }
-            router.replace(router.asPath)
         }
         
     }
@@ -62,6 +87,10 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                     <ActionIcon
                     variant='transparent'
                     onClick={likeHandler}
+                    loading={likeLoading}
+                    loaderProps={{
+                        variant: "dots"
+                    }}
                     >
                         {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
                     </ActionIcon>
