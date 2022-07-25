@@ -14,11 +14,13 @@ const AvatarNameDateDisplay = ({ post }: PropTypes) : JSX.Element => {
         <div className='justify-start flex flex-row space-x-4'>
             <Link
             href={`/users/${post.author.id}`} >
-                <Avatar
-                className='rounded-full'
-                size="xl"
-                src={post.author.picture}
-                />
+                <a>
+                    <Avatar
+                    className='rounded-full'
+                    size="xl"
+                    src={post.author.picture}
+                    />
+                </a>
             </Link>
             <div className='flex flex-col space-y-2'>
                 <Link
