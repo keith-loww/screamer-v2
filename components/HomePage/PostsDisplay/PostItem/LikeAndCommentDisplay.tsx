@@ -49,7 +49,9 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                     color: "green",
                     icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
                 })
-                router.replace(router.asPath)
+                router.replace(router.asPath, router.asPath, {
+                    scroll: false
+                })
                 setLikeLoading(false)
             } catch (error) {
                 console.log(error)
