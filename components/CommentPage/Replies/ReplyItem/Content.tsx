@@ -12,11 +12,13 @@ const Content = ({ comment }: PropTypes) => {
     return (
         <div className='flex flex-row space-x-2 w-full'>
             <Link href={`/users/${comment.author.id}`} >
-                <Avatar
-                className='rounded-full hover:brightness-75 ease-linear duration-200'
-                src={comment.author.picture}
-                size="md"
-                 />
+                <a href="">
+                    <Avatar
+                    className='rounded-full hover:brightness-75 ease-linear duration-200'
+                    src={comment.author.picture}
+                    size="md"
+                     />
+                </a>
             </Link>
             <div className='flex-col w-full'>
                 <div className='flex flex-row space-x-2 items-center'>
@@ -30,9 +32,9 @@ const Content = ({ comment }: PropTypes) => {
                     </span>
                 </div>
                 <Link href={`/comments/${comment.id}`} >
-                    <div className='h-full break-all whitespace-pre-wrap'>
+                    <a className='h-full break-words whitespace-pre-wrap'>
                         {comment.content}
-                    </div>
+                    </a>
                 </Link>
             </div>
         </div>
