@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike } from 'react-icons/ai'
 import { getRandomId } from '../../../lib/LikePostNotifId'
+import LikeTooltip from '../../Tooltips/LikeTooltip'
 import { Comment, CommentData } from '../../types'
 
 interface PropTypes {
@@ -72,15 +73,21 @@ const LikeDisplay = ({ comment }: PropTypes) => {
     return (
         <div className='w-full flex space-x-2'>
             <div className='flex space-x-2 items-center'>
-                <ActionIcon
-                size="lg"
-                variant='transparent'
-                onClick={likeHandler}
-                disabled={likeLoading} >
-                    {alreadyLiked
-                    ? <AiFillLike size={20} />
-                    : <AiOutlineLike size={20} />}
-                </ActionIcon>
+                <LikeTooltip
+                position='bottom'
+                placement='center'
+                alreadyLiked={Boolean(alreadyLiked)}
+                type="comment" >
+                    <ActionIcon
+                    size="lg"
+                    variant='transparent'
+                    onClick={likeHandler}
+                    disabled={likeLoading} >
+                        {alreadyLiked
+                        ? <AiFillLike size={20} />
+                        : <AiOutlineLike size={20} />}
+                    </ActionIcon>
+                </LikeTooltip>
                 <span>
                     {comment.likedBy.length}
                 </span>

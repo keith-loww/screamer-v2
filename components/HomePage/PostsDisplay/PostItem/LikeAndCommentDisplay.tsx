@@ -95,7 +95,7 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                 position='bottom'
                 placement='center'
                 withArrow
-                label="Like this post" >
+                label={alreadyLiked ? "Unlike this post" : "Like this post"} >
                     <ActionIcon
                     variant='transparent'
                     onClick={likeHandler}
