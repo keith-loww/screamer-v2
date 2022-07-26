@@ -66,7 +66,7 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
                     <Tooltip
                     position='bottom'
                     placement='center'
-                    label="Like this comment" >
+                    label={alreadyLiked ? "Unlike this post" : "Like this post"} >
                         <ActionIcon
                         disabled={likeLoading}
                         variant='transparent'

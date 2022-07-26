@@ -91,7 +91,7 @@ export default function LikeDisplay({post} : PropTypes): JSX.Element {
             <Tooltip
             position='bottom'
             placement='center'
-            label="Like this post" >
+            label={alreadyLiked ? "Unlike this post" : "Like this post"} >
                 <ActionIcon
                 variant='transparent'
                 onClick={likeHandler}

@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import { AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike } from 'react-icons/ai'
 import { BiCommentError } from 'react-icons/bi'
 import { getRandomId } from '../../../lib/LikePostNotifId'
+import LikeTooltip from '../../Tooltips/LikeTooltip'
 import { ReplyTo, ReplyToType } from '../../types'
 
 interface PropTypes {
@@ -82,13 +83,19 @@ const LikeAndCommentDisplay = ({ replyTo, type }: PropTypes) => {
     return (
         <div className='flex justify-start space-x-6'>
                 <div className='flex items-center space-x-1'>
-                    <ActionIcon
-                    variant='transparent'
-                    onClick={likeHandler}
-                    disabled={likeLoading}
-                    >
-                        {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
-                    </ActionIcon>
+                    <LikeTooltip 
+                    type={type === "Post" ? "post" : "comment"}
+                    alreadyLiked={Boolean(alreadyLiked)}
+                    position="bottom"
+                    placement='center' >
+                        <ActionIcon
+                        variant='transparent'
+                        onClick={likeHandler}
+                        disabled={likeLoading}
+                        >
+                            {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
+                        </ActionIcon>
+                    </LikeTooltip>
                     <span>
                         {replyTo.likedBy.length}
                     </span>
