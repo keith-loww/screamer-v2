@@ -4,6 +4,7 @@ import { UserProvider } from '@auth0/nextjs-auth0';
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useLocalStorage } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -11,13 +12,28 @@ function MyApp({ Component, pageProps }: AppProps) {
     defaultValue: 'dark',
     getInitialValueInEffect: true,
   });
-  const toggleColorScheme = (value?: ColorScheme) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  
+  const [primaryColor, setPrimaryColor] = useState("blue");
+  useEffect(() => {
+    setPrimaryColor(colorScheme === "dark" ? "blue" : "pink");
+  } ,[colorScheme]);
 
+  const toggleColorScheme = (value?: ColorScheme) => {
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+    setPrimaryColor(primaryColor === 'blue' ? 'pink' : 'blue');
+  }
 
   return (
     <UserProvider>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme} >
-        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS >
+        <MantineProvider withGlobalStyles withNormalizeCSS
+         theme={{ 
+          colorScheme,
+          colors: {
+            brand: ['#F0BBDD', '#ED9BCF', '#EC7CC3', '#ED5DB8', '#F13EAF', '#F71FA7', '#FF00A1', '#E00890', '#C50E82','#AD1374' ],
+          },
+          primaryColor,
+          }} >
           <NotificationsProvider>
             <Component {...pageProps} />
           </NotificationsProvider>
