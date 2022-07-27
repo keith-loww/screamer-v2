@@ -14,7 +14,7 @@ export default function ProfileDropDown() {
         <Menu control={(<Avatar className='rounded-full' src={user.picture} size={48} />)
         }>  
             <Menu.Item>
-                <Link href={`/users/${user.sub}`}>
+                <Link href={`/my-profile`}>
                     Profile
                 </Link>
             </Menu.Item>
