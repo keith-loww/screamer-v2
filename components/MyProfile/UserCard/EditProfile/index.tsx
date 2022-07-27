@@ -1,6 +1,7 @@
 import { Button, Modal } from '@mantine/core'
 import React, { useState } from 'react'
 import { User } from '../../../types'
+import ChangeNickname from './ChangeNickname'
 
 interface PropTypes {
     user: User
@@ -15,7 +16,7 @@ const EditProfile = ({ user }: PropTypes) => {
             opened={modalOpen}
             onClose={() => setModalOpen(false)}
             title='Edit Profile'>
-                Hello
+                <ChangeNickname user={user} />
             </Modal>
             <Button variant='outline'
             color={'gray'}
