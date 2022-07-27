@@ -1,5 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0';
-import { ActionIcon, Button, Header, Tooltip, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Button, Header, Text, Tooltip, useMantineColorScheme } from '@mantine/core';
 import Link from 'next/link'
 import React from 'react'
 import { IoMegaphoneSharp } from 'react-icons/io5'
@@ -16,13 +16,18 @@ export default function NavBar() : JSX.Element {
             <div className='justify-start'>
                 <Link href="/">
                 <Button
+                sx={(theme) => ({
+                    color: theme.colorScheme === 'dark' ? 'white' : 'black',
+                })}
                 className="text-xl flex space-x-2"
                 variant='subtle'
                 color="gray"
                 >
                     <div className='flex items-center space-x-2'>
-                        <IoMegaphoneSharp className='hover:animate-ping' />
-                        <span>SCREAMER V2</span>
+                        <IoMegaphoneSharp/>
+                        <Text size="xl">
+                            SCREAMER V2
+                        </Text>
                     </div>
                 </Button>
                 </Link>

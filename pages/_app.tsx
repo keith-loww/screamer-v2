@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
   
   const [primaryColor, setPrimaryColor] = useState("blue");
+
   useEffect(() => {
     setPrimaryColor(colorScheme === "dark" ? "blue" : "pink");
   } ,[colorScheme]);
