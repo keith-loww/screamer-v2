@@ -4,7 +4,7 @@ import axios from "axios"
 import { AiOutlineExclamation } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
 
-const ChangeNickname = async (nickname: string, id: string, setLoading: (state: boolean) => void) => {
+const changeNickname = async (nickname: string, id: string, setLoading: (state: boolean) => void) => {
     const notifId = generateChangeNicknameNotifId()
     try {
         setLoading(false)
@@ -57,4 +57,4 @@ const changeNicknameRequest = async (nickname: string, id: string) => {
     return user.data.data
 }
 
-export default ChangeNickname
+export default changeNickname

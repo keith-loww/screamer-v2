@@ -1,7 +1,9 @@
 import { Button, Group, Stack, Text, TextInput } from '@mantine/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { User } from '../../../types'
 import { useForm } from 'react-hook-form'
+import changeNickname from '../../../../lib/EditProfile/ChangeNickname'
+import { useUser } from '@auth0/nextjs-auth0'
 
 interface PropTypes {
     user: User
@@ -15,11 +17,9 @@ const ChangeNickname = ({ user }: PropTypes) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
     const [loading, setLoading] = useState(false)
 
-    const submitHandler = ({ nickname }: FormData) => {
-        const 
-        try {
-
-        }
+    const submitHandler = async ({ nickname }: FormData) => {
+        if (!nickname) return
+        await changeNickname(nickname, user.id, setLoading)
     }
 
     return (
