@@ -12,7 +12,7 @@ const CommentDisplay = ({comments }: PropTypes) => {
     }
     return (
         <div className='w-full md:w-3/5 xl:w-2/5 p-2'>
-            <h1 className='text-2xl font-semibold mb-2'>REPLIES ({comments.length})</h1>
+            <h1 className='text-2xl font-semibold my-0 mb-2'>REPLIES ({comments.length})</h1>
             <div className='space-y-2'>
                 {comments.map((comment, index) => {
                     return (
