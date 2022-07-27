@@ -22,6 +22,10 @@ export interface User {
     posts: Post[]
 }
 
+export interface UserData extends Omit<User, 'posts'> {
+    posts: string[]
+}
+
 export interface UserShort {
     id: string,
     nickname: string,
