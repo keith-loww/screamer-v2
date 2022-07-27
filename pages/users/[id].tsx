@@ -1,6 +1,8 @@
+import { useUser } from '@auth0/nextjs-auth0'
 import { AppShell } from '@mantine/core'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import React from 'react'
 import Footer from '../../components/HomePage/Footer'
 import NavBar from '../../components/HomePage/NavBar'
@@ -16,6 +18,10 @@ interface PropTypes {
 }
 
 const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
+    const router = useRouter()
+    const {user : authUser} = useUser()
+    if (user.id === authUser?.sub) router.replace("/my-profile", `/users/${user.id}`)
+
     return (<>
         <Head>
             <title>{user.nickname.toUpperCase()}&#39;s PROFILE</title>
