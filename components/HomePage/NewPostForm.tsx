@@ -46,8 +46,8 @@ export default function NewPostForm(): JSX.Element | null {
     }
 
     return (
-        <div className='w-full'>
-            <h1 className='text-xl md:text-2xl font-semibold mb-2'>
+        <div className='w-full items-start'>
+            <h1 className='text-xl md:text-2xl font-semibold my-0 mb-2'>
                 HEY, {user.nickname?.toUpperCase()}
             </h1>
             <form onSubmit={handleSubmit(submitHandler)}
