@@ -66,7 +66,7 @@ const LikeAndCommentDisplay = ({ replyTo, type }: PropTypes) => {
                 color: "green",
                 icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
             })
-            router.replace(router.asPath)
+            router.replace(router.asPath, router.asPath, { scroll: false })
         } catch (error) {
             console.log(error)
             setLikeLoading(false)

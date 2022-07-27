@@ -52,7 +52,7 @@ export default function LikeDisplay({post} : PropTypes): JSX.Element {
                 color: "green",
                 icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
             })
-            router.replace(router.asPath)
+            router.replace(router.asPath, router.asPath, { scroll: false })
         } catch (error) {
             console.log(error)
             setLoading(false)

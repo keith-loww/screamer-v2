@@ -55,11 +55,3 @@ function LoginBtn() : JSX.Element {
         </Link>
     )
 }
-
-function LogoutBtn() : JSX.Element {
-    return (
-        <Link href="/api/auth/logout">
-            <a className="btn">LOGOUT</a>
-        </Link>
-    )
-}

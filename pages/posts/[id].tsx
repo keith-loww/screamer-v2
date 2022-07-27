@@ -3,9 +3,8 @@ import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react'
-import Footer from '../../components/HomePage/Footer';
 import NavBar from '../../components/HomePage/NavBar';
-import { Post, PostData } from '../../components/types'
+import { Post } from '../../components/types'
 import LikeDisplay from '../../components/PostsPage/LikeDisplay';
 import {  useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
