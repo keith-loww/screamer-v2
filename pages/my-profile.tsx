@@ -16,7 +16,6 @@ interface PropTypes {
 }
 
 const MyProfilePage: NextPage<PropTypes> = ({ userData }: PropTypes) => {
-    console.log(userData)
     return (
         <>
             <Head>
