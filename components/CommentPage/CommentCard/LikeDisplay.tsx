@@ -55,7 +55,7 @@ const LikeDisplay = ({ comment }: PropTypes) => {
                 icon: alreadyLiked ? <AiFillDislike /> : <AiFillLike />
             })
             setLikeLoading(false)
-            router.replace(router.asPath)
+            router.replace(router.asPath, router.asPath, { scroll: false })
         } catch (error) {
             console.log(error)
             setLikeLoading(false)
