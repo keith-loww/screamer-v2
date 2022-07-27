@@ -13,9 +13,13 @@ interface FormData {
 
 const ChangeNickname = ({ user }: PropTypes) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
+    const [loading, setLoading] = useState(false)
+
     const submitHandler = ({ nickname }: FormData) => {
-        console.log(nickname)
-        reset()
+        const 
+        try {
+
+        }
     }
 
     return (
@@ -27,6 +31,7 @@ const ChangeNickname = ({ user }: PropTypes) => {
                     Change Nickname
                 </Text>
                 <TextInput
+                disabled={loading}
                 {...register("nickname", {
                     required: true,
                     minLength: {
@@ -44,6 +49,8 @@ const ChangeNickname = ({ user }: PropTypes) => {
                 placeholder='New nickname...' />
                 <Group position='right'>
                     <Button
+                    loading={loading}
+                    loaderPosition='right'
                     type='submit'
                     variant='outline'
                     color={'gray'}>
