@@ -13,12 +13,13 @@ interface FormData {
 
 const ChangeNickname = ({ user }: PropTypes) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
-    const submitHandler = (data: FormData) => {
-        console.log(data)
+    const submitHandler = ({ nickname }: FormData) => {
+        console.log(nickname)
+        reset()
     }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit(submitHandler)} >
             <Stack spacing="xs" >
                 <Text
                 size='md'
@@ -26,11 +27,24 @@ const ChangeNickname = ({ user }: PropTypes) => {
                     Change Nickname
                 </Text>
                 <TextInput
+                {...register("nickname", {
+                    required: true,
+                    minLength: {
+                        value: 3,
+                        message: "NICKNAME MUST BE AT LEAST 3 CHARACTERS"
+                    },
+                    maxLength: {
+                        value: 20,
+                        message: "NICKNAME CANNOT BE LONGER THAN 20 CHARACTERS"
+                    }
+                })}
+                error={errors?.nickname?.message}
                 required
                 label='Nickname'
                 placeholder='New nickname...' />
                 <Group position='right'>
                     <Button
+                    type='submit'
                     variant='outline'
                     color={'gray'}>
                         Submit
