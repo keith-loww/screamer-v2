@@ -53,7 +53,7 @@ const generateChangeNicknameNotifId = () => {
 }
 
 const changeNicknameRequest = async (nickname: string, id: string) => {
-    const user = await axios.patch(`api/users/${id}`, { nickname })
+    const user = await axios.patch(`/api/users/${id}`, { nickname })
     return user.data.data
 }
 
