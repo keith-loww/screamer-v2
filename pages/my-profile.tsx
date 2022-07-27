@@ -7,12 +7,16 @@ import { getUserWithPostsAndAuthors } from './api/users/[id]';
 import Head from 'next/head';
 import { AppShell } from '@mantine/core';
 import NavBar from '../components/HomePage/NavBar';
+import { stringifyAndParse } from '../lib/jsonhelper';
+import PostsDisplay from '../components/UserProfile/PostsDisplay';
+import UserCard from '../components/MyProfile/UserCard';
 
 interface PropTypes {
-    user: User
+    userData: User
 }
 
-const MyProfilePage: NextPage<PropTypes> = ({ user }: PropTypes) => {
+const MyProfilePage: NextPage<PropTypes> = ({ userData }: PropTypes) => {
+    console.log(userData)
     return (
         <>
             <Head>
@@ -22,8 +26,9 @@ const MyProfilePage: NextPage<PropTypes> = ({ user }: PropTypes) => {
             header={<NavBar />} >
                 <div className='flex justify-center' >
                     <div className='w-full md:w-3/5 xl:w-1/3'>
-                        <h1>My Profile</h1>
-                        <p>{user.name}</p>
+                        <UserCard user={userData} />
+                        <PostsDisplay
+                        user={userData} />
                     </div>
                 </div>
             </AppShell>
@@ -40,9 +45,9 @@ export const getServerSideProps = withPageAuthRequired({
         if (!session) throw new Error('No session')
         const userSession = session?.user;
         await dbConnect()
-        const user = getUserWithPostsAndAuthors(userSession.sub)
+        const user = stringifyAndParse(await getUserWithPostsAndAuthors(userSession?.sub))
         return {
-            props: { user }
+            props: { userData: user }
         }
     }
 })
