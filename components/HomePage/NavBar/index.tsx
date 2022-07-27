@@ -17,10 +17,10 @@ export default function NavBar() : JSX.Element {
                 <Link href="/">
                 <Button
                 sx={(theme) => ({
-                    color: theme.colorScheme === 'dark' ? 'white' : 'black',
+                    color: theme.colorScheme === 'dark' ? theme.colors.gray[2] : 'black',
                 })}
                 className="text-xl flex space-x-2"
-                variant='subtle'
+                variant='subtle'    
                 color="gray"
                 >
                     <div className='flex items-center space-x-2'>
