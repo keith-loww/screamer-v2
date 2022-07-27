@@ -19,7 +19,14 @@ const EditProfile = ({ user }: PropTypes) => {
                 <ChangeNickname user={user} />
             </Modal>
             <Button variant='outline'
-            color={'gray'}
+            sx={(theme) => ({
+                color: theme.colorScheme === "dark"
+                ? theme.colors.gray[0]
+                : theme.colors.gray[9],
+                borderColor: theme.colorScheme === "dark"
+                ? theme.colors.gray[0]
+                : theme.colors.gray[9],
+            })}
             onClick={() => setModalOpen(true)}>
                 Edit Profile
             </Button>
