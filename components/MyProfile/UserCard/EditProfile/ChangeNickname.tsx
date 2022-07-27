@@ -4,6 +4,8 @@ import { User } from '../../../types'
 import { useForm } from 'react-hook-form'
 import changeNickname from '../../../../lib/EditProfile/ChangeNickname'
 import { useUser } from '@auth0/nextjs-auth0'
+import Router, { useRouter } from 'next/router'
+import { BiUserPin } from 'react-icons/bi'
 
 interface PropTypes {
     user: User
@@ -14,12 +16,15 @@ interface FormData {
 }
 
 const ChangeNickname = ({ user }: PropTypes) => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<FormData>()
+    const router = useRouter()
     const [loading, setLoading] = useState(false)
 
     const submitHandler = async ({ nickname }: FormData) => {
         if (!nickname) return
         await changeNickname(nickname, user.id, setLoading)
+        reset()
+        router.replace(router.asPath)
     }
 
     return (
@@ -43,6 +48,8 @@ const ChangeNickname = ({ user }: PropTypes) => {
                         message: "NICKNAME CANNOT BE LONGER THAN 20 CHARACTERS"
                     }
                 })}
+                icon={<BiUserPin />}
+                onChange={(e) => setValue('nickname', e.target.value.toUpperCase())}
                 error={errors?.nickname?.message}
                 required
                 label='Nickname'
