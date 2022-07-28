@@ -3,6 +3,8 @@ import { Avatar, Menu } from '@mantine/core'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { CgProfile } from 'react-icons/cg'
+import { FiLogOut } from 'react-icons/fi'
 
 export default function ProfileDropDown() {
     const { user } = useUser()
@@ -11,14 +13,16 @@ export default function ProfileDropDown() {
     }
 
     return (
-        <Menu control={(<Avatar className='rounded-full' src={user.picture} size={48} />)
-        }>  
-            <Menu.Item>
+        <Menu control={(<Avatar className='rounded-full' src={user.picture} size={48} />)} 
+        transition='scale-y'
+        position='bottom'
+        placement='end' >  
+            <Menu.Item icon={<CgProfile />} >
                 <Link href={`/my-profile`} as={`/users/${user.sub}`} >
                     Profile
                 </Link>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item color="red" icon={<FiLogOut />} >
                 <Link href="/api/auth/logout">
                     Logout
                 </Link>
