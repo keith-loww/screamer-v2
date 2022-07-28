@@ -30,7 +30,12 @@ const Technologies = () => {
                 <h3>
                     <Group>
                         Auth0
-                        <SiAuth0 />
+                        <ActionIcon
+                        variant="subtle" >
+                            <Link href="https://auth0.com">
+                                <SiAuth0 />
+                            </Link>
+                        </ActionIcon>
                     </Group>
                 </h3>
                 <p>
@@ -43,7 +48,12 @@ const Technologies = () => {
                 <h3>
                     <Group>
                         MongoDB
-                        <SiMongodb />
+                        <ActionIcon
+                        variant="subtle" >
+                            <Link href="https://www.mongodb.com">
+                                <SiMongodb />
+                            </Link>
+                        </ActionIcon>
                     </Group>
                 </h3>
                 <p>

@@ -1,6 +1,7 @@
 import { AppShell, Blockquote, Button, Center, Stack, TypographyStylesProvider } from '@mantine/core'
 import { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import React from 'react'
 import { BsGithub } from 'react-icons/bs'
 import Technologies from '../components/About/Technologies'
@@ -23,16 +24,16 @@ const About: NextPage = () => {
                             <span className='font-semibold'>SCREAMER</span>
                             <span> is a platform for people to share their stories and experiences, but only in full caps.</span>
                         </div>
-                        <Center>
-                            <Button
-                            component='a'
-                            href='https://github.com/keith-loww/screamer-v2'
-                            className='w-1/5 no-underline'
-                            color="gray"
-                            variant='outline'
-                            leftIcon={<BsGithub />}>
-                                GitHub
-                            </Button>
+                        <Center className='w-full'>
+                            <Link href='https://github.com/keith-loww/screamer-v2'>
+                                <Button
+                                className='w-1/5'
+                                variant='outline'
+                                color="gray"
+                                leftIcon={<BsGithub />}>
+                                    GitHub
+                                </Button>
+                            </Link>
                         </Center>
                         <Technologies />
                     </Stack>
