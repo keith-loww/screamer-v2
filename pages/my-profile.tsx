@@ -22,6 +22,7 @@ const MyProfilePage: NextPage<PropTypes> = ({ userData }: PropTypes) => {
                 <title>My Profile</title>
             </Head>
             <AppShell
+            fixed
             header={<NavBar />} >
                 <div className='flex justify-center' >
                     <div className='w-full md:w-3/5 xl:w-1/3'>

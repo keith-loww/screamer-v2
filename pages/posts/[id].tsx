@@ -43,6 +43,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
                 <title>{post.author.nickname.toUpperCase()}&#39;s POST </title>
             </Head>
             <AppShell
+            fixed
             header={<NavBar />} >
                 <div className=' flex justify-center align-middle flex-col items-center'>
                     <Card
