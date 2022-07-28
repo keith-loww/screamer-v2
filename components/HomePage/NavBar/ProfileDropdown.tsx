@@ -13,8 +13,10 @@ export default function ProfileDropDown() {
     }
 
     return (
-        <Menu control={(<Avatar className='rounded-full' src={user.picture} size={48} />)
-        }>  
+        <Menu control={(<Avatar className='rounded-full' src={user.picture} size={48} />)} 
+        transition='scale-y'
+        position='bottom'
+        placement='end' >  
             <Menu.Item icon={<CgProfile />} >
                 <Link href={`/my-profile`} as={`/users/${user.sub}`} >
                     Profile
