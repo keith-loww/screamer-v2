@@ -26,6 +26,7 @@ const Home : NextPage<PropTypes> = ({ posts, userData } : PropTypes) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppShell
+      fixed
       header={<NavBar />}
       >
         <div className='flex justify-center'>
