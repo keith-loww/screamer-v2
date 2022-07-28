@@ -1,16 +1,22 @@
-import { Group, Stack, Text } from '@mantine/core'
+import { ActionIcon, Group } from '@mantine/core'
+import Link from 'next/link'
 import React from 'react'
 import { SiNextdotjs, SiAuth0, SiMongodb } from 'react-icons/si'
 
 const Technologies = () => {
     return (
         <div>
-            <h2>Technologies</h2>
+            <h1>Technologies</h1>
             <div>
                 <h3>
                     <Group>
                         NextJs
-                        <SiNextdotjs />
+                        <ActionIcon
+                        variant="subtle" >
+                            <Link href="https://www.nextjs.org">
+                                <SiNextdotjs />
+                            </Link>
+                        </ActionIcon>
                     </Group>
                 </h3>
                 <p>
