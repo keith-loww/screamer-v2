@@ -27,7 +27,7 @@ const About: NextPage = () => {
                         <Center className='w-full'>
                             <Link href='https://github.com/keith-loww/screamer-v2'>
                                 <Button
-                                className='w-1/5'
+                                className='w-1/3 md:w-1/5'
                                 variant='outline'
                                 color="gray"
                                 leftIcon={<BsGithub />}>
