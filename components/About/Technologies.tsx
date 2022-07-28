@@ -1,7 +1,7 @@
 import { ActionIcon, Group } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
-import { SiNextdotjs, SiAuth0, SiMongodb } from 'react-icons/si'
+import { SiNextdotjs, SiAuth0, SiMongodb, SiReact, SiTailwindcss } from 'react-icons/si'
 
 const Technologies = () => {
     return (
@@ -62,6 +62,23 @@ const Technologies = () => {
                     This allows us to store data in a structured way.
                     Mongoose is used to connect to MongoDB, and help manage its data on the frontend.
                 </p>
+            </div>
+            <div>
+                <h3>Other Technologies:</h3>
+                <h2>
+                    <Group px="sm" spacing="xl">
+                        <ActionIcon variant='transparent' >
+                            <Link href="https://reactjs.org/" >
+                                <SiReact />
+                            </Link>
+                        </ActionIcon>
+                        <ActionIcon variant='transparent' >
+                            <Link href="https://tailwindcss.com/" >
+                                <SiTailwindcss />
+                            </Link>
+                        </ActionIcon>
+                    </Group>
+                </h2>
             </div>
         </div>
     )
