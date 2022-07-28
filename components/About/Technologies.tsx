@@ -1,6 +1,6 @@
 import { Group, Stack, Text } from '@mantine/core'
 import React from 'react'
-import { SiNextdotjs, SiAuth0 } from 'react-icons/si'
+import { SiNextdotjs, SiAuth0, SiMongodb } from 'react-icons/si'
 
 const Technologies = () => {
     return (
@@ -31,6 +31,20 @@ const Technologies = () => {
                     SCREAMER&#39;s user authentication is handled by Auth0. 
                     Auth0 is a third party authentication service that allows users to login to the application.
                     This way our users can rest assured that their information is safe and secure.
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <Group>
+                        MongoDB
+                        <SiMongodb />
+                    </Group>
+                </h3>
+                <p>
+                    SCREAMER&#39;s database is MongoDB.
+                    MongoDB is a NoSQL database that is used to store data.
+                    This allows us to store data in a structured way.
+                    Mongoose is used to connect to MongoDB, and help manage its data on the frontend.
                 </p>
             </div>
         </div>
