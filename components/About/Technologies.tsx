@@ -12,7 +12,7 @@ const Technologies = () => {
                     <Group>
                         NextJs
                         <ActionIcon
-                        variant="subtle" >
+                        variant='transparent' >
                             <Link href="https://www.nextjs.org">
                                 <SiNextdotjs />
                             </Link>
@@ -31,7 +31,7 @@ const Technologies = () => {
                     <Group>
                         Auth0
                         <ActionIcon
-                        variant="subtle" >
+                        variant='transparent' >
                             <Link href="https://auth0.com">
                                 <SiAuth0 />
                             </Link>
@@ -49,7 +49,7 @@ const Technologies = () => {
                     <Group>
                         MongoDB
                         <ActionIcon
-                        variant="subtle" >
+                        variant="transparent" >
                             <Link href="https://www.mongodb.com">
                                 <SiMongodb />
                             </Link>
