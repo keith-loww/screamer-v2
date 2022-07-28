@@ -27,6 +27,7 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
             <title>{comment.author.nickname.toUpperCase()}&#39;s COMMENT</title>
         </Head>
         <AppShell
+        fixed
         header={<NavBar />}
         >
             <div className='flex justify-center'>
