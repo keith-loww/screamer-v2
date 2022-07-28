@@ -20,6 +20,19 @@ const Technologies = () => {
                     This results in faster page loads and a better user experience.
                 </p>
             </div>
+            <div>
+                <h3>
+                    <Group>
+                        Auth0
+                        <SiAuth0 />
+                    </Group>
+                </h3>
+                <p>
+                    SCREAMER&#39;s user authentication is handled by Auth0. 
+                    Auth0 is a third party authentication service that allows users to login to the application.
+                    This way our users can rest assured that their information is safe and secure.
+                </p>
+            </div>
         </div>
     )
 }
