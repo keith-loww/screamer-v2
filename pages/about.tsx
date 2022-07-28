@@ -13,6 +13,7 @@ const About: NextPage = () => {
             <title>About</title>
         </Head>
         <AppShell
+        fixed
         header={<NavBar />} >
             <TypographyStylesProvider>
                 <Center>
