@@ -19,7 +19,7 @@ const MyProfilePage: NextPage<PropTypes> = ({ userData }: PropTypes) => {
     return (
         <>
             <Head>
-                <title>My Profile</title>
+                <title>My Profile - SCREAMER</title>
             </Head>
             <AppShell
             fixed

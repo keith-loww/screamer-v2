@@ -40,7 +40,7 @@ const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
     return (
         <>
             <Head>
-                <title>{post.author.nickname.toUpperCase()}&#39;s POST </title>
+                <title>{post.author.nickname.toUpperCase()}&#39;s POST - SCREAMER</title>
             </Head>
             <AppShell
             fixed

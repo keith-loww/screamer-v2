@@ -24,7 +24,7 @@ const CommentPage : NextPage<PropTypes> = ({ comment }: PropTypes) => {
 
     return (<>
         <Head>
-            <title>{comment.author.nickname.toUpperCase()}&#39;s COMMENT</title>
+            <title>{comment.author.nickname.toUpperCase()}&#39;s COMMENT - SCREAMER</title>
         </Head>
         <AppShell
         fixed
