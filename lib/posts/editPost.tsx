@@ -8,8 +8,7 @@ const editPost = async (content: string,
     setLoading: (state: boolean) => void) => {
     const notifId = generateEditPostNotifId()
     try {
-        console.log("editing post")
-        setLoading(false)
+        setLoading(true)
         createEditPostNotif(notifId)
         const post = await editPostRequest(content, id)
         console.log(post)
