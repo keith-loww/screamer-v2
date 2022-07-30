@@ -1,6 +1,6 @@
 import { showNotification, updateNotification } from "@mantine/notifications"
 import axios from "axios";
-import { BsPencil } from "react-icons/bs"
+import { BsPencilFill } from "react-icons/bs"
 import { v4 as uuidv4 } from 'uuid';
 
 const editPost = async (content: string, 
@@ -38,7 +38,7 @@ const resolveEditPostNotif = (notifId: string) => {
         message: "POST SUCCESSFULLY EDITED",
         loading: false,
         color: "green",
-        icon: <BsPencil />
+        icon: <BsPencilFill />
     })
 }
 
