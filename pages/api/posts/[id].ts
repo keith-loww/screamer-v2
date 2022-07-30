@@ -57,7 +57,16 @@ export default async function handler(req: NextApiRequest, res : NextApiResponse
                     success: true
                 })
             } catch (error) {
-                console.log({error})
+                return res.status(400).json({ success: false })
+            }
+        case "PATCH":
+            try {
+                const updated = await Post.findByIdAndUpdate(id, {$set: req.body}, {new: true})
+                return res.status(200).json({
+                    success: true,
+                    data: updated
+                })
+            } catch (error) {
                 return res.status(400).json({ success: false })
             }
         default:

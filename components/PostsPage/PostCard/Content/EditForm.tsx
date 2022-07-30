@@ -1,11 +1,9 @@
 import { Button, Group, Stack, Textarea } from '@mantine/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { Post } from '../../../types'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 import { useRouter } from 'next/router'
-import { showNotification } from '@mantine/notifications'
-import { BsPencil } from 'react-icons/bs'
+import editPost from '../../../../lib/posts/editPost'
 
 interface PropTypes {
     post: Post,
@@ -18,26 +16,15 @@ interface FormData {
 
 const EditForm = ({ post, setEditMode }: PropTypes) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>()
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     const submitHandler = async (data: any) => {
-        try {
-            if (!data.content) return
-            const { content } = data
-            await axios.put(`/api/posts/${post.id}`, { content })
-            showNotification({
-                message: "SUCCESSFULLY EDITED POST",
-                color: "green",
-                icon: <BsPencil />
-            })
-            router.replace(router.asPath)
-            setEditMode(false)
-        } catch (error) {
-            showNotification({
-                message: "ERROR EDITING",
-                color: "red",
-            })
-        }
+        if (!data.content) return
+        const { content } = data
+        await editPost(content, post.id, setLoading)
+        router.replace(router.asPath)
+        setEditMode(false)
     }
 
     return (
@@ -55,6 +42,7 @@ const EditForm = ({ post, setEditMode }: PropTypes) => {
                         message: "POST CONTENT CANNOT BE MORE THAN 280 CHARACTERS"
                     }
                 })}
+                disabled={loading}
                 onChange={(e) => setValue("content", e.target.value.toUpperCase())}
                 error={errors?.content?.message}
                 defaultValue={post.content}
@@ -62,6 +50,8 @@ const EditForm = ({ post, setEditMode }: PropTypes) => {
                 size='xl' />
                 <Group position='right' >
                     <Button 
+                    loading={loading}
+                    loaderPosition="left"
                     type='submit'
                     className=''
                     variant='outline' >
