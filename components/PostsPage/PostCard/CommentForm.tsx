@@ -1,9 +1,8 @@
 // create jsx element CommentForm and export default CommentForm
 import { useUser } from '@auth0/nextjs-auth0';
-import { Button, Textarea } from '@mantine/core';
+import { Avatar, Button, Textarea } from '@mantine/core';
 import React, { useState } from 'react';
-import { Post } from '../types';
-import Avatar from './Avatar';
+import { Post } from '../../types';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { showNotification } from '@mantine/notifications';
@@ -57,7 +56,8 @@ const CommentForm = ( {post} : PropTypes ) => {
         className='flex flex-col'>
             <div className='flex flex-row space-x-2 p-2 items-center'>
                 <Avatar
-                user={user} />
+                className='rounded-full'
+                src={user.picture} />
                 <Textarea
                     {...register("content", {
                             maxLength : {
