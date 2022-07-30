@@ -1,6 +1,6 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { Card, Divider } from '@mantine/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { Post } from '../../types'
 import AvatarNameDateDisplay from './AvatarNameDateDisplay'
 import LikeDisplay from './LikeDisplay'
@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { showNotification } from '@mantine/notifications'
 import { FaRegTrashAlt } from 'react-icons/fa'
+import Content from './Content'
 
 interface PropTypes {
     post: Post
@@ -18,6 +19,7 @@ interface PropTypes {
 const PostCard = ({ post }: PropTypes) => {
     const { user } = useUser()
     const router = useRouter()
+    const [editMode, setEditMode] = useState(false)
 
     const deleteHandler = async () => {
         await axios.delete(`/api/posts/${post.id}`)
@@ -42,13 +44,12 @@ const PostCard = ({ post }: PropTypes) => {
                 ? (
                     <div className='justify-end relative bottom-2'>
                         <DropdownMenu
+                        setEditMode={setEditMode}
                         deleteHandler={deleteHandler} />
                     </div>
                 ) : null}
             </div>
-            <div className='text-2xl mt-2 break-words whitespace-pre-wrap'>
-                {post.content}
-            </div>
+            <Content post={post}/>
             <Divider my="md" />
             <LikeDisplay
             post={post} />
