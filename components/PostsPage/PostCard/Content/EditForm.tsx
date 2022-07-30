@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { showNotification } from '@mantine/notifications'
-import { FaCheckCircle } from 'react-icons/fa'
+import { BsPencil } from 'react-icons/bs'
 
 interface PropTypes {
     post: Post,
@@ -17,7 +17,7 @@ interface FormData {
 }
 
 const EditForm = ({ post, setEditMode }: PropTypes) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>()
     const router = useRouter()
 
     const submitHandler = async (data: any) => {
@@ -26,9 +26,9 @@ const EditForm = ({ post, setEditMode }: PropTypes) => {
             const { content } = data
             await axios.put(`/api/posts/${post.id}`, { content })
             showNotification({
-                message: "SUCCESSFULLY EDITED",
+                message: "SUCCESSFULLY EDITED POST",
                 color: "green",
-                icon: <FaCheckCircle />
+                icon: <BsPencil />
             })
             router.replace(router.asPath)
             setEditMode(false)
@@ -55,6 +55,7 @@ const EditForm = ({ post, setEditMode }: PropTypes) => {
                         message: "POST CONTENT CANNOT BE MORE THAN 280 CHARACTERS"
                     }
                 })}
+                onChange={(e) => setValue("content", e.target.value.toUpperCase())}
                 error={errors?.content?.message}
                 defaultValue={post.content}
                 autosize
