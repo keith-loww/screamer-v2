@@ -12,12 +12,12 @@ export default function DropdownMenu({deleteHandler, setEditMode} : PropTypes) {
     return (
         <Menu placement='end'>
             <Menu.Item
+            icon={<BsPencil />}
+            onClick={() => setEditMode(true)}>Edit</Menu.Item>
+            <Menu.Item
             color="red"
             icon={<FaRegTrashAlt />}
             onClick={deleteHandler}>Delete</Menu.Item>
-            <Menu.Item
-            icon={<BsPencil />}
-            onClick={() => setEditMode(true)}>Edit</Menu.Item>
         </Menu>
     )
 }

@@ -49,7 +49,7 @@ const PostCard = ({ post }: PropTypes) => {
                     </div>
                 ) : null}
             </div>
-            <Content post={post}/>
+            <Content post={post} editMode={editMode} setEditMode={setEditMode} />
             <Divider my="md" />
             <LikeDisplay
             post={post} />

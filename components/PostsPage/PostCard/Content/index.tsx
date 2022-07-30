@@ -1,14 +1,25 @@
+import { Container } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
 import React from 'react'
 import { Post } from '../../../types'
+import EditForm from './CommentForm';
 
 interface PropTypes {
-    post: Post
+    post: Post,
+    editMode: boolean,
+    setEditMode: (editMode: boolean) => void
 }
 
-const Content = ({ post }: PropTypes) => {
+const Content = ({ post, editMode, setEditMode } : PropTypes) => {
+    const ref = useClickOutside(() => setEditMode(false));
+
     return (
         <div className='text-2xl mt-2 break-words whitespace-pre-wrap'>
-            {post.content}
+            {editMode ? 
+            <Container p={0} ref={ref} >
+                <EditForm />
+            </Container> 
+            : post.content }
         </div>
     )
 }
