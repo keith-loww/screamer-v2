@@ -1,21 +1,14 @@
-import axios from 'axios'
 import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react'
 import NavBar from '../../components/HomePage/NavBar';
 import { Post } from '../../components/types'
-import LikeDisplay from '../../components/PostsPage/LikeDisplay';
-import {  useUser } from '@auth0/nextjs-auth0';
 import dbConnect from '../../lib/dbConnect';
 import { getPostWithAuthorAndComments } from '../api/posts/[id]';
-import DropdownMenu from '../../components/PostsPage/DropdownMenu';
-import CommentForm from '../../components/PostsPage/CommentForm';
 import CommentDisplay from '../../components/PostsPage/CommentDisplay';
-import AvatarNameDateDisplay from '../../components/PostsPage/AvatarNameDateDisplay';
-import { AppShell, Card, Divider } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import { FaRegTrashAlt } from 'react-icons/fa'
+import { AppShell } from '@mantine/core';
+import PostCard from '../../components/PostsPage/PostCard';
 
 
 interface PropTypes {
@@ -23,59 +16,16 @@ interface PropTypes {
 }
 
 const PostPage : NextPage<PropTypes> = ({ post } : PropTypes) => {
-    const router = useRouter()
-    const { user } = useUser();
-
-    
-    const deleteHandler = async () => {
-        await axios.delete(`/api/posts/${post.id}`)
-        showNotification({
-            message: "POST SUCESSFULLY DELETED",
-            color: "green",
-            icon: <FaRegTrashAlt />
-        })
-        router.push("/")
-    }
-
     return (
         <>
             <Head>
-                <title>{post.author.nickname.toUpperCase()}&#39;s POST </title>
+                <title>{post.author.nickname.toUpperCase()}&#39;s POST - SCREAMER</title>
             </Head>
             <AppShell
             fixed
             header={<NavBar />} >
                 <div className=' flex justify-center align-middle flex-col items-center'>
-                    <Card
-                    p="xl"
-                    shadow="sm"
-                    className='w-full md:w-3/5 xl:w-2/5 my-2'>
-                        <div className='flex w-full flex-row justify-between'>
-                            <AvatarNameDateDisplay
-                            post={post} />
-                            {(user && user.sub === post.author.id)
-                            ? (
-                                <div className='justify-end relative bottom-2'>
-                                    <DropdownMenu
-                                    deleteHandler={deleteHandler} />
-                                </div>
-                            ) : null}
-                        </div>
-                        <div className='text-2xl mt-2 break-words whitespace-pre-wrap'>
-                            {post.content}
-                        </div>
-                        <Divider my="md" />
-                        <LikeDisplay
-                        post={post} />
-                        {user
-                        ? (
-                            <div>
-                                <Divider my="md" />
-                                <CommentForm post={post} />
-                            </div>
-                            )
-                        : null}
-                    </Card>
+                    <PostCard post={post} />
                     <CommentDisplay comments={post.comments} />
                 </div>
             </AppShell>

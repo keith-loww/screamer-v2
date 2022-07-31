@@ -3,11 +3,10 @@ import { ActionIcon, Tooltip } from '@mantine/core'
 import { showNotification, updateNotification } from '@mantine/notifications'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike} from "react-icons/ai"
-import { FaCheckCircle } from 'react-icons/fa'
-import { getRandomId } from '../../lib/LikePostNotifId'
-import { Post, PostData } from '../types'
+import { getRandomId } from '../../../lib/LikePostNotifId'
+import { Post, PostData } from '../../types'
 
 interface PropTypes {
     post: Post

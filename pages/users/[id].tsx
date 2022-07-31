@@ -23,7 +23,7 @@ const UserProfile: NextPage<PropTypes> = ({user} : PropTypes) => {
 
     return (<>
         <Head>
-            <title>{user.nickname.toUpperCase()}&#39;s PROFILE</title>
+            <title>{user.nickname.toUpperCase()} - SCREAMER</title>
         </Head>
         <AppShell
         header={<NavBar />} >

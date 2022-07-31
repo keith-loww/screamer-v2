@@ -19,13 +19,13 @@ const MyProfilePage: NextPage<PropTypes> = ({ userData }: PropTypes) => {
     return (
         <>
             <Head>
-                <title>My Profile</title>
+                <title>My Profile - SCREAMER</title>
             </Head>
             <AppShell
             fixed
             header={<NavBar />} >
                 <div className='flex justify-center' >
-                    <div className='w-full md:w-3/5 xl:w-1/3'>
+                    <div className='w-full md:w-3/5 xl:w-2/5 flex flex-row flex-wrap'>
                         <UserCard user={userData} />
                         <PostsDisplay
                         user={userData} />

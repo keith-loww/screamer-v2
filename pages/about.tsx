@@ -10,7 +10,7 @@ import NavBar from '../components/HomePage/NavBar'
 const About: NextPage = () => {
     return (<>
         <Head>
-            <title>About</title>
+            <title>About - SCREAMER</title>
         </Head>
         <AppShell
         fixed

@@ -1,9 +1,8 @@
 import { Avatar } from '@mantine/core';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
-import { getPostPageDate } from '../../lib/dateHelper';
-import { Post } from '../types';
+import { getPostPageDate } from '../../../lib/dateHelper';
+import { Post } from '../../types';
 
 interface PropTypes {
     post: Post
