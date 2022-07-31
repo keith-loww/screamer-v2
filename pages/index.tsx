@@ -36,7 +36,7 @@ const Home : NextPage<PropTypes> = ({ posts, userData } : PropTypes) => {
                 ? <NewPostForm userData={userData} />
                 : null}
             </div>
-            <Divider my="xl" />
+            {user ? <Divider my="xl" /> : null}
             <PostsDisplay
             posts={posts} />
           </div>
