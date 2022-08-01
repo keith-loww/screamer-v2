@@ -2,6 +2,7 @@ import { Container } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import React from 'react'
 import { Comment } from '../../../types';
+import EditForm from './EditForm';
 
 interface PropTypes {
     comment: Comment,
@@ -16,10 +17,9 @@ const Content = ({ comment, editMode, setEditMode } : PropTypes) => {
         <div className='text-2xl mt-2 break-words whitespace-pre-wrap'>
             {editMode ? 
             <Container p={0} ref={ref} >
-                {/* <EditForm
+                <EditForm
                 comment={comment}
-                setEditMode={setEditMode} /> */}
-                hello edit mode
+                setEditMode={setEditMode} />
             </Container> 
             : comment.content }
         </div>
