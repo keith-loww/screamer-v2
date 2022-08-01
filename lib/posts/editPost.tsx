@@ -11,7 +11,6 @@ const editPost = async (content: string,
         setLoading(true)
         createEditPostNotif(notifId)
         const post = await editPostRequest(content, id)
-        console.log(post)
         resolveEditPostNotif(notifId)
         setLoading(false)
         return post

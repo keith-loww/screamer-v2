@@ -31,11 +31,11 @@ const EditForm = ({ comment, setEditMode }: PropTypes) => {
                     required: true,
                     minLength: {
                         value: 5,
-                        message: "POST CONTENT MUST BE AT LEAST 5 CHARACTERS"
+                        message: "COMMENT CONTENT MUST BE AT LEAST 5 CHARACTERS"
                     },
                     maxLength: {
                         value: 280,
-                        message: "POST CONTENT CANNOT BE MORE THAN 280 CHARACTERS"
+                        message: "COMMENT CONTENT CANNOT BE LONGER THAN 280 CHARACTERS"
                     }
                 })}
                 disabled={loading}

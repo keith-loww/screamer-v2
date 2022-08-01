@@ -12,7 +12,6 @@ const editComment = async (content: string,
         setLoading(true)
         createEditCommentNotif(notifId)
         const comment = await editCommentRequest(content, id)
-        console.log(comment)
         resolveEditCommentNotif(notifId)
         setLoading(false)
         return comment
