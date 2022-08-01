@@ -1,15 +1,15 @@
 import { Container } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import React from 'react'
-import { Post } from '../../../types';
+import { Comment } from '../../../types';
 
 interface PropTypes {
-    post: Post,
+    comment: Comment,
     editMode: boolean,
     setEditMode: (editMode: boolean) => void
 }
 
-const Content = ({ post, editMode, setEditMode } : PropTypes) => {
+const Content = ({ comment, editMode, setEditMode } : PropTypes) => {
     const ref = useClickOutside(() => setEditMode(false));
 
     return (
@@ -17,10 +17,13 @@ const Content = ({ post, editMode, setEditMode } : PropTypes) => {
             {editMode ? 
             <Container p={0} ref={ref} >
                 <EditForm
-                post={post}
+                comment={comment}
                 setEditMode={setEditMode} />
             </Container> 
-            : post.content }
+            : comment.content }
         </div>
     )
 }
+
+
+export default Content
