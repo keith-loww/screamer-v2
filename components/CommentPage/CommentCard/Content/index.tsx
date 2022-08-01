@@ -16,9 +16,10 @@ const Content = ({ comment, editMode, setEditMode } : PropTypes) => {
         <div className='text-2xl mt-2 break-words whitespace-pre-wrap'>
             {editMode ? 
             <Container p={0} ref={ref} >
-                <EditForm
+                {/* <EditForm
                 comment={comment}
-                setEditMode={setEditMode} />
+                setEditMode={setEditMode} /> */}
+                hello edit mode
             </Container> 
             : comment.content }
         </div>
