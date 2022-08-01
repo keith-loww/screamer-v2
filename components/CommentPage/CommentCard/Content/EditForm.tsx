@@ -51,7 +51,7 @@ const EditForm = ({ comment, setEditMode }: PropTypes) => {
                     type='submit'
                     className=''
                     variant='outline' >
-                        UPDATE POST
+                        UPDATE COMMENT
                     </Button>
                 </Group>
             </Stack>

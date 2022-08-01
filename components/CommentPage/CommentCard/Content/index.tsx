@@ -14,7 +14,7 @@ const Content = ({ comment, editMode, setEditMode } : PropTypes) => {
     const ref = useClickOutside(() => setEditMode(false));
 
     return (
-        <div className='text-2xl mt-2 break-words whitespace-pre-wrap'>
+        <div className='text-2xl mt-2 break-words whitespace-pre-wrap w-full'>
             {editMode ? 
             <Container p={0} ref={ref} >
                 <EditForm
