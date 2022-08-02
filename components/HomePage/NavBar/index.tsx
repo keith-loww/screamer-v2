@@ -24,7 +24,7 @@ export default function NavBar() : JSX.Element {
                         color="gray"
                         >
                             <div className='flex items-center space-x-2'>
-                                <IoMegaphoneSharp className='hover:animate-ping' />
+                                <IoMegaphoneSharp />
                                 <span>SCREAMER V2</span>
                             </div>
                         </Button>
