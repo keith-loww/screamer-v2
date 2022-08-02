@@ -45,7 +45,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
                     <Link href={`/users/${post.author.id}`}>
                         <a>
                             <Avatar
-                            className='rounded-full'
+                            className='rounded-full hover:brightness-75 duration-100 ease-linear' 
                             src={post.author.picture}
                             size="lg"
                             />
