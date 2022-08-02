@@ -21,7 +21,7 @@ const ContentSection = ({ replyTo, type }: PropTypes) => {
                     <a>
                         <Avatar
                         size="lg"
-                        className='rounded-full hover:brightness-75 ease-linear duration-200'
+                        className='rounded-full hover:brightness-75 ease-linear duration-100'
                         src={replyTo.author.picture} />
                     </a>
                 </Link>
