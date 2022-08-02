@@ -14,7 +14,7 @@ const Content = ({ comment }: PropTypes) => {
             <Link href={`/users/${comment.author.id}`} >
                 <a href="">
                     <Avatar
-                    className='rounded-full hover:brightness-75 ease-linear duration-200'
+                    className='rounded-full hover:brightness-75 ease-linear duration-100'
                     src={comment.author.picture}
                     size="md"
                      />
