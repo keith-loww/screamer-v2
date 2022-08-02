@@ -19,12 +19,12 @@ export default function ProfileDropDown() {
         placement='end' >  
             <Menu.Item icon={<CgProfile />} >
                 <Link href={`/my-profile`} as={`/users/${user.sub}`} >
-                    Profile
+                    <a>Profile</a>
                 </Link>
             </Menu.Item>
             <Menu.Item color="red" icon={<FiLogOut />} >
                 <Link href="/api/auth/logout">
-                    Logout
+                    <a>Logout</a>
                 </Link>
             </Menu.Item>
         </Menu>
