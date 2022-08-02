@@ -15,7 +15,7 @@ const AvatarNameDateDisplay = ({ post }: PropTypes) : JSX.Element => {
             href={`/users/${post.author.id}`} >
                 <a>
                     <Avatar
-                    className='rounded-full'
+                    className='rounded-full hover:brightness-75 ease-linear duration-100'
                     size="xl"
                     src={post.author.picture}
                     />
