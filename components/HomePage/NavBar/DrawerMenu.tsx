@@ -17,13 +17,13 @@ const DrawerMenu = () => {
                     {/* @ts-ignore */}
                     <Button variant="unstyled" leftIcon={<AiOutlineHome />} className="flex justify-start hover:brightness-125" >
                         <Link href="/">
-                            Home
+                            <a>Home</a>
                         </Link>
                     </Button>
                     {/* @ts-ignore */}
                     <Button variant="unstyled" leftIcon={<AiOutlineInfoCircle />} className="flex justify-start hover:brightness-125" >
                         <Link href="/about">
-                            About
+                            <a>About</a>
                         </Link>
                     </Button>
                 </Stack>
