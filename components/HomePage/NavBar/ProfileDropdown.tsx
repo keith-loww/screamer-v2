@@ -13,10 +13,11 @@ export default function ProfileDropDown() {
     }
 
     return (
-        <Menu 
-        width="xl"
+        <Menu
+        width={175}
         transition='scale-y'
-        position='bottom-end' >  
+        position='bottom-end'
+        withinPortal >  
             <Menu.Target>
             <Avatar className='rounded-full' src={user.picture} size={48} />
             </Menu.Target>
