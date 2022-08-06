@@ -14,7 +14,8 @@ export default function ProfileDropDown() {
 
     return (
         <Menu
-        width={175}
+        shadow="md"
+        width={200}
         transition='scale-y'
         position='bottom-end'
         withinPortal >  
