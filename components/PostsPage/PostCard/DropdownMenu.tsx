@@ -10,9 +10,14 @@ interface PropTypes {
 
 export default function DropdownMenu({deleteHandler, setEditMode} : PropTypes) {
     return (
-        <Menu withArrow position='bottom-end' zIndex={100} withinPortal>
+        <Menu
+        position='bottom-end'
+        withinPortal
+        shadow="md"
+        width={200}
+        transition="pop" >
             <Menu.Target>
-                <ActionIcon variant="transparent">
+                <ActionIcon variant="subtle">
                     <BsThreeDots />
                 </ActionIcon>
             </Menu.Target>

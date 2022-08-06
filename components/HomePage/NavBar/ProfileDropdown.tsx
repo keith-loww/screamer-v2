@@ -1,6 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { Avatar, Menu } from '@mantine/core'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { CgProfile } from 'react-icons/cg'

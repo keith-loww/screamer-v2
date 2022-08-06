@@ -14,7 +14,7 @@ export default function DropdownMenu({deleteHandler} : PropTypes) {
         withinPortal
         shadow="md"
         position='bottom-end'
-        transition="scale" >
+        transition="pop" >
             <Menu.Target>
                 <ActionIcon variant='subtle'>
                     <BsThreeDots />
