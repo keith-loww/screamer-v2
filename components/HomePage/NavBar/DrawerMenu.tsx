@@ -1,4 +1,4 @@
-import { Burger, Button, Drawer, Stack } from '@mantine/core'
+import { Burger, NavLink, Drawer, Stack } from '@mantine/core'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { AiOutlineHome, AiOutlineInfoCircle } from 'react-icons/ai'
@@ -16,18 +16,17 @@ const DrawerMenu = () => {
                 <Stack>
                     <Link href="/">
                         <a>
-                            {/* @ts-ignore */}
-                            <Button variant="unstyled" leftIcon={<AiOutlineHome />} className="flex justify-start hover:brightness-125 w-full" >
-                                Home
-                            </Button>
+                            <NavLink
+                            label="Home"
+                            icon={<AiOutlineHome />} >
+                            </NavLink>
                         </a>
                     </Link>
                     <Link href="/about">
                         <a>
-                            {/* @ts-ignore */}
-                            <Button variant="unstyled" leftIcon={<AiOutlineInfoCircle />} className="flex justify-start hover:brightness-125 w-full" >
-                                About
-                            </Button>
+                            <NavLink
+                            label="About"
+                            icon={<AiOutlineInfoCircle />} />
                         </a>
                     </Link>
                 </Stack>
