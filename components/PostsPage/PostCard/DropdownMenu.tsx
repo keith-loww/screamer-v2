@@ -1,4 +1,4 @@
-import { Menu } from '@mantine/core'
+import { ActionIcon, Menu } from '@mantine/core'
 import React from 'react'
 import { BsPencil, BsThreeDots } from 'react-icons/bs'
 import { FaRegTrashAlt } from 'react-icons/fa'
@@ -12,7 +12,9 @@ export default function DropdownMenu({deleteHandler, setEditMode} : PropTypes) {
     return (
         <Menu withArrow position='bottom-start' zIndex={100}>
             <Menu.Target>
-                <BsThreeDots />
+                <ActionIcon variant="transparent">
+                    <BsThreeDots />
+                </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown>
                 <Menu.Item
