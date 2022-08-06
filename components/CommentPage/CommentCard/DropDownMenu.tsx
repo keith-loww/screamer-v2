@@ -1,12 +1,12 @@
 import React from 'react'
 import { Comment } from '../../types'
-import { Menu } from '@mantine/core'
+import { ActionIcon, Menu } from '@mantine/core'
 import { useUser } from '@auth0/nextjs-auth0'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { showNotification } from '@mantine/notifications'
-import { BsPencil } from 'react-icons/bs'
+import { BsPencil, BsThreeDots } from 'react-icons/bs'
 
 interface PropTypes {
     comment: Comment,
@@ -40,18 +40,30 @@ const DropDownMenu = ({ comment, setEditMode }: PropTypes) => {
     }
 
     return (
-        <Menu placement='end'>
-            <Menu.Item
-            icon={<BsPencil />}
-            onClick={() => setEditMode(true)}>
-                Edit
-            </Menu.Item>
-            <Menu.Item
-            color="red"
-            icon={<FaRegTrashAlt />}
-            onClick={deleteHandler}>
-                Delete
-            </Menu.Item>
+        <Menu
+        position='bottom-end'
+        withinPortal
+        width={200}
+        shadow="md"
+        transition="pop" >
+            <Menu.Target>
+                <ActionIcon variant='subtle' >
+                    <BsThreeDots />
+                </ActionIcon>
+            </Menu.Target>
+            <Menu.Dropdown>
+                <Menu.Item
+                icon={<BsPencil />}
+                onClick={() => setEditMode(true)}>
+                    Edit
+                </Menu.Item>
+                <Menu.Item
+                color="red"
+                icon={<FaRegTrashAlt />}
+                onClick={deleteHandler}>
+                    Delete
+                </Menu.Item>
+            </Menu.Dropdown>
         </Menu>
     )
 }
