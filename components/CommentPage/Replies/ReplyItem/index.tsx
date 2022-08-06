@@ -10,7 +10,7 @@ interface PropTypes {
 
 const ReplyItem = ({ comment }: PropTypes) => {
     return (
-        <Card withBorder className='w-full'>
+        <Card className='w-full'>
             <Content
             comment={comment} />
             <div className='w-full mt-2'>
