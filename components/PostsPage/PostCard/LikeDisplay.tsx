@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import {AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike} from "react-icons/ai"
 import { getRandomId } from '../../../lib/LikePostNotifId'
+import LikeTooltip from '../../Tooltips/LikeTooltip'
 import { Post, PostData } from '../../types'
 
 interface PropTypes {
@@ -87,10 +88,10 @@ export default function LikeDisplay({post} : PropTypes): JSX.Element {
 
     return (
         <div className='flex flex-row space-x-2 items-center'>
-            <Tooltip
+            <LikeTooltip
             position='bottom'
-            placement='center'
-            label={alreadyLiked ? "Unlike this post" : "Like this post"} >
+            type='post'
+            alreadyLiked={Boolean(alreadyLiked)} >
                 <ActionIcon
                 variant='transparent'
                 onClick={likeHandler}
@@ -99,7 +100,7 @@ export default function LikeDisplay({post} : PropTypes): JSX.Element {
                 ? <AiFillLike size={24} />
                 : <AiOutlineLike size={24} />}
                 </ActionIcon>
-            </Tooltip>
+            </LikeTooltip>
             <span className='text-lg'>{post.likedBy.length}</span>
         </div>
     )

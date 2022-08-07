@@ -1,5 +1,6 @@
 import { useUser } from '@auth0/nextjs-auth0'
-import { ActionIcon } from '@mantine/core'
+import { ActionIcon, Tooltip } from '@mantine/core'
+import { NextLink } from '@mantine/next'
 import { showNotification, updateNotification } from '@mantine/notifications'
 import axios from 'axios'
 import Link from 'next/link'
@@ -86,8 +87,7 @@ const LikeAndCommentDisplay = ({ replyTo, type }: PropTypes) => {
                     <LikeTooltip 
                     type={type === "Post" ? "post" : "comment"}
                     alreadyLiked={Boolean(alreadyLiked)}
-                    position="bottom"
-                    placement='center' >
+                    position="bottom" >
                         <ActionIcon
                         variant='transparent'
                         onClick={likeHandler}
@@ -101,13 +101,21 @@ const LikeAndCommentDisplay = ({ replyTo, type }: PropTypes) => {
                     </span>
                 </div>
                 <div className='flex items-center space-x-1'>
-                    <Link
-                    href={isPost(type) ? `/posts/${replyTo.id}` : `/comments/${replyTo.id}`}>
-                        <ActionIcon
-                        variant='transparent'>
-                            <BiCommentError />
-                        </ActionIcon>
-                    </Link>
+                    <Tooltip
+                    transition="pop"
+                    color="gray"
+                    withinPortal
+                    position='bottom'
+                    label="Comments"
+                     >
+                        <NextLink
+                        href={isPost(type) ? `/posts/${replyTo.id}` : `/comments/${replyTo.id}`}>
+                            <ActionIcon
+                            variant='transparent'>
+                                <BiCommentError />
+                            </ActionIcon>
+                        </NextLink>
+                    </Tooltip>
                     <span>
                         {replyTo.comments.length}
                     </span>

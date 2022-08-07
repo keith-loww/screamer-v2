@@ -75,7 +75,6 @@ const LikeDisplay = ({ comment }: PropTypes) => {
             <div className='flex space-x-2 items-center'>
                 <LikeTooltip
                 position='bottom'
-                placement='center'
                 alreadyLiked={Boolean(alreadyLiked)}
                 type="comment" >
                     <ActionIcon

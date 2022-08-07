@@ -1,6 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import axios from 'axios'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ActionIcon, Tooltip } from '@mantine/core'
@@ -9,6 +8,8 @@ import { BiCommentError } from 'react-icons/bi'
 import { Post, PostData } from '../../../types'
 import { showNotification, updateNotification } from '@mantine/notifications'
 import { getRandomId } from '../../../../lib/LikePostNotifId'
+import { NextLink } from '@mantine/next'
+import LikeTooltip from '../../../Tooltips/LikeTooltip'
 
 
 const LikeAndCommentDisplay = ({post} : {post : Post}) => {
@@ -91,11 +92,10 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
     return (
         <div className='flex justify-start space-x-6'>
             <div className='flex items-center space-x-1'>
-                <Tooltip
+                <LikeTooltip
+                alreadyLiked={Boolean(alreadyLiked)}
                 position='bottom'
-                placement='center'
-                withArrow
-                label={alreadyLiked ? "Unlike this post" : "Like this post"} >
+                type="post" >
                     <ActionIcon
                     variant='transparent'
                     onClick={likeHandler}
@@ -103,23 +103,25 @@ const LikeAndCommentDisplay = ({post} : {post : Post}) => {
                     >
                         {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
                     </ActionIcon>
-                </Tooltip>
+                </LikeTooltip>
                 <span>
                     {post.likedBy.length}
                 </span>
             </div>
             <div className='flex items-center space-x-1'>
                 <Tooltip
+                color="gray"
+                transition="pop"
+                withinPortal
                 position='bottom'
-                placement='center'
                 label="Comments" >
-                    <Link
+                    <NextLink
                     href={`/posts/${post.id}`}>
                         <ActionIcon
                         variant='transparent'>
                             <BiCommentError />
                         </ActionIcon>
-                    </Link>
+                    </NextLink>
                 </Tooltip>
                 <span>
                     {post.comments.length}
