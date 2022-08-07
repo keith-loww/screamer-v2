@@ -3,17 +3,18 @@ import React from 'react'
 
 interface PropTypes {
     alreadyLiked: boolean,
-    position?: "top" | "bottom" | "left" | "right",
-    placement?: "start" | "end" | "center",
+    position?: "bottom" | "left" | "right" | "top" |
+                "bottom-end" | "bottom-start" | "left-end" |
+                "left-start" | "right-end" | "right-start" |
+                "top-end" | "top-start",
     type: "post" | "comment",
     children: JSX.Element
 }
 
-const LikeTooltip = ({ alreadyLiked, position, placement, children, type }: PropTypes) => {
+const LikeTooltip = ({ alreadyLiked, position, children, type }: PropTypes) => {
     return (
         <Tooltip
         position={position}
-        placement={placement}
         label={alreadyLiked ? `Unlike this ${type}` : `Like this ${type}`} >
             {children}
         </Tooltip>
