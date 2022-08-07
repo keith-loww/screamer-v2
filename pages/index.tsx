@@ -5,6 +5,7 @@ import Head from 'next/head'
 import NavBar from '../components/HomePage/NavBar'
 import NewPostForm from '../components/HomePage/NewPostForm'
 import PostsDisplay from '../components/HomePage/PostsDisplay'
+import ScrollToTop from '../components/HomePage/ScrollToTop'
 import { Post, UserData } from '../components/types'
 import dbConnect from '../lib/dbConnect'
 import { stringifyAndParse } from '../lib/jsonhelper'
@@ -41,6 +42,7 @@ const Home : NextPage<PropTypes> = ({ posts, userData } : PropTypes) => {
             posts={posts} />
           </div>
         </div>
+        <ScrollToTop />
       </AppShell>    
     </>
   )
