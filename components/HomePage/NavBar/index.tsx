@@ -32,8 +32,11 @@ export default function NavBar() : JSX.Element {
                 </Group>
                 <div className="justify-end flex items-center space-x-4">
                     <Tooltip
-                    position='bottom'
-                    placement='end'
+                    py={6}
+                    px="xs"
+                    position='bottom-end'
+                    withinPortal
+                    transition="pop-top-right"
                     label="Toggle Light/Dark Mode" >
                         <ActionIcon
                         variant='outline'
