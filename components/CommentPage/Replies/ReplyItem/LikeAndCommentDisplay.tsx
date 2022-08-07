@@ -1,7 +1,7 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import { ActionIcon, Tooltip } from '@mantine/core'
+import { NextLink } from '@mantine/next'
 import { showNotification, updateNotification } from '@mantine/notifications'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { AiFillDislike, AiFillLike, AiOutlineExclamation, AiOutlineLike } from 'react-icons/ai'
@@ -9,7 +9,8 @@ import { BiCommentError } from 'react-icons/bi'
 import { FaCheckCircle } from 'react-icons/fa'
 import AddOrRemoveLike from '../../../../lib/CommentLikeHelper'
 import { getRandomId } from '../../../../lib/LikePostNotifId'
-import { CommentData, CommentWithoutComments } from '../../../types'
+import LikeTooltip from '../../../Tooltips/LikeTooltip'
+import { CommentWithoutComments } from '../../../types'
 
 
 interface PropTypes {
@@ -63,10 +64,10 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
     return (
         <div className='flex justify-start space-x-6'>
                 <div className='flex items-center space-x-1'>
-                    <Tooltip
+                    <LikeTooltip
                     position='bottom'
-                    placement='center'
-                    label={alreadyLiked ? "Unlike this post" : "Like this post"} >
+                    type="comment"
+                    alreadyLiked={Boolean(alreadyLiked)} >
                         <ActionIcon
                         disabled={likeLoading}
                         variant='transparent'
@@ -74,23 +75,25 @@ const LikeAndCommentDisplay = ({ comment }: PropTypes) => {
                         >
                             {alreadyLiked ? <AiFillLike /> : <AiOutlineLike />}
                         </ActionIcon>
-                    </Tooltip>
+                    </LikeTooltip>
                     <span>
                         {comment.likedBy.length}
                     </span>
                 </div>
                 <div className='flex items-center space-x-1'>
                     <Tooltip
+                    transition="pop"
+                    color="gray"
+                    withinPortal
                     position='bottom'
-                    placement='center'
                     label="Comments" >
-                        <Link
+                        <NextLink
                         href={`/comments/${comment.id}`}>
                             <ActionIcon
                             variant='transparent'>
                                 <BiCommentError />
                             </ActionIcon>
-                        </Link>
+                        </NextLink>
                     </Tooltip>
                     <span>
                         {comment.comments.length}
