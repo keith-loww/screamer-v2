@@ -15,7 +15,6 @@ const LikeTooltip = ({ alreadyLiked, position, children, type }: PropTypes) => {
     return (
         <Tooltip
         color="gray"
-        withArrow
         withinPortal
         position={position}
         transition="pop"
