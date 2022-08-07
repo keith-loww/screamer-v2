@@ -14,18 +14,22 @@ const DrawerMenu = () => {
             padding="xl"
             size="md">
                 <Stack>
-                    {/* @ts-ignore */}
-                    <Button variant="unstyled" leftIcon={<AiOutlineHome />} className="flex justify-start hover:brightness-125" >
-                        <Link href="/">
-                            Home
-                        </Link>
-                    </Button>
-                    {/* @ts-ignore */}
-                    <Button variant="unstyled" leftIcon={<AiOutlineInfoCircle />} className="flex justify-start hover:brightness-125" >
-                        <Link href="/about">
-                            About
-                        </Link>
-                    </Button>
+                    <Link href="/">
+                        <a>
+                            {/* @ts-ignore */}
+                            <Button variant="unstyled" leftIcon={<AiOutlineHome />} className="flex justify-start hover:brightness-125 w-full" >
+                                Home
+                            </Button>
+                        </a>
+                    </Link>
+                    <Link href="/about">
+                        <a>
+                            {/* @ts-ignore */}
+                            <Button variant="unstyled" leftIcon={<AiOutlineInfoCircle />} className="flex justify-start hover:brightness-125 w-full" >
+                                About
+                            </Button>
+                        </a>
+                    </Link>
                 </Stack>
             </Drawer>
             <Burger 

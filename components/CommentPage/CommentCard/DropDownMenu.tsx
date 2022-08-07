@@ -6,12 +6,14 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { showNotification } from '@mantine/notifications'
+import { BsPencil } from 'react-icons/bs'
 
 interface PropTypes {
     comment: Comment,
+    setEditMode: (editMode: boolean) => void
 }
 
-const DropDownMenu = ({ comment }: PropTypes) => {
+const DropDownMenu = ({ comment, setEditMode }: PropTypes) => {
     const { user } = useUser()
     const router = useRouter()
     if (!user) return null
@@ -39,6 +41,11 @@ const DropDownMenu = ({ comment }: PropTypes) => {
 
     return (
         <Menu placement='end'>
+            <Menu.Item
+            icon={<BsPencil />}
+            onClick={() => setEditMode(true)}>
+                Edit
+            </Menu.Item>
             <Menu.Item
             color="red"
             icon={<FaRegTrashAlt />}

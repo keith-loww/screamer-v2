@@ -14,7 +14,7 @@ const InfoSection = ({ comment }: PropTypes) => {
             <Link href={`/users/${comment.author.id}`}>
                 <a>
                     <Avatar
-                    className='rounded-full'
+                    className='rounded-full hover:brightness-75 ease-linear duration-100'
                     src={comment.author.picture}
                     size="xl" />
                 </a>

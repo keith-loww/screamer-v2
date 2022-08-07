@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Divider, Group } from "@mantine/core";
 import { Comment } from '../../types';
 import InfoSection from './InfoSection';
 import LikeDisplay from './LikeDisplay';
 import NewCommentForm from './NewCommentForm';
 import DropDownMenu from './DropDownMenu';
+import Content from './Content';
 
 interface PropTypes {
     comment: Comment
 }
 
 const CommentCard = ({ comment }: PropTypes) => {
+    const [editMode, setEditMode] = useState(false);
     return (
         <Card shadow="sm">
             <Group>
@@ -18,14 +20,16 @@ const CommentCard = ({ comment }: PropTypes) => {
                     <InfoSection comment={comment} />
                     <div className='justify-end'>
                         <DropDownMenu
+                        setEditMode={setEditMode}
                         comment={comment} />
                     </div>
                 </div>
             </Group>
             <Group mt="md">
-                <div className='text-xl break-words whitespace-pre-wrap'>
-                    {comment.content}
-                </div>
+                <Content
+                comment={comment}
+                setEditMode={setEditMode}
+                editMode={editMode} />
             </Group>
             <Divider my="sm" />
             <LikeDisplay

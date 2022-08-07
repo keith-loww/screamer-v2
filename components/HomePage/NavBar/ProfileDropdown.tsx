@@ -17,16 +17,20 @@ export default function ProfileDropDown() {
         transition='scale-y'
         position='bottom'
         placement='end' >  
-            <Menu.Item icon={<CgProfile />} >
-                <Link href={`/my-profile`} as={`/users/${user.sub}`} >
-                    Profile
-                </Link>
-            </Menu.Item>
-            <Menu.Item color="red" icon={<FiLogOut />} >
-                <Link href="/api/auth/logout">
-                    Logout
-                </Link>
-            </Menu.Item>
+            <Link href={`/my-profile`} as={`/users/${user.sub}`} >
+                <a>
+                    <Menu.Item icon={<CgProfile />} >
+                            Profile
+                    </Menu.Item>
+                </a>
+            </Link>
+            <Link href="/api/auth/logout">
+                <a>
+                    <Menu.Item color="red" icon={<FiLogOut />} >
+                        Logout
+                    </Menu.Item>
+                </a>
+            </Link>
         </Menu>
     )
 }
