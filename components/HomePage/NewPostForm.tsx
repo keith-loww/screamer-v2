@@ -58,7 +58,7 @@ export default function NewPostForm({userData} : PropTypes): JSX.Element | null 
             </h1>
             <form onSubmit={handleSubmit(submitHandler)}
             className="flex flex-col space-y-2">
-                <div className='w-4/5'>
+                <div>
                     <Textarea {...register("content", {
                         maxLength : {
                             value: 280,
@@ -71,6 +71,7 @@ export default function NewPostForm({userData} : PropTypes): JSX.Element | null 
                     })}
                     placeholder="SCREAM HERE...(MAX 280 CHARACTERS)"
                     autosize
+                    minRows={2}
                     onChange={(e) => setValue("content", e.target.value.toUpperCase())}
                     error={errors ? errors.content?.message : null}
                     className="" />
