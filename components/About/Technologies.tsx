@@ -14,7 +14,8 @@ const Technologies = () => {
                         <ActionIcon
                         variant='transparent' >
                             <Link href="https://www.nextjs.org">
-                                <SiNextdotjs />
+                                <SiNextdotjs
+                                size={20} />
                             </Link>
                         </ActionIcon>
                     </Group>
@@ -33,7 +34,8 @@ const Technologies = () => {
                         <ActionIcon
                         variant='transparent' >
                             <Link href="https://auth0.com">
-                                <SiAuth0 />
+                                <SiAuth0
+                                size={20} />
                             </Link>
                         </ActionIcon>
                     </Group>
@@ -51,7 +53,8 @@ const Technologies = () => {
                         <ActionIcon
                         variant="transparent" >
                             <Link href="https://www.mongodb.com">
-                                <SiMongodb />
+                                <SiMongodb
+                                size={20} />
                             </Link>
                         </ActionIcon>
                     </Group>
@@ -69,12 +72,12 @@ const Technologies = () => {
                     <Group px="sm" spacing="xl">
                         <ActionIcon variant='transparent' >
                             <Link href="https://reactjs.org/" >
-                                <SiReact />
+                                <SiReact size={20} />
                             </Link>
                         </ActionIcon>
                         <ActionIcon variant='transparent' >
                             <Link href="https://tailwindcss.com/" >
-                                <SiTailwindcss />
+                                <SiTailwindcss size={20} />
                             </Link>
                         </ActionIcon>
                     </Group>
