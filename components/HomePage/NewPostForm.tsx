@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { showNotification } from '@mantine/notifications';
 import { FaCheckCircle } from "react-icons/fa"
-import { Button, Textarea } from '@mantine/core';
+import { Button, Group, Textarea } from '@mantine/core';
 import { UserData } from '../types';
 
 type FormData = {
@@ -76,13 +76,15 @@ export default function NewPostForm({userData} : PropTypes): JSX.Element | null 
                     error={errors ? errors.content?.message : null}
                     className="" />
                 </div>
-                <Button
-                type="submit"
-                variant='filled'
-                loading={btnLoading}
-                className='w-1/3 md:w-56'>
-                    SUBMIT
-                </Button>
+                <Group position='right' >
+                    <Button
+                    type="submit"
+                    variant='filled'
+                    loading={btnLoading}
+                    className='w-1/3 md:w-56'>
+                        SUBMIT
+                    </Button>
+                </Group>
             </form>
         </div>
     )
