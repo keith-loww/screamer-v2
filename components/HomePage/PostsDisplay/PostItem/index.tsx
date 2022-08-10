@@ -2,7 +2,6 @@ import { useUser } from '@auth0/nextjs-auth0';
 import { Avatar, Card, Divider } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import axios from 'axios';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react'
