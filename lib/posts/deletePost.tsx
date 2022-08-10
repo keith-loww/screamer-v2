@@ -16,3 +16,5 @@ const deletePost = async (postId: string, router: NextRouter) => {
         console.error(err);
     }
 }
+
+export default deletePost;

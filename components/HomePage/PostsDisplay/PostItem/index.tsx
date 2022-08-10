@@ -10,6 +10,7 @@ import { Post } from '../../../types';
 import DropdownMenu from './DropdownMenu';
 import LikeAndCommentDisplay from './LikeAndCommentDisplay';
 import { FaRegTrashAlt } from 'react-icons/fa'
+import deletePost from '../../../../lib/posts/deletePost';
 
 interface PropTypes {
     post: Post,
@@ -21,17 +22,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
     if (!post) return null
 
     const deleteHandler = async () => {
-        try {
-            showNotification({
-                message: "POST SUCCESSFULLY DELETED",
-                color: "green",
-                icon: <FaRegTrashAlt />
-            });
-            await axios.delete(`/api/posts/${post.id}`);
-            router.replace(router.asPath);
-        } catch (err) {
-            console.error(err);
-        }
+        await deletePost(post.id, router);
     }
 
     return (
