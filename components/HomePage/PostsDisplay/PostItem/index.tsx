@@ -1,7 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0';
 import { Avatar, Card, Divider } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react'
@@ -9,8 +7,6 @@ import { getPostItemDate } from '../../../../lib/dateHelper';
 import { Post } from '../../../types';
 import DropdownMenu from './DropdownMenu';
 import LikeAndCommentDisplay from './LikeAndCommentDisplay';
-import { FaRegTrashAlt } from 'react-icons/fa'
-import deletePost from '../../../../lib/posts/deletePost';
 import deletePostConfirmModal from '../../../../lib/posts/deletePostConfirmModal';
 
 interface PropTypes {

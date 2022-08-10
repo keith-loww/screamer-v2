@@ -7,9 +7,6 @@ import LikeDisplay from './LikeDisplay'
 import DropdownMenu from './DropdownMenu'
 import CommentForm from './CommentForm'
 import { useRouter } from 'next/router'
-import axios from 'axios'
-import { showNotification } from '@mantine/notifications'
-import { FaRegTrashAlt } from 'react-icons/fa'
 import Content from './Content'
 import deletePostConfirmModal from '../../../lib/posts/deletePostConfirmModal'
 
@@ -25,7 +22,6 @@ const PostCard = ({ post }: PropTypes) => {
     const deleteHandler = async () => {
         deletePostConfirmModal(post.id, router)
     }
-
 
     return (
         <Card

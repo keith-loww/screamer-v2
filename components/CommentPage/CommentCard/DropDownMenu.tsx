@@ -4,8 +4,6 @@ import { ActionIcon, Menu } from '@mantine/core'
 import { useUser } from '@auth0/nextjs-auth0'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
-import axios from 'axios'
-import { showNotification } from '@mantine/notifications'
 import { BsPencil, BsThreeDots } from 'react-icons/bs'
 import deleteComment from '../../../lib/comments/deleteComment'
 
