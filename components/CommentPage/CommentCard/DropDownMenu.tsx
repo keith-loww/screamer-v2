@@ -5,7 +5,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { BsPencil, BsThreeDots } from 'react-icons/bs'
-import deleteComment from '../../../lib/comments/deleteComment'
+import deleteCommentConfirmModal from '../../../lib/comments/deleteCommentConfirmModal'
 
 interface PropTypes {
     comment: Comment,
@@ -18,7 +18,7 @@ const DropDownMenu = ({ comment, setEditMode }: PropTypes) => {
     if (!user) return null
 
     const deleteHandler = async () => {
-        await deleteComment(comment, router)
+        deleteCommentConfirmModal(comment, router)
     }
 
     return (
