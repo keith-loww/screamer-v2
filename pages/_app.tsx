@@ -5,6 +5,7 @@ import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core
 import { NotificationsProvider } from '@mantine/notifications';
 import { useLocalStorage } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
+import { ModalsProvider } from '@mantine/modals';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -36,7 +37,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           primaryColor,
           }} >
           <NotificationsProvider>
-            <Component {...pageProps} />
+            <ModalsProvider>
+              <Component {...pageProps} />
+            </ModalsProvider>
           </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
