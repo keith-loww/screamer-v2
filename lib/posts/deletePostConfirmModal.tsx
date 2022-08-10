@@ -1,17 +1,18 @@
 import { Text } from "@mantine/core";
 import { openConfirmModal } from "@mantine/modals";
+import { NextRouter } from "next/router";
+import deletePost from "./deletePost";
 
-const deletePostConfirmModal = () => openConfirmModal({
-    title: 'Please confirm your action',
+const deletePostConfirmModal = (postID: string, router: NextRouter) => openConfirmModal({
+    title: 'Delete Post?',
     children: (
       <Text size="sm">
-        This action is so important that you are required to confirm it with a modal. Please click
-        one of these buttons to proceed.
+        Are you sure you want to delete this post? This action cannot be undone.
       </Text>
     ),
     labels: { confirm: 'Confirm', cancel: 'Cancel' },
-    onCancel: () => console.log('Cancelnpm '),
-    onConfirm: () => console.log('Confirmed'),
+    confirmProps: { color : 'red' },
+    onConfirm: () => deletePost(postID, router),
 });
 
 export default deletePostConfirmModal;{}

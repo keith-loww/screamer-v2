@@ -11,6 +11,7 @@ import DropdownMenu from './DropdownMenu';
 import LikeAndCommentDisplay from './LikeAndCommentDisplay';
 import { FaRegTrashAlt } from 'react-icons/fa'
 import deletePost from '../../../../lib/posts/deletePost';
+import deletePostConfirmModal from '../../../../lib/posts/deletePostConfirmModal';
 
 interface PropTypes {
     post: Post,
@@ -22,7 +23,7 @@ export default function PostItem({ post } : PropTypes): JSX.Element | null {
     if (!post) return null
 
     const deleteHandler = async () => {
-        await deletePost(post.id, router);
+        deletePostConfirmModal(post.id, router);
     }
 
     return (
