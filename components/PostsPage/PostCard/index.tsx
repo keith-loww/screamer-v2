@@ -11,6 +11,7 @@ import axios from 'axios'
 import { showNotification } from '@mantine/notifications'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import Content from './Content'
+import deletePostConfirmModal from '../../../lib/posts/deletePostConfirmModal'
 
 interface PropTypes {
     post: Post
@@ -22,13 +23,7 @@ const PostCard = ({ post }: PropTypes) => {
     const [editMode, setEditMode] = useState(false)
 
     const deleteHandler = async () => {
-        await axios.delete(`/api/posts/${post.id}`)
-        showNotification({
-            message: "POST SUCESSFULLY DELETED",
-            color: "green",
-            icon: <FaRegTrashAlt />
-        })
-        router.push("/")
+        deletePostConfirmModal(post.id, router)
     }
 
 

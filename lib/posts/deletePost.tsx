@@ -11,7 +11,7 @@ const deletePost = async (postId: string, router: NextRouter) => {
             icon: <FaRegTrashAlt />
         });
         await axios.delete(`/api/posts/${postId}`);
-        router.replace(router.asPath);
+        router.push("/")
     } catch (err) {
         console.error(err);
     }
