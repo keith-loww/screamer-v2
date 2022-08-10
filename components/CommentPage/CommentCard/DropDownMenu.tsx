@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { showNotification } from '@mantine/notifications'
 import { BsPencil, BsThreeDots } from 'react-icons/bs'
+import deleteComment from '../../../lib/comments/deleteComment'
 
 interface PropTypes {
     comment: Comment,
@@ -19,24 +20,7 @@ const DropDownMenu = ({ comment, setEditMode }: PropTypes) => {
     if (!user) return null
 
     const deleteHandler = async () => {
-        try {
-            await axios.delete(`/api/comments/${comment.id}`)
-            showNotification({
-                message: 'COMMENT SUCCESSFULLY DELETED',
-                color: "green",
-                icon: <FaRegTrashAlt />
-            })
-            if (comment.replyToType === 'Post') {
-                router.push(`/posts/${comment.replyTo.id}`)
-            } else {
-                router.push(`/comments/${comment.replyTo.id}`)
-            }
-        } catch (error) {
-            showNotification({
-                message: 'Error deleting comment',
-                color: "red"
-            })
-        }
+        await deleteComment(comment, router)
     }
 
     return (
