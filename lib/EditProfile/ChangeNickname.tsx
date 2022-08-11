@@ -3,8 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from "axios"
 import { AiOutlineExclamation } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
+import { NextRouter } from "next/router";
 
-const changeNickname = async (nickname: string, id: string, setLoading: (state: boolean) => void) => {
+const changeNickname = async (
+    nickname: string, id: string, setLoading: (state: boolean,) => void,
+    router: NextRouter, reset: () => void, setModalOpen: (open: boolean) => void
+    ) => {
     const notifId = generateChangeNicknameNotifId()
     try {
         setLoading(false)
@@ -12,6 +16,9 @@ const changeNickname = async (nickname: string, id: string, setLoading: (state: 
         const user = await changeNicknameRequest(nickname, id)
         resolveChangeNicknameNotif(notifId)
         setLoading(false)
+        reset()
+        setModalOpen(false)
+        router.replace(router.asPath)
         return user
     } catch (error) {
         errorChangeNicknameNotif(notifId)
