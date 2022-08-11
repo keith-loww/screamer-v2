@@ -1,8 +1,12 @@
 import { Text } from "@mantine/core";
 import { openConfirmModal } from "@mantine/modals";
+import { NextRouter } from "next/router";
 import changeNickname from "./ChangeNickname";
 
-const ChangeNickNameConfirmModal = (nickname: string, id: string, setLoading: (state: boolean) => void) => {
+const ChangeNickNameConfirmModal = (
+    nickname: string, id: string, setLoading: (state: boolean) => void,
+    router: NextRouter, reset: () => void, setModalOpen: (open: boolean) => void
+    ) => {
     openConfirmModal({
         title: "Change Nickname?",
         children: (
@@ -11,7 +15,7 @@ const ChangeNickNameConfirmModal = (nickname: string, id: string, setLoading: (s
         </Text>
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
-        onConfirm: () => changeNickname(nickname, id, setLoading),
+        onConfirm: () => changeNickname(nickname, id, setLoading, router, reset, setModalOpen),
     });
 }
 

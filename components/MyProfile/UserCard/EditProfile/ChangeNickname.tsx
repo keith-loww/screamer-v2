@@ -2,10 +2,10 @@ import { Button, Group, Stack, Text, TextInput } from '@mantine/core'
 import React, { useState } from 'react'
 import { User } from '../../../types'
 import { useForm } from 'react-hook-form'
-import changeNickname from '../../../../lib/EditProfile/ChangeNickname'
 import { useUser } from '@auth0/nextjs-auth0'
 import Router, { useRouter } from 'next/router'
 import { BiUserPin } from 'react-icons/bi'
+import ChangeNickNameConfirmModal from '../../../../lib/EditProfile/ChangeNicknameConfirmModal'
 
 interface PropTypes {
     user: User,
@@ -23,7 +23,7 @@ const ChangeNickname = ({ user, setModalOpen }: PropTypes) => {
 
     const submitHandler = async ({ nickname }: FormData) => {
         if (!nickname) return
-        await changeNickname(nickname, user.id, setLoading, router, reset, setModalOpen)
+        ChangeNickNameConfirmModal(nickname, user.id, setLoading, router, reset, setModalOpen)
     }
 
     return (
