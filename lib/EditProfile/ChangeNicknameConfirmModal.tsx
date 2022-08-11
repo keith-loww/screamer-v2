@@ -15,6 +15,7 @@ const ChangeNickNameConfirmModal = (
         </Text>
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
+        onCancel: () => setModalOpen(true),
         onConfirm: () => changeNickname(nickname, id, setLoading, router, reset, setModalOpen),
     });
 }

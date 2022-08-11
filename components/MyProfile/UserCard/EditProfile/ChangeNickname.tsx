@@ -23,6 +23,7 @@ const ChangeNickname = ({ user, setModalOpen }: PropTypes) => {
 
     const submitHandler = async ({ nickname }: FormData) => {
         if (!nickname) return
+        setModalOpen(false)
         ChangeNickNameConfirmModal(nickname, user.id, setLoading, router, reset, setModalOpen)
     }
 
