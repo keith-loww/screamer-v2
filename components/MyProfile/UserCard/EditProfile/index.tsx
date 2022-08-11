@@ -16,7 +16,9 @@ const EditProfile = ({ user }: PropTypes) => {
             opened={modalOpen}
             onClose={() => setModalOpen(false)}
             title='Edit Profile'>
-                <ChangeNickname user={user} />
+                <ChangeNickname
+                setModalOpen={setModalOpen}
+                user={user} />
             </Modal>
             <Button variant='outline'
             sx={(theme) => ({

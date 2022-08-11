@@ -8,14 +8,15 @@ import Router, { useRouter } from 'next/router'
 import { BiUserPin } from 'react-icons/bi'
 
 interface PropTypes {
-    user: User
+    user: User,
+    setModalOpen: (open: boolean) => void
 }
 
 interface FormData {
     nickname: string
 }
 
-const ChangeNickname = ({ user }: PropTypes) => {
+const ChangeNickname = ({ user, setModalOpen }: PropTypes) => {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<FormData>()
     const router = useRouter()
     const [loading, setLoading] = useState(false)
@@ -24,6 +25,7 @@ const ChangeNickname = ({ user }: PropTypes) => {
         if (!nickname) return
         await changeNickname(nickname, user.id, setLoading)
         reset()
+        setModalOpen(false)
         router.replace(router.asPath)
     }
 
