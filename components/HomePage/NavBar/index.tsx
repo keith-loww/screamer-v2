@@ -21,7 +21,7 @@ export default function NavBar() : JSX.Element {
                         <Button
                         className="text-xl flex space-x-2"
                         variant='subtle'
-                        color="gray"
+                        color="dark"
                         >
                             <div className='flex items-center space-x-2'>
                                 <IoMegaphoneSharp />
